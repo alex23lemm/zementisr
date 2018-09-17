@@ -41,9 +41,10 @@ get_models <- function() {
 #' Activates an existing PMML model which was deployed to ZEMENTIS Server.
 #'
 #' @param name The name of the model that is activated on ZEMENTIS server.
-#' @return A data frame that contains a subset of the model's properties including
-#' its name and active status if the activation on the server was successfull.
-#' Otherwise an error is thrown.
+#' @return If the model name is not known to the server, an error. Otherwise a
+#'  list with components:
+#'  \item{model_name}{The name of the activated model}
+#'  \item{is_active}{The activation status of the model}
 #' @importFrom magrittr %>%
 #' @export
 activate_model <- function(name) {
@@ -75,7 +76,7 @@ activate_model <- function(name) {
   parsed <- httr::content(response, as = "text") %>%
     jsonlite::fromJSON()
 
-  tibble::data_frame(
+  list(
     model_name = parsed[["modelName"]],
     is_active = parsed[["isActive"]]
   )
