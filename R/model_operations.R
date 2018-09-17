@@ -4,7 +4,6 @@
 #'
 #' @return A character vector that lists all available PMML models on ZEMENTIS
 #'   Server.
-#' @importFrom magrittr %>%
 #' @export
 get_models <- function() {
 
@@ -26,11 +25,9 @@ get_models <- function() {
       call. = FALSE
     )
   }
-
   if (httr::http_type(response) != "application/json") {
     stop("Zementis Server API did not return json", .call = FALSE)
   }
-
   httr::content(response, as = "text") %>%
     jsonlite::fromJSON() %>%
     unlist(use.names = FALSE)
@@ -45,7 +42,6 @@ get_models <- function() {
 #'  list with components:
 #'  \item{model_name}{The name of the activated model}
 #'  \item{is_active}{The activation status of the model}
-#' @importFrom magrittr %>%
 #' @export
 activate_model <- function(name) {
 
@@ -69,9 +65,11 @@ activate_model <- function(name) {
                              httr::content(response)$errors[[1]],
                              sep = "\n")
     }
-
-
     stop(error_message, call. = FALSE)
+  }
+
+  if (httr::http_type(response) != "application/json") {
+    stop("Zementis Server API did not return json", .call = FALSE)
   }
   parsed <- httr::content(response, as = "text") %>%
     jsonlite::fromJSON()

@@ -1,4 +1,6 @@
-
+#' @importFrom magrittr %>%
+#' @export
+magrittr::`%>%`
 
 get_useragent <- function() {
   ua <- "Request created by the zementisr package; https://github.com/alex23lemm/zementisr"
