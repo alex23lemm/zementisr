@@ -3,4 +3,5 @@
 export("%>%")
 export(activate_model)
 export(get_models)
+export(upload_model)
 importFrom(magrittr,"%>%")
