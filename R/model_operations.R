@@ -124,8 +124,62 @@ activate_model <- function(name) {
 
   stopifnot(is.character(name))
 
-  url <- paste(get_zementis_base_url(), "model", name, "activate",
-               sep = "/")
+  url <- paste(get_zementis_base_url(), "model", gsub(" ", "%20", name),
+               "activate", sep = "/")
+
+  response <- httr::PUT(url, httr::authenticate(get_zementis_usr(),
+                                                get_zementis_pwd()),
+                        httr::user_agent(get_useragent()))
+
+  if (httr::http_error(response)) {
+    error_message <- sprintf(
+      "Zementis Server API request failed [%s]\n%s\n%s\n%s",
+      httr::status_code(response),
+      httr::http_status(response)$category,
+      httr::http_status(response)$reason,
+      httr::http_status(response)$message
+    )
+    if(httr::status_code(response) == 404) {
+      error_message <- paste(error_message,
+                             httr::content(response)$errors[[1]],
+                             sep = "\n")
+    }
+    stop(error_message, call. = FALSE)
+  }
+
+  if (httr::http_type(response) != "application/json") {
+    stop("Zementis Server API did not return json", .call = FALSE)
+  }
+  parsed <- httr::content(response, as = "text") %>%
+    jsonlite::fromJSON()
+
+  list(
+    model_name = parsed[["modelName"]],
+    is_active = parsed[["isActive"]]
+  )
+}
+
+#' Deactivate existing PMML model
+#'
+#' Dectivates an existing PMML model which was deployed to Zementis Server.
+#'
+#' @param name The name of the model that is deactivated on Zementis server.
+#' @return If the model name is not known to the server, an error. Otherwise a
+#'  list with components:
+#'  \item{model_name}{The \code{name} of the deactivated model}
+#'  \item{is_active}{A logical indicating the activation status of the model}
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   deactivate_model("IrisMLRModel")
+#' }
+deactivate_model <- function(name) {
+
+  stopifnot(is.character(name))
+
+  url <- paste(get_zementis_base_url(), "model", gsub(" ", "%20", name),
+               "deactivate", sep = "/")
 
   response <- httr::PUT(url, httr::authenticate(get_zementis_usr(),
                                                 get_zementis_pwd()),
