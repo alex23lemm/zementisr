@@ -7,9 +7,9 @@
 get_models()
 }
 \value{
-A character vector that lists all available PMML models on ZEMENTIS
+A character vector that lists all available PMML models on Zementis
   Server.
 }
 \description{
-Retrieves model names of all available PMML models on ZEMENTIS Server.
+Retrieves model names of all available PMML models on Zementis Server.
 }
