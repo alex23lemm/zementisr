@@ -105,11 +105,11 @@ upload_model <- function(file, applyCleanser = TRUE) {
 }
 
 
-#' Delete model
+#' Delete PMML model
 #'
-#' Remove model from server and list remaining models.
+#' Remove PMML model from server and list remaining models.
 #'
-#' @param name Name of the model to be deleted.
+#' @param model_name Name of the model to be deleted.
 #' @return If deletion is successful, a vector of names of models remaining
 #' deployed on the server with \code{model_name} missing in it. Otherwise, an
 #' error.

@@ -2,12 +2,12 @@
 % Please edit documentation in R/model_operations.R
 \name{delete_model}
 \alias{delete_model}
-\title{Delete model}
+\title{Delete PMML model}
 \usage{
 delete_model(model_name)
 }
 \arguments{
-\item{name}{Name of the model to be deleted.}
+\item{model_name}{Name of the model to be deleted.}
 }
 \value{
 If deletion is successful, a vector of names of models remaining
@@ -15,7 +15,7 @@ deployed on the server with \code{model_name} missing in it. Otherwise, an
 error.
 }
 \description{
-Remove model from server and list remaining models.
+Remove PMML model from server and list remaining models.
 }
 \examples{
 \dontrun{
