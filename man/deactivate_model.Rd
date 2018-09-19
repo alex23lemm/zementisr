@@ -4,15 +4,15 @@
 \alias{deactivate_model}
 \title{Deactivate existing PMML model}
 \usage{
-deactivate_model(name)
+deactivate_model(model_name)
 }
 \arguments{
-\item{name}{The name of the model that is deactivated on Zementis server.}
+\item{model_name}{The name of the model that is deactivated on Zementis server.}
 }
 \value{
 If the model name is not known to the server, an error. Otherwise a
  list with components:
- \item{model_name}{The \code{name} of the deactivated model}
+ \item{model_name}{The \code{model_name} of the deactivated model}
  \item{is_active}{A logical indicating the activation status of the model}
 }
 \description{
@@ -20,6 +20,6 @@ Dectivates an existing PMML model which was deployed to Zementis Server.
 }
 \examples{
 \dontrun{
-  deactivate_model("IrisMLRModel")
+  deactivate_model("iris_model")
 }
 }
