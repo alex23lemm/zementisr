@@ -5,6 +5,8 @@ Authors@R: person("Alexander", "Lemm", email = "alex23lemm@gmail.com", role = c(
 Description: What the package does (one paragraph).
 Depends: R (>= 3.5.1)
 License: What license is it under?
+URL: https://github.com/alex23lemm/zementisr
+BugReports: https://github.com/alex23lemm/zementisr/issues
 Encoding: UTF-8
 LazyData: true
 Imports: httr,
