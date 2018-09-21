@@ -12,8 +12,10 @@ deactivate_model(model_name)
 \value{
 If the model name is not known to the server, an error. Otherwise a
  list with components:
- \item{model_name}{The \code{model_name} of the deactivated model}
- \item{is_active}{A logical indicating the activation status of the model}
+ \itemize{
+   \item \code{model_name} The \code{model_name} of the deactivated model
+   \item \code{is_active} A logical indicating the activation status of the model
+   }
 }
 \description{
 Dectivates an existing PMML model which was deployed to Zementis Server.

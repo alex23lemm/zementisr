@@ -52,7 +52,6 @@ get_models <- function() {
 #'
 #' @examples
 #'  \dontrun{
-#'
 #'    #Build a simple lm model
 #'    iris_lm <- lm(Sepal.Length ~ ., data=iris)
 #'    # Convert to pmml and save to disk
@@ -69,8 +68,8 @@ upload_model <- function(file, applyCleanser = TRUE) {
   }
   applyCleanser <- ifelse(applyCleanser, "true", "false")
   url <- paste(get_zementis_base_url(), "model" , sep = "/") %>%
-    modify_url(query = list(applyCleanser = applyCleanser))
-  my_file <- upload_file(file)
+    httr::modify_url(query = list(applyCleanser = applyCleanser))
+  my_file <- httr::upload_file(file)
 
   response <- httr::POST(url, httr::authenticate(get_zementis_usr(),
                                                  get_zementis_pwd()),
@@ -120,7 +119,7 @@ upload_model <- function(file, applyCleanser = TRUE) {
 #'  delete("iris_model")
 #'
 #'  #Delete all models
-#'  get_models() %>% purrr:::map_chr(delete_model)
+#'  get_models() %>% purrr:::map(delete_model)
 #'  }
 delete_model <- function(model_name) {
 
@@ -165,13 +164,18 @@ delete_model <- function(model_name) {
 #' @param model_name The name of the model that is activated on Zementis server.
 #' @return If the model name is not known to the server, an error. Otherwise a
 #'  list with components:
-#'  \item{model_name}{The \code{model_name} of the activated model}
-#'  \item{is_active}{A logical indicating the activation status of the model}
+#'  \itemize{
+#'    \item \code{model_name} The \code{model_name} of the activated model
+#'    \item \code{is_active} A logical indicating the activation status of the model
+#'  }
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #'   activate_model("iris_model")
+#'
+#'   #Activate all models on the server
+#'   get_models() %>% purrr::map_df(activate_model)
 #' }
 activate_model <- function(model_name) {
 
@@ -219,13 +223,18 @@ activate_model <- function(model_name) {
 #' @param model_name The name of the model that is deactivated on Zementis server.
 #' @return If the model name is not known to the server, an error. Otherwise a
 #'  list with components:
-#'  \item{model_name}{The \code{model_name} of the deactivated model}
-#'  \item{is_active}{A logical indicating the activation status of the model}
+#'  \itemize{
+#'    \item \code{model_name} The \code{model_name} of the deactivated model
+#'    \item \code{is_active} A logical indicating the activation status of the model
+#'    }
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #'   deactivate_model("iris_model")
+#'
+#'   #Deactivate all models on the server
+#'   get_models() %>% purrr::map_df(deactivate_model)
 #' }
 deactivate_model <- function(model_name) {
 
