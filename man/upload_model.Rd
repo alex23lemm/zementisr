@@ -26,7 +26,6 @@ Upload new PMML source or serialized model file to Zementis Server.
 }
 \examples{
  \dontrun{
-
    #Build a simple lm model
    iris_lm <- lm(Sepal.Length ~ ., data=iris)
    # Convert to pmml and save to disk

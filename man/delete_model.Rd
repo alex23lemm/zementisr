@@ -22,6 +22,6 @@ Remove PMML model from server and list remaining models.
  delete("iris_model")
 
  #Delete all models
- get_models() \%>\% purrr:::map_chr(delete_model)
+ get_models() \%>\% purrr:::map(delete_model)
  }
 }

@@ -1,17 +1,21 @@
 #' List available models
 #'
-#' Retrieves model names of all available PMML models on Zementis Server.
+#' Retrieves names of all available PMML models on Zementis Server.
 #'
+#' @param ... Additional arguments passed on to the underlying HTTP method.
+#'   This might be necessary if you need to set some curl options explicitly
+#'   via \code{\link[httr]{config}}.
 #' @return A character vector that lists all available PMML models on Zementis
 #'   Server.
 #' @export
-get_models <- function() {
+get_models <- function(a, ...) {
 
   url <- paste(get_zementis_base_url(), "models", sep = "/")
 
   response <- httr::GET(url, httr::authenticate(get_zementis_usr(),
                                                 get_zementis_pwd()),
-                        httr::user_agent(get_useragent()))
+                        httr::user_agent(get_useragent()),
+                        ...)
 
   if (httr::http_error(response)) {
     stop(
@@ -125,11 +129,12 @@ delete_model <- function(model_name) {
 
   stopifnot(is.character(model_name))
 
-  url <- paste(get_zementis_base_url(), "model", gsub(" ", "%20", model_name),
+  url <- paste(get_zementis_base_url(), "model",
+               gsub(" ", "%20", model_name),
                sep = "/")
 
   response <- httr::DELETE(url, httr::authenticate(get_zementis_usr(),
-                                                get_zementis_pwd()),
+                                                   get_zementis_pwd()),
                         httr::user_agent(get_useragent()))
 
   if (httr::http_error(response)) {
@@ -181,7 +186,8 @@ activate_model <- function(model_name) {
 
   stopifnot(is.character(model_name))
 
-  url <- paste(get_zementis_base_url(), "model", gsub(" ", "%20", model_name),
+  url <- paste(get_zementis_base_url(), "model",
+               gsub(" ", "%20", model_name),
                "activate", sep = "/")
 
   response <- httr::PUT(url, httr::authenticate(get_zementis_usr(),
@@ -240,7 +246,8 @@ deactivate_model <- function(model_name) {
 
   stopifnot(is.character(model_name))
 
-  url <- paste(get_zementis_base_url(), "model", gsub(" ", "%20", model_name),
+  url <- paste(get_zementis_base_url(), "model",
+               gsub(" ", "%20", model_name),
                "deactivate", sep = "/")
 
   response <- httr::PUT(url, httr::authenticate(get_zementis_usr(),

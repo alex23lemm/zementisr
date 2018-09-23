@@ -23,5 +23,8 @@ Dectivates an existing PMML model which was deployed to Zementis Server.
 \examples{
 \dontrun{
   deactivate_model("iris_model")
+
+  #Deactivate all models on the server
+  get_models() \%>\% purrr::map_df(deactivate_model)
 }
 }

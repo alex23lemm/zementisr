@@ -23,5 +23,8 @@ Activates an existing PMML model which was deployed to Zementis Server.
 \examples{
 \dontrun{
   activate_model("iris_model")
+
+  #Activate all models on the server
+  get_models() \%>\% purrr::map_df(activate_model)
 }
 }

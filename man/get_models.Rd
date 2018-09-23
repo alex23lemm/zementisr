@@ -4,12 +4,17 @@
 \alias{get_models}
 \title{List available models}
 \usage{
-get_models()
+get_models(a, ...)
+}
+\arguments{
+\item{...}{Additional arguments passed on to the underlying HTTP method.
+This might be necessary if you need to set some curl options explicitly
+via \code{\link[httr]{config}}.}
 }
 \value{
 A character vector that lists all available PMML models on Zementis
   Server.
 }
 \description{
-Retrieves model names of all available PMML models on Zementis Server.
+Retrieves names of all available PMML models on Zementis Server.
 }
