@@ -8,7 +8,7 @@
 #' @return A character vector that lists all available PMML models on Zementis
 #'   Server.
 #' @export
-get_models <- function(a, ...) {
+get_models <- function(...) {
 
   url <- paste(get_zementis_base_url(), "models", sep = "/")
 
@@ -34,7 +34,7 @@ get_models <- function(a, ...) {
   }
   httr::content(response, as = "text") %>%
     jsonlite::fromJSON() %>%
-    purrr:::flatten_chr()
+    purrr::flatten_chr()
 }
 
 
@@ -90,7 +90,7 @@ upload_model <- function(file, applyCleanser = TRUE) {
     )
     if (httr::status_code(response) %in% c(400, 409)) {
       error_message <- paste(error_message,
-                             content(response)$errors[[1]],
+                             httr::content(response)$errors[[1]],
                              sep = "\n")
     }
     stop(error_message, call. = FALSE)
@@ -158,7 +158,7 @@ delete_model <- function(model_name) {
   }
   httr::content(response, as = "text") %>%
     jsonlite::fromJSON() %>%
-    purrr:::flatten_chr()
+    purrr::flatten_chr()
 }
 
 

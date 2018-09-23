@@ -4,7 +4,7 @@
 \alias{get_models}
 \title{List available models}
 \usage{
-get_models(a, ...)
+get_models(...)
 }
 \arguments{
 \item{...}{Additional arguments passed on to the underlying HTTP method.
