@@ -1,8 +1,5 @@
-#' R client for the Zementis Server API
-#'
-#' test
-#'
-#' @author Alex Lemm \email{alex23lemm@gmail.com}
+#' @details
+#' TODO
+#' @keywords internal
 #' @docType package
-#' @name zementisr
 "_PACKAGE"
