@@ -20,16 +20,22 @@ A list with the following components:
   \item \code{model} A vector containg the \code{mode_name}
   \item \code{outputs} A data frame containing the prediction results
 }
+
+ For regression models \code{outputs} will include a 1-column data frame with
+ the predicted value.
+
+ For binary classification models \code{outputs} will include a 3-column
+ data frame that includes the probability of class A, the probability of
+ class B and the classification label based on a 50\% threshold.
 }
 \description{
 Apply model to single input record
 }
 \examples{
 \dontrun{
-
- server_prediciton <- apply_model("iris_model", iris[1, ])
+apply_model("iris_model", iris[1, ])
 }
 }
 \seealso{
-[upload_model()]
+[upload_model]
 }

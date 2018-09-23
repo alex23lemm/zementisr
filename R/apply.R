@@ -12,13 +12,19 @@
 #'   \item \code{model} A vector containg the \code{mode_name}
 #'   \item \code{outputs} A data frame containing the prediction results
 #' }
-#' @seealso [upload_model()]
+#'
+#'  For regression models \code{outputs} will include a 1-column data frame with
+#'  the predicted value.
+#'
+#'  For binary classification models \code{outputs} will include a 3-column
+#'  data frame that includes the probability of class A, the probability of
+#'  class B and the classification label based on a 50\% threshold.
+#' @seealso [upload_model]
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#'
-#'  server_prediciton <- apply_model("iris_model", iris[1, ])
+#' apply_model("iris_model", iris[1, ])
 #' }
 
 apply_model <- function(model_name, x) {
@@ -27,13 +33,16 @@ apply_model <- function(model_name, x) {
                "apply",
                gsub(" ", "%20", model_name),
                sep = "/") %>%
-    httr::modify_url(query = list(record = toJSON(x)))
+    httr::modify_url(query = list(record = jsonlite::toJSON(x)))
 
   response <- httr::GET(url, httr::authenticate(get_zementis_usr(),
                                                 get_zementis_pwd()),
-                        content_type_json(),
+                        #httr::content_type_json(),
                         httr::user_agent(get_useragent()))
 
-  parsed <- content(response, as = "text") %>% jsonlite::fromJSON()
+  parsed <- httr::content(response, as = "text") %>%
+    jsonlite::fromJSON()
+
+  parsed
 
 }
