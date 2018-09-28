@@ -8,9 +8,6 @@
 \description{
 What the package does (one paragraph).
 }
-\details{
-TODO
-}
 \seealso{
 Useful links:
 \itemize{
