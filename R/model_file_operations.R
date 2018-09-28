@@ -6,6 +6,7 @@
 #' \code{.pmml} or even be \code{.zip} or \code{.gzip} compressed.
 #' @param applyCleanser Logical indicating if the server should perfom cleansing
 #'  on the PMML file. (Default: TRUE)
+#' @inheritParams get_models
 #' @return  If a model with the same name already existis on the server or if is
 #'  not valid PMML, an error.
 #' Otherwise a list with the following components:
@@ -25,7 +26,7 @@
 #'    # Upload model to server
 #'    upload_model("iris_pmml.xml")
 #'  }
-upload_model <- function(file, applyCleanser = TRUE) {
+upload_model <- function(file, applyCleanser = TRUE, ...) {
   if (!file.exists(file)) {
     stop("Please provide a valid path to the model file.", .call = FALSE)
   }
@@ -36,7 +37,8 @@ upload_model <- function(file, applyCleanser = TRUE) {
   response <- httr::POST(url, httr::authenticate(get_zementis_usr(),
                                                  get_zementis_pwd()),
                          httr::user_agent(get_useragent()),
-                         body = list(file = my_file))
+                         body = list(file = my_file),
+                         ...)
   if (httr::status_code(response) != 201) {
     error_message <- sprintf(
       "Zementis Server API request failed [%s]\n%s\n%s\n%s",

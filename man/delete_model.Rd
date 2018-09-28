@@ -4,10 +4,14 @@
 \alias{delete_model}
 \title{Delete PMML model}
 \usage{
-delete_model(model_name)
+delete_model(model_name, ...)
 }
 \arguments{
 \item{model_name}{Name of the model to be deleted.}
+
+\item{...}{Additional arguments passed on to the underlying HTTP method.
+This might be necessary if you need to set some curl options explicitly
+via \code{\link[httr]{config}}.}
 }
 \value{
 If deletion is successful, a vector of names of models remaining

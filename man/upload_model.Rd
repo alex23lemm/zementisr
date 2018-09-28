@@ -4,7 +4,7 @@
 \alias{upload_model}
 \title{Upload new PMML model}
 \usage{
-upload_model(file, applyCleanser = TRUE)
+upload_model(file, applyCleanser = TRUE, ...)
 }
 \arguments{
 \item{file}{Path to a file. The PMML model file can end in \code{.xml},
@@ -12,6 +12,10 @@ upload_model(file, applyCleanser = TRUE)
 
 \item{applyCleanser}{Logical indicating if the server should perfom cleansing
 on the PMML file. (Default: TRUE)}
+
+\item{...}{Additional arguments passed on to the underlying HTTP method.
+This might be necessary if you need to set some curl options explicitly
+via \code{\link[httr]{config}}.}
 }
 \value{
 If a model with the same name already existis on the server or if is

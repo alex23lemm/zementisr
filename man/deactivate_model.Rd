@@ -4,10 +4,14 @@
 \alias{deactivate_model}
 \title{Deactivate existing PMML model}
 \usage{
-deactivate_model(model_name)
+deactivate_model(model_name, ...)
 }
 \arguments{
 \item{model_name}{The name of the model that is deactivated on Zementis server.}
+
+\item{...}{Additional arguments passed on to the underlying HTTP method.
+This might be necessary if you need to set some curl options explicitly
+via \code{\link[httr]{config}}.}
 }
 \value{
 If the model name is not known to the server, an error. Otherwise a

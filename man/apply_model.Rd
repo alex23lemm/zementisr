@@ -4,7 +4,7 @@
 \alias{apply_model}
 \title{Apply PMML model to data}
 \usage{
-apply_model(model_name, x)
+apply_model(model_name, x, ...)
 }
 \arguments{
 \item{model_name}{The name of the deployed PMML model which will predict
@@ -13,6 +13,10 @@ the \code{record}.}
 \item{x}{A one row data frame containg the data set which will be send to
 Zementis Server for prediction. The data frame column names must match
 the PMML model argument names.}
+
+\item{...}{Additional arguments passed on to the underlying HTTP method.
+This might be necessary if you need to set some curl options explicitly
+via \code{\link[httr]{config}}.}
 }
 \value{
 A list with the following components:

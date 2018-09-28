@@ -4,10 +4,14 @@
 \alias{activate_model}
 \title{Activate existing PMML model}
 \usage{
-activate_model(model_name)
+activate_model(model_name, ...)
 }
 \arguments{
 \item{model_name}{The name of the model that is activated on Zementis server.}
+
+\item{...}{Additional arguments passed on to the underlying HTTP method.
+This might be necessary if you need to set some curl options explicitly
+via \code{\link[httr]{config}}.}
 }
 \value{
 If the model name is not known to the server, an error. Otherwise a

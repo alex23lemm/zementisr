@@ -7,6 +7,7 @@
 #'  the PMML model argument names.
 #' @param model_name The name of the deployed PMML model which will predict
 #'  the \code{record}.
+#' @inheritParams get_models
 #' @return A list with the following components:
 #' \itemize{
 #'   \item \code{model} A vector containg the \code{mode_name}
@@ -27,7 +28,7 @@
 #' apply_model("iris_model", iris[1, ])
 #' }
 
-apply_model <- function(model_name, x) {
+apply_model <- function(model_name, x, ...) {
 
   url <- paste(get_zementis_base_url(),
                "apply",
@@ -38,7 +39,8 @@ apply_model <- function(model_name, x) {
   response <- httr::GET(url, httr::authenticate(get_zementis_usr(),
                                                 get_zementis_pwd()),
                         httr::content_type_json(),
-                        httr::user_agent(get_useragent()))
+                        httr::user_agent(get_useragent()),
+                        ...)
 
   if (httr::http_error(response)) {
     error_message <- sprintf(

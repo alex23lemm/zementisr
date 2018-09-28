@@ -43,6 +43,7 @@ get_models <- function(...) {
 #' Remove PMML model from server and list remaining models.
 #'
 #' @param model_name Name of the model to be deleted.
+#' @inheritParams  get_models
 #' @return If deletion is successful, a vector of names of models remaining
 #' deployed on the server with \code{model_name} missing in it. Otherwise, an
 #' error.
@@ -55,7 +56,7 @@ get_models <- function(...) {
 #'  #Delete all models
 #'  get_models() %>% purrr:::map(delete_model)
 #'  }
-delete_model <- function(model_name) {
+delete_model <- function(model_name, ...) {
 
   stopifnot(is.character(model_name))
 
@@ -65,7 +66,8 @@ delete_model <- function(model_name) {
 
   response <- httr::DELETE(url, httr::authenticate(get_zementis_usr(),
                                                    get_zementis_pwd()),
-                        httr::user_agent(get_useragent()))
+                        httr::user_agent(get_useragent()),
+                        ...)
 
   if (httr::http_error(response)) {
     error_message <- sprintf(
@@ -97,6 +99,7 @@ delete_model <- function(model_name) {
 #' Activates an existing PMML model which was deployed to Zementis Server.
 #'
 #' @param model_name The name of the model that is activated on Zementis server.
+#' @inheritParams get_models
 #' @return If the model name is not known to the server, an error. Otherwise a
 #'  list with components:
 #'  \itemize{
@@ -112,7 +115,7 @@ delete_model <- function(model_name) {
 #'   #Activate all models on the server
 #'   get_models() %>% purrr::map_df(activate_model)
 #' }
-activate_model <- function(model_name) {
+activate_model <- function(model_name, ...) {
 
   stopifnot(is.character(model_name))
 
@@ -122,7 +125,8 @@ activate_model <- function(model_name) {
 
   response <- httr::PUT(url, httr::authenticate(get_zementis_usr(),
                                                 get_zementis_pwd()),
-                        httr::user_agent(get_useragent()))
+                        httr::user_agent(get_useragent()),
+                        ...)
 
   if (httr::http_error(response)) {
     error_message <- sprintf(
@@ -157,6 +161,7 @@ activate_model <- function(model_name) {
 #' Dectivates an existing PMML model which was deployed to Zementis Server.
 #'
 #' @param model_name The name of the model that is deactivated on Zementis server.
+#' @inheritParams get_models
 #' @return If the model name is not known to the server, an error. Otherwise a
 #'  list with components:
 #'  \itemize{
@@ -172,7 +177,7 @@ activate_model <- function(model_name) {
 #'   #Deactivate all models on the server
 #'   get_models() %>% purrr::map_df(deactivate_model)
 #' }
-deactivate_model <- function(model_name) {
+deactivate_model <- function(model_name, ...) {
 
   stopifnot(is.character(model_name))
 
@@ -182,7 +187,8 @@ deactivate_model <- function(model_name) {
 
   response <- httr::PUT(url, httr::authenticate(get_zementis_usr(),
                                                 get_zementis_pwd()),
-                        httr::user_agent(get_useragent()))
+                        httr::user_agent(get_useragent()),
+                        ...)
 
   if (httr::http_error(response)) {
     error_message <- sprintf(
