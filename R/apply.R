@@ -6,11 +6,11 @@
 #'  Zementis Server for prediction. The data frame column names must match
 #'  the PMML model argument names.
 #' @param model_name The name of the deployed PMML model which will predict
-#'  the \code{record}.
+#'  the record \code{x}.
 #' @inheritParams get_models
 #' @return A list with the following components:
 #' \itemize{
-#'   \item \code{model} A vector containg the \code{mode_name}
+#'   \item \code{model} A vector containg the \code{model_name}
 #'   \item \code{outputs} A data frame containing the prediction results
 #' }
 #'
@@ -20,10 +20,11 @@
 #'  For binary classification models \code{outputs} will include a 3-column
 #'  data frame that includes the probability of class A, the probability of
 #'  class B and the classification class label result based on a 50\% threshold.
-#' @seealso [upload_model]
+#' @seealso \code{\link{upload_model}}
 #' @export
 #'
 #' @examples
+#'
 #' \dontrun{
 #' apply_model("iris_model", iris[1, ])
 #' }

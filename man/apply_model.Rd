@@ -36,10 +36,11 @@ A list with the following components:
 Apply model to single input record
 }
 \examples{
+
 \dontrun{
 apply_model("iris_model", iris[1, ])
 }
 }
 \seealso{
-[upload_model]
+\code{\link{upload_model}}
 }
