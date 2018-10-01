@@ -1,21 +1,5 @@
 context("full_model_operations checks")
 
-# Create new PMML models which will be deployed to Zementis Server
-kyphosis_fit <- rpart::rpart(Kyphosis ~ Age + Number + Start, data = rpart::kyphosis)
-kyphosis_pmml <- pmml::pmml(kyphosis_fit, model.name = "kyphosis_model")
-XML::saveXML(kyphosis_pmml, "kyphosis_pmml.xml")
-
-iris_fit <- lm(Sepal.Length ~ ., data=iris)
-iris_pmml <- pmml::pmml(iris_fit, model.name = "iris_model")
-XML::saveXML(iris_pmml, "iris_pmml.xml")
-
-err_not_known <- paste("Zementis Server API request failed [404]",
-                       "Client error",
-                       "Not Found",
-                       "Client error: (404) Not Found",
-                       "Model 'unknown_model' not found.", sep = "\n")
-
-
 test_that("upload_model() returns a list after model upload", {
   expect_equal(upload_model("kyphosis_pmml.xml"), list(model_name = "kyphosis_model",
                                                        is_active = TRUE))
@@ -65,11 +49,3 @@ test_that("activate_model() returns error if model name is unknown to the server
   expect_error(activate_model("unknown_model"), err_not_known, fixed = TRUE)
 })
 
-test_that("delete_model() returns character vector", {
-  expect_is(delete_model("kyphosis_model"), "character")
-  expect_gte(length(delete_model("iris_model")), 0)
-})
-
-test_that("delete_model() returns error if model name is unknown to the server", {
-  expect_error(delete_model("unknown_model"), err_not_known, fixed = TRUE)
-})
