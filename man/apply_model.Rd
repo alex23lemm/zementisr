@@ -33,14 +33,16 @@ A list with the following components:
  class 1 and the classification class label result based on a 50\% threshold.
 }
 \description{
-Apply model to single input record
+\code{apply_model()} returns the prediction for a single input record that is sent
+  Zementis Server. The value returned depends on the type of prediction model
+  being executed on the server.
 }
 \examples{
 
 \dontrun{
-apply_model("iris_model", iris[1, ])
+apply_model("iris_model", iris[42, ])
 }
 }
 \seealso{
-\code{\link{upload_model}}
+\code{\link{upload_model}} \code{\link{apply_model}}
 }
