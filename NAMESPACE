@@ -3,6 +3,7 @@
 export("%>%")
 export(activate_model)
 export(apply_model)
+export(apply_model_batch)
 export(deactivate_model)
 export(delete_model)
 export(get_models)

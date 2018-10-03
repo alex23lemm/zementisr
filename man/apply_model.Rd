@@ -2,17 +2,17 @@
 % Please edit documentation in R/apply.R
 \name{apply_model}
 \alias{apply_model}
-\title{Apply PMML model to data}
+\title{Apply model to single input record}
 \usage{
-apply_model(model_name, x, ...)
+apply_model(x, model_name, ...)
 }
 \arguments{
-\item{model_name}{The name of the deployed PMML model which will predict
-the \code{record}.}
-
 \item{x}{A one row data frame containg the data set which will be send to
 Zementis Server for prediction. The data frame column names must match
 the PMML model argument names.}
+
+\item{model_name}{The name of the deployed PMML model which will predict
+the record \code{x}.}
 
 \item{...}{Additional arguments passed on to the underlying HTTP method.
 This might be necessary if you need to set some curl options explicitly
@@ -21,7 +21,7 @@ via \code{\link[httr]{config}}.}
 \value{
 A list with the following components:
 \itemize{
-  \item \code{model} A vector containg the \code{mode_name}
+  \item \code{model} A vector containg the \code{model_name}
   \item \code{outputs} A data frame containing the prediction results
 }
 
@@ -29,8 +29,8 @@ A list with the following components:
  the predicted value.
 
  For binary classification models \code{outputs} will include a 3-column
- data frame that includes the probability of class A, the probability of
- class B and the classification class label result based on a 50\% threshold.
+ data frame that includes the probability of class 0, the probability of
+ class 1 and the classification class label result based on a 50\% threshold.
 }
 \description{
 Apply model to single input record
