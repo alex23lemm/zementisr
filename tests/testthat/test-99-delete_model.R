@@ -1,4 +1,4 @@
-context("99-delete_model")
+context("delete_model")
 
 test_that("delete_model() returns character vector", {
   expect_is(delete_model("kyphosis_model"), "character")

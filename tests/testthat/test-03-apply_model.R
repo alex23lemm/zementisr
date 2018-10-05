@@ -1,4 +1,4 @@
-context("apply_model() checks")
+context("apply_model")
 
 test_that("apply_model() returns correct prediction for regression models", {
   expect_equivalent(apply_model(iris[42, ], "iris_model")$outputs[1, ],

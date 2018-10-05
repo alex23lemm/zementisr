@@ -1,4 +1,4 @@
-context("apply_model_batch() checks")
+context("apply_model_batch")
 
 iris_resp <- list(
   model = "iris_model",
@@ -28,11 +28,16 @@ test_that("apply_model_batch works correctly for data frames", {
 test_that("apply_model_batch() works correcly for .csv files", {
   expect_equal(apply_model_batch("iris.csv", "iris_model"), iris_resp,
                tolerance = 1.5e-6)
+  expect_equal(apply_model_batch("kyphosis.csv", "kyphosis_model"), kyphosis_resp,
+               tolerance = 1.5e-6)
 })
 
 test_that("apply_model_batch() works correcly for .json files", {
   expect_equal(apply_model_batch("iris.json", "iris_model"), iris_resp,
                tolerance = 1.5e-6)
+  expect_equal(apply_model_batch("kyphosis.json", "kyphosis_model"), kyphosis_resp,
+               tolerance = 1.5e-6)
+
 })
 
 test_that("apply_model_batch() requires data frame or valid path to a file as input", {
