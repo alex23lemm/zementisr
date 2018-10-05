@@ -2,7 +2,7 @@
 % Please edit documentation in R/apply.R
 \name{apply_model}
 \alias{apply_model}
-\title{Apply model to single input record}
+\title{Apply PMML model to single input record}
 \usage{
 apply_model(x, model_name, ...)
 }
@@ -22,7 +22,7 @@ via \code{\link[httr]{config}}.}
 A list with the following components:
 \itemize{
   \item \code{model} A vector containg the \code{model_name}
-  \item \code{outputs} A data frame containing the prediction results
+  \item \code{outputs} A data frame containing the prediction results for \code{x}
 }
 
  For regression models \code{outputs} will include a 1-column data frame with
@@ -34,15 +34,14 @@ A list with the following components:
 }
 \description{
 \code{apply_model()} returns the prediction for a single input record that is sent
-  Zementis Server. The value returned depends on the type of prediction model
-  being executed on the server.
+to Zementis Server. The value(s) returned depends on the type of prediction model
+being executed on the server.
 }
 \examples{
-
 \dontrun{
-apply_model("iris_model", iris[42, ])
+apply_model(iris[42, ], "iris_model")
 }
 }
 \seealso{
-\code{\link{upload_model}} \code{\link{apply_model}}
+\code{\link{upload_model}}, \code{\link{apply_model}}
 }
