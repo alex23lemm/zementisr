@@ -5,7 +5,7 @@
 #' being executed on the server.
 #'
 #' @param data Either a data frame or a path to a file that contain multiple data
-#'   records that are sent to Zementis Server for prediction. Files must be
+#'   records that are sent to Zementis Server for prediction. Files must
 #'   be \code{.csv} or \code{.json} files. Alternatively, \code{.csv} and \code{.json}
 #'   files can also be sent in compressed format (\code{.zip} or \code{.gzip}).
 #' @param model_name The name of the deployed PMML model that gets predictions
@@ -43,6 +43,9 @@ apply_model_batch <- function(data, model_name, ...) {
 
   if(class(data) != "data.frame" && (!is.character(data) || !file.exists(data))) {
     stop("Please either provide a data frame or a path to a file.")
+  }
+  if (length(model_name) != 1L || typeof(model_name) != "character") {
+    stop("'model_name' must be a length-one character vector")
   }
 
   if(class(data) == "data.frame") {

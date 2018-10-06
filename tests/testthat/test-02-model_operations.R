@@ -16,7 +16,12 @@ test_that("deactivate_model() returns list after successful deactivation", {
 })
 
 test_that("deactivate_model() returns error if model name is unknown to the server", {
-  expect_error(activate_model("unknown_model"), err_not_known, fixed = TRUE)
+  expect_error(deactivate_model("unknown_model"), err_not_known, fixed = TRUE)
+})
+
+test_that("deactivate_model() returns error if 'model_name' is not length one character vector", {
+  expect_error(deactivate_model(c("iris_model", "kyphosis_model")))
+  expect_error(deactivate_model(1:2))
 })
 
 test_that("activate_model() returns list after successful activation", {
@@ -24,6 +29,12 @@ test_that("activate_model() returns list after successful activation", {
                                                   is_active = TRUE))
   expect_equal(activate_model("kyphosis_model"), list(model_name = "kyphosis_model",
                                                   is_active = TRUE))
+})
+
+
+test_that("activate_model() returns error if 'model_name' is not length one character vector", {
+  expect_error(activate_model(c("iris_model", "kyphosis_model")))
+  expect_error(activate_model(1:2))
 })
 
 test_that("activate_model() returns error if model name is unknown to the server", {

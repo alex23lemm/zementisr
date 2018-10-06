@@ -40,7 +40,7 @@ test_that("apply_model_batch() works for .json files", {
 
 })
 
-test_that("apply_model_batch() works correcly for .zip files", {
+test_that("apply_model_batch() works for .zip files", {
   expect_equal(apply_model_batch("iris.csv.zip", "iris_model"), iris_resp,
                tolerance = 1.5e-6)
   expect_equal(apply_model_batch("kyphosis.json.zip", "kyphosis_model"), kyphosis_resp,
@@ -55,6 +55,11 @@ test_that("apply_model_batch() requires data frame or valid path to a file as in
   expect_error(apply_model_batch(1:4, "iris_model"),
                "Please either provide a data frame or a path to a file",
                fixed = TRUE)
+})
+
+test_that("apply_model_batch() returns error if 'model_name' is not length one character vector", {
+  expect_error(apply_model_batch(iris[1:2, ], c("iris_model", "kyphosis_model")))
+  expect_error(apply_model_batch(iris[1:2, ], 1:2))
 })
 
 test_that("apply_model_batch() returns error if model name is unknown to the server", {

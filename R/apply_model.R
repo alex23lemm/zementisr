@@ -31,8 +31,14 @@
 #' }
 apply_model <- function(x, model_name, ...) {
 
-  if(dim(x)[1] > 1) {
-    stop("Please provide a data frame with a single record.")
+  if(!is.data.frame(x)) {
+    stop("'x' must be a data frame with a single record.")
+  }
+  if(is.data.frame(x) && dim(x)[1] > 1) {
+    stop("'x' must be a data frame with with a single record.")
+  }
+  if (length(model_name) != 1L || typeof(model_name) != "character") {
+    stop("'model_name' must be a length-one character vector")
   }
 
   url <- paste(get_zementis_base_url(),

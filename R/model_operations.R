@@ -58,7 +58,9 @@ get_models <- function(...) {
 #'  }
 delete_model <- function(model_name, ...) {
 
-  stopifnot(is.character(model_name))
+  if (length(model_name) != 1L || typeof(model_name) != "character") {
+    stop("'model_name' must be a length-one character vector")
+  }
 
   url <- paste(get_zementis_base_url(), "model",
                gsub(" ", "%20", model_name),
@@ -117,7 +119,9 @@ delete_model <- function(model_name, ...) {
 #' }
 activate_model <- function(model_name, ...) {
 
-  stopifnot(is.character(model_name))
+  if (length(model_name) != 1L || typeof(model_name) != "character") {
+    stop("'model_name' must be a length-one character vector")
+  }
 
   url <- paste(get_zementis_base_url(), "model",
                gsub(" ", "%20", model_name),
@@ -179,7 +183,9 @@ activate_model <- function(model_name, ...) {
 #' }
 deactivate_model <- function(model_name, ...) {
 
-  stopifnot(is.character(model_name))
+  if (length(model_name) != 1L || typeof(model_name) != "character") {
+    stop("'model_name' must be a length-one character vector")
+  }
 
   url <- paste(get_zementis_base_url(), "model",
                gsub(" ", "%20", model_name),

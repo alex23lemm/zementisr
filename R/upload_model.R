@@ -28,7 +28,7 @@
 #'  }
 upload_model <- function(file, applyCleanser = TRUE, ...) {
   if (!file.exists(file)) {
-    stop("Please provide a valid path to the model file.", .call = FALSE)
+    stop("Please provide a valid path to a model file.", .call = FALSE)
   }
   applyCleanser <- ifelse(applyCleanser, "true", "false")
   url <- paste(get_zementis_base_url(), "model" , sep = "/") %>%

@@ -8,7 +8,7 @@ apply_model_batch(data, model_name, ...)
 }
 \arguments{
 \item{data}{Either a data frame or a path to a file that contain multiple data
-records that are sent to Zementis Server for prediction. Files must be
+records that are sent to Zementis Server for prediction. Files must
 be \code{.csv} or \code{.json} files. Alternatively, \code{.csv} and \code{.json}
 files can also be sent in compressed format (\code{.zip} or \code{.gzip}).}
 
