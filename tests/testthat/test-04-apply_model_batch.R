@@ -18,24 +18,32 @@ kyphosis_resp <- list(
   )
 )
 
-test_that("apply_model_batch works correctly for data frames", {
+test_that("apply_model_batch works for data frames", {
   expect_equal(apply_model_batch(iris[1:3, ], "iris_model"), iris_resp,
                tolerance = 1.5e-6)
   expect_equal(apply_model_batch(kyphosis[1:3, ], "kyphosis_model"),
                kyphosis_resp, tolerance = 1.5e-6)
 })
 
-test_that("apply_model_batch() works correcly for .csv files", {
+test_that("apply_model_batch() works for .csv files", {
   expect_equal(apply_model_batch("iris.csv", "iris_model"), iris_resp,
                tolerance = 1.5e-6)
   expect_equal(apply_model_batch("kyphosis.csv", "kyphosis_model"), kyphosis_resp,
                tolerance = 1.5e-6)
 })
 
-test_that("apply_model_batch() works correcly for .json files", {
+test_that("apply_model_batch() works for .json files", {
   expect_equal(apply_model_batch("iris.json", "iris_model"), iris_resp,
                tolerance = 1.5e-6)
   expect_equal(apply_model_batch("kyphosis.json", "kyphosis_model"), kyphosis_resp,
+               tolerance = 1.5e-6)
+
+})
+
+test_that("apply_model_batch() works correcly for .zip files", {
+  expect_equal(apply_model_batch("iris.csv.zip", "iris_model"), iris_resp,
+               tolerance = 1.5e-6)
+  expect_equal(apply_model_batch("kyphosis.json.zip", "kyphosis_model"), kyphosis_resp,
                tolerance = 1.5e-6)
 
 })

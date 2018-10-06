@@ -4,14 +4,12 @@
 #' that are sent to Zementis Server. The values returned depend on the type of prediction model
 #' being executed on the server.
 #'
-#' The data frame column names must match the PMML model argument names.
-#'
-#' @param data Either a data frame or a path to a file that contain mulitple data
+#' @param data Either a data frame or a path to a file that contain multiple data
 #'   records that are sent to Zementis Server for prediction. Files must be
 #'   be \code{.csv} or \code{.json} files. Alternatively, \code{.csv} and \code{.json}
 #'   files can also be sent in compressed format (\code{.zip} or \code{.gzip}).
-#' @param model_name The name of the deployed PMML model that predicts
-#'  the records contained  in \code{data}.
+#' @param model_name The name of the deployed PMML model that gets predictions
+#'  on the new data records contained in \code{data}.
 #' @inheritParams get_models
 #' @return A list with the following components:
 #' \itemize{
@@ -80,6 +78,19 @@ apply_model_batch <- function(data, model_name, ...) {
     }
     stop(error_message, call. = FALSE)
   }
-  httr::content(response, as = "text") %>%
-    jsonlite::fromJSON()
+  if (response$headers$`content-type` == "application/zip") {
+    # Save compressed response to temp file
+    f_zipped <- tempfile(fileext = ".zip")
+    on.exit(unlink(f_zipped), add = TRUE)
+    writeBin(httr::content(response, as = "raw"), f_zipped)
+    # Unzip temp file
+    f_unzipped <- unzip(f_zipped)
+    on.exit(unlink(f_unzipped), add = TRUE)
+    # Parse temp file
+    parsed <- jsonlite::fromJSON(f_unzipped)
+  } else {
+    parsed <- httr::content(response, as = "text") %>%
+      jsonlite::fromJSON()
+  }
+  parsed
 }
