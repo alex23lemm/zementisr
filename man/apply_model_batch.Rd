@@ -4,27 +4,36 @@
 \alias{apply_model_batch}
 \title{Apply PMML model to multiple input records}
 \usage{
-apply_model_batch(data, model_name, ...)
+apply_model_batch(data, model_name, path, ...)
 }
 \arguments{
 \item{data}{Either a data frame or a path to a file that contain multiple data
 records that are sent to Zementis Server for prediction. Files must
 be \code{.csv} or \code{.json} files. Alternatively, \code{.csv} and \code{.json}
-files can also be sent in compressed format (\code{.zip} or \code{.gzip}).}
+files can also be sent in compressed format (\code{.zip} or \code{.gzip}). For
+compressed files you need to set the \code{path} argument.}
 
 \item{model_name}{The name of the deployed PMML model that gets predictions
 on the new data records contained in \code{data}.}
+
+\item{path}{Path to a file to which the response from Zementis Server is written to. Only used
+if compressed input files (\code{.zip}) are passed to \code{data}.}
 
 \item{...}{Additional arguments passed on to the underlying HTTP method.
 This might be necessary if you need to set some curl options explicitly
 via \code{\link[httr]{config}}.}
 }
 \value{
-A list with the following components:
+If \code{data} is a data frame, a \code{.csv} file or a \code{.json} file, a
+ list with the following components:
 \itemize{
   \item \code{model} A vector containg the \code{model_name}
   \item \code{outputs} A data frame containing the prediction results for \code{data}
 }
+
+ If \code{data} is a compressed file (\code{.zip}), a compressed \code{.json} file saved
+ to \code{path} and an invisible 200 HTTP status code. If uncompressed and read into R,
+ the file saved to \code{path} will be a list with the 2 components described above.
 
  For regression models \code{outputs} will include a 1-column data frame with
  the predicted values.
@@ -34,7 +43,7 @@ A list with the following components:
  class 1 and the classification class label result based on a 50\% threshold.
 }
 \description{
-\code{apply_model_batch()} returns the prediction for multiple input records
+\code{apply_model_batch()} returns the predictions for multiple input records
 that are sent to Zementis Server. The values returned depend on the type of prediction model
 being executed on the server.
 }
@@ -50,6 +59,11 @@ apply_model_batch("iris.json", "iris_model",)
 # Predict the entire iris data set previously saved to a .csv file
 write.csv(iris, "iris.csv", row.names = FALSE)
 apply_model_batch("iris.csv","iris_model")
+
+# Predict the entire iris data set previously saved and compressed
+apply_model_bath("iris.csv.zip", "iris_model", "iris_predictions.zip")
+unzipped_predictions <- unzip("iris_predictions.zip")
+jsonlite::fromJSON(unzipped_predictions)
 }
 }
 \seealso{

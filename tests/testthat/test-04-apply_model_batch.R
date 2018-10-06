@@ -41,11 +41,25 @@ test_that("apply_model_batch() works for .json files", {
 })
 
 test_that("apply_model_batch() works for .zip files", {
-  expect_equal(apply_model_batch("iris.csv.zip", "iris_model"), iris_resp,
-               tolerance = 1.5e-6)
-  expect_equal(apply_model_batch("kyphosis.json.zip", "kyphosis_model"), kyphosis_resp,
-               tolerance = 1.5e-6)
 
+  # Download compressed iris predictions
+  tmp_iris_z <- tempfile(fileext = ".zip")
+  on.exit(unlink(tmp_iris_z))
+  apply_model_batch("iris.csv.zip", "iris_model", tmp_iris_z)
+  tmp_iris_uz <- unzip(tmp_iris_z)
+  on.exit(unlink(tmp_iris_uz), add = TRUE)
+
+  # Download compressed kyphosis predictions
+  tmp_kyphosis_z <- tempfile(fileext = ".zip")
+  on.exit(unlink(tmp_kyphosis_z), add = TRUE)
+  apply_model_batch("kyphosis.json.zip", "kyphosis_model", tmp_kyphosis_z)
+  tmp_kyphosis_uz <- unzip(tmp_kyphosis_z)
+  on.exit(unlink(tmp_kyphosis_uz), add = TRUE)
+
+  expect_equal(jsonlite::fromJSON(tmp_iris_uz), iris_resp,
+               tolerance = 1.5e-6)
+  expect_equal(jsonlite::fromJSON(tmp_kyphosis_uz), kyphosis_resp,
+               tolerance = 1.5e-6)
 })
 
 test_that("apply_model_batch() requires data frame or valid path to a file as input", {

@@ -1,21 +1,29 @@
 #' Apply PMML model to multiple input records
 #'
-#' \code{apply_model_batch()} returns the prediction for multiple input records
+#' \code{apply_model_batch()} returns the predictions for multiple input records
 #' that are sent to Zementis Server. The values returned depend on the type of prediction model
 #' being executed on the server.
 #'
 #' @param data Either a data frame or a path to a file that contain multiple data
 #'   records that are sent to Zementis Server for prediction. Files must
 #'   be \code{.csv} or \code{.json} files. Alternatively, \code{.csv} and \code{.json}
-#'   files can also be sent in compressed format (\code{.zip} or \code{.gzip}).
+#'   files can also be sent in compressed format (\code{.zip} or \code{.gzip}). For
+#'   compressed files you need to set the \code{path} argument.
 #' @param model_name The name of the deployed PMML model that gets predictions
 #'  on the new data records contained in \code{data}.
+#' @param path Path to a file to which the response from Zementis Server is written to. Only used
+#'  if compressed input files (\code{.zip}) are passed to \code{data}.
 #' @inheritParams get_models
-#' @return A list with the following components:
+#' @return If \code{data} is a data frame, a \code{.csv} file or a \code{.json} file, a
+#'  list with the following components:
 #' \itemize{
 #'   \item \code{model} A vector containg the \code{model_name}
 #'   \item \code{outputs} A data frame containing the prediction results for \code{data}
 #' }
+#'
+#'  If \code{data} is a compressed file (\code{.zip}), a compressed \code{.json} file saved
+#'  to \code{path} and an invisible 200 HTTP status code. If uncompressed and read into R,
+#'  the file saved to \code{path} will be a list with the 2 components described above.
 #'
 #'  For regression models \code{outputs} will include a 1-column data frame with
 #'  the predicted values.
@@ -38,8 +46,13 @@
 #' # Predict the entire iris data set previously saved to a .csv file
 #' write.csv(iris, "iris.csv", row.names = FALSE)
 #' apply_model_batch("iris.csv","iris_model")
+#'
+#' # Predict the entire iris data set previously saved and compressed
+#' apply_model_bath("iris.csv.zip", "iris_model", "iris_predictions.zip")
+#' unzipped_predictions <- unzip("iris_predictions.zip")
+#' jsonlite::fromJSON(unzipped_predictions)
 #' }
-apply_model_batch <- function(data, model_name, ...) {
+apply_model_batch <- function(data, model_name, path, ...) {
 
   if(class(data) != "data.frame" && (!is.character(data) || !file.exists(data))) {
     stop("Please either provide a data frame or a path to a file.")
@@ -57,14 +70,23 @@ apply_model_batch <- function(data, model_name, ...) {
   }
 
   url <- paste(get_zementis_base_url(), "apply" , model_name,  sep = "/")
-
   my_file <- httr::upload_file(file)
-  response <- httr::POST(url, httr::authenticate(get_zementis_usr(),
-                                                 get_zementis_pwd()),
-                         httr::accept_json(),
-                         httr::user_agent(get_useragent()),
-                         body = list(file = my_file),
-                         ...)
+  args <- list(url, httr::authenticate(get_zementis_usr(),
+                                       get_zementis_pwd()),
+               httr::accept_json(),
+               httr::user_agent(get_useragent()),
+               body = list(file = my_file),
+               ...)
+  is_compressed <- FALSE
+
+  if(my_file$type == "application/zip") {
+    if(missing(path)) {
+      stop("Please provide a 'path' to which the predictions from Zementis Server are written to.")
+    }
+    is_compressed <- TRUE
+    args[[7]] <- httr::write_disk(path, overwrite = TRUE)
+  }
+  response <- do.call(httr::POST, args)
 
   if (httr::http_error(response)) {
     error_message <- sprintf(
@@ -81,19 +103,9 @@ apply_model_batch <- function(data, model_name, ...) {
     }
     stop(error_message, call. = FALSE)
   }
-  if (response$headers$`content-type` == "application/zip") {
-    # Save compressed response to temp file
-    f_zipped <- tempfile(fileext = ".zip")
-    on.exit(unlink(f_zipped), add = TRUE)
-    writeBin(httr::content(response, as = "raw"), f_zipped)
-    # Unzip temp file
-    f_unzipped <- unzip(f_zipped)
-    on.exit(unlink(f_unzipped), add = TRUE)
-    # Parse temp file
-    parsed <- jsonlite::fromJSON(f_unzipped)
-  } else {
-    parsed <- httr::content(response, as = "text") %>%
-      jsonlite::fromJSON()
+  if (is_compressed) {
+    return(invisible(httr::status_code(response)))
   }
-  parsed
+  httr::content(response, as = "text") %>%
+    jsonlite::fromJSON()
 }
