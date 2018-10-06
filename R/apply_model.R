@@ -7,8 +7,8 @@
 #' @param x A one row data frame containg the data record which is sent to
 #'  Zementis Server for prediction. The data frame column names must match
 #'  the PMML model argument names.
-#' @param model_name The name of the deployed PMML model that predicts
-#'  the record \code{x}.
+#' @param model_name The name of the deployed PMML model that gets the prediction
+#'  on the new data record \code{x}.
 #' @inheritParams get_models
 #' @return A list with the following components:
 #' \itemize{
