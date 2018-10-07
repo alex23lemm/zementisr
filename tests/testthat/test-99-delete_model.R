@@ -13,3 +13,6 @@ test_that("delete_model() returns error if 'model_name' is not length one charac
 test_that("delete_model() returns error if model name is unknown to the server", {
   expect_error(delete_model("unknown_model"), err_not_known, fixed = TRUE)
 })
+
+file.remove("iris_pmml.xml")
+file.remove("kyphosis_pmml.xml")
