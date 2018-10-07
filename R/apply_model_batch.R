@@ -84,7 +84,7 @@ apply_model_batch <- function(data, model_name, path, ...) {
       stop("Please provide a 'path' to which the predictions from Zementis Server are written to.")
     }
     is_compressed <- TRUE
-    args[[7]] <- httr::write_disk(path, overwrite = TRUE)
+    args[[length(args) + 1]] <- httr::write_disk(path, overwrite = TRUE)
   }
   response <- do.call(httr::POST, args)
 
