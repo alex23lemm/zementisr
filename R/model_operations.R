@@ -261,7 +261,7 @@ deactivate_model <- function(model_name, ...) {
       httr::http_status(response)$reason,
       httr::http_status(response)$message
     )
-    if(httr::status_code(response) == 404) {
+    if (httr::status_code(response) == 404) {
       error_message <- paste(error_message,
                              httr::content(response)$errors[[1]],
                              sep = "\n")

@@ -7,7 +7,7 @@
 activate_model(model_name, ...)
 }
 \arguments{
-\item{model_name}{The name of the model that is activated on Zementis server.}
+\item{model_name}{The name of the PMML model that is activated on Zementis server.}
 
 \item{...}{Additional arguments passed on to the underlying HTTP method.
 This might be necessary if you need to set some curl options explicitly
@@ -31,4 +31,7 @@ Activates an existing PMML model which was deployed to Zementis Server.
   #Activate all models on the server
   get_models() \%>\% purrr::map_df(activate_model)
 }
+}
+\seealso{
+\code{\link{upload_model}}, \code{\link{deactivate_model}}
 }

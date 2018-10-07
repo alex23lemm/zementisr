@@ -29,3 +29,6 @@ Remove PMML model from server and list remaining models.
  get_models() \%>\% purrr:::map(delete_model)
  }
 }
+\seealso{
+\code{\link{upload_model}}
+}

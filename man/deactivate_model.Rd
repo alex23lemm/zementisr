@@ -7,7 +7,7 @@
 deactivate_model(model_name, ...)
 }
 \arguments{
-\item{model_name}{The name of the model that is deactivated on Zementis server.}
+\item{model_name}{The name of the PMML model that is deactivated on Zementis server.}
 
 \item{...}{Additional arguments passed on to the underlying HTTP method.
 This might be necessary if you need to set some curl options explicitly
@@ -31,4 +31,7 @@ Dectivates an existing PMML model which was deployed to Zementis Server.
   #Deactivate all models on the server
   get_models() \%>\% purrr::map_df(deactivate_model)
 }
+}
+\seealso{
+\code{\link{upload_model}}, \code{\link{activate_model}}
 }

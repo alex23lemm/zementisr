@@ -2,7 +2,7 @@
 % Please edit documentation in R/model_operations.R
 \name{get_models}
 \alias{get_models}
-\title{List available models}
+\title{List available PMML models}
 \usage{
 get_models(...)
 }
@@ -17,4 +17,7 @@ A character vector that lists all available PMML models on Zementis
 }
 \description{
 Retrieves names of all available PMML models on Zementis Server.
+}
+\seealso{
+\code{\link{upload_model}}
 }

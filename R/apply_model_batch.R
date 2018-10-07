@@ -54,14 +54,14 @@
 #' }
 apply_model_batch <- function(data, model_name, path, ...) {
 
-  if(class(data) != "data.frame" && (!is.character(data) || !file.exists(data))) {
+  if (class(data) != "data.frame" && (!is.character(data) || !file.exists(data))) {
     stop("Please either provide a data frame or a path to a file.")
   }
   if (length(model_name) != 1L || typeof(model_name) != "character") {
     stop("'model_name' must be a length-one character vector")
   }
 
-  if(class(data) == "data.frame") {
+  if (class(data) == "data.frame") {
     file <- tempfile(fileext = ".json")
     on.exit(unlink(file))
     jsonlite::write_json(data, file)
@@ -79,8 +79,8 @@ apply_model_batch <- function(data, model_name, path, ...) {
                ...)
   is_compressed <- FALSE
 
-  if(my_file$type == "application/zip") {
-    if(missing(path)) {
+  if (my_file$type == "application/zip") {
+    if (missing(path)) {
       stop("Please provide a 'path' to which the predictions from Zementis Server are written to.")
     }
     is_compressed <- TRUE
@@ -96,7 +96,7 @@ apply_model_batch <- function(data, model_name, path, ...) {
       httr::http_status(response)$reason,
       httr::http_status(response)$message
     )
-    if(httr::status_code(response) %in% c(400, 404)) {
+    if (httr::status_code(response) %in% c(400, 404)) {
       error_message <- paste(error_message,
                              httr::content(response)$errors[[1]],
                              sep = "\n")

@@ -31,10 +31,10 @@
 #' }
 apply_model <- function(x, model_name, ...) {
 
-  if(!is.data.frame(x)) {
+  if (!is.data.frame(x)) {
     stop("'x' must be a data frame with a single record.")
   }
-  if(is.data.frame(x) && dim(x)[1] > 1) {
+  if (is.data.frame(x) && dim(x)[1] > 1) {
     stop("'x' must be a data frame with with a single record.")
   }
   if (length(model_name) != 1L || typeof(model_name) != "character") {
@@ -61,7 +61,7 @@ apply_model <- function(x, model_name, ...) {
       httr::http_status(response)$reason,
       httr::http_status(response)$message
     )
-    if(httr::status_code(response) %in% c(400, 404)) {
+    if (httr::status_code(response) %in% c(400, 404)) {
       error_message <- paste(error_message,
                              httr::content(response)$errors[[1]],
                              sep = "\n")

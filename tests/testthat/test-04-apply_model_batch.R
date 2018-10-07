@@ -37,7 +37,6 @@ test_that("apply_model_batch() works for .json files", {
                tolerance = 1.5e-6)
   expect_equal(apply_model_batch("kyphosis.json", "kyphosis_model"), kyphosis_resp,
                tolerance = 1.5e-6)
-
 })
 
 test_that("apply_model_batch() works for .zip files", {

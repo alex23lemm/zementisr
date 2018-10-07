@@ -7,7 +7,6 @@ test_that("apply_model() returns correct prediction for regression models", {
                     predict(iris_fit, iris[93, ]))
 })
 
-
 test_that("apply_model() returns correct prediction for binary classififcation models", {
   server_prediction <- apply_model(kyphosis[38, ], "kyphosis_model")
 
