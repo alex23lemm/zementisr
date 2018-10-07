@@ -1,10 +1,13 @@
 context("upload_model")
 
-test_that("upload_model() returns a list after model upload", {
+test_that("upload_model() works for XMLNode objects", {
+  expect_equal(upload_model(iris_pmml), list(model_name = "iris_model",
+                                             is_active = TRUE))
+})
+
+test_that("upload_model() works for pmml files", {
   expect_equal(upload_model("kyphosis_pmml.xml"), list(model_name = "kyphosis_model",
                                                        is_active = TRUE))
-  expect_equal(upload_model("iris_pmml.xml"), list(model_name = "iris_model",
-                                                   is_active = TRUE))
 })
 
 test_that("upload_model(): model names must be unique; file must exist", {

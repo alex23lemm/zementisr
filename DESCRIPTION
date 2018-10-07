@@ -12,7 +12,8 @@ LazyData: true
 Imports: httr,
     magrittr,
     purrr,
-    jsonlite
+    jsonlite,
+    XML
 RoxygenNote: 6.1.0
 Suggests: testthat,
     rpart,
