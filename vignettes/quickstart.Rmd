@@ -10,9 +10,11 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
+NOT_CRAN <- identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  purl = NOT_CRAN
 )
 ```
 
@@ -30,6 +32,74 @@ ZEMENTIS_usr = "guybrush.threepwood"
 ZEMENTIS_pwd = "bigwhoop"
 
 ```
+
+
+## Preparation
+
+Before we get started we create two simple prediction models and convert them to PMML using `pmml()` from the pmml package. The first model is saved to disk.  
+
+``` {r eval=NOT_CRAN}
+
+library(rpart)
+library(pmml)
+library(zementisr)
+
+iris_lm <- lm(Sepal.Length ~ ., data=iris)
+iris_pmml <- pmml(iris_lm, model.name = "iris_model")
+saveXML(iris_pmml, "iris_pmml.xml")
+
+kyphosis_fit <- rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
+kyphosis_pmml <- pmml(kyphosis_fit, model.name = "kyphosis_model")
+
+```
+
+
+## Model deployment 
+
+Now, we will start using functions from the zementisr package. We begin with `upload_model()` to upload our models to the server. 
+
+`upload_model()` either accepts a path to a PMML file on disk or an `XMLNode` object created with `pmml::pmml()`. Below we demonstrate both options to upload the two models to the server. A successful upload always returns a list with the model name and its activation status.
+
+```{r eval=TRUE}
+library(zementisr)
+
+upload_model("iris_pmml.xml")
+upload_model(kyphosis_pmml)
+```
+
+
+## Basic model operations 
+
+After deployment you might be interested in how many models are currently deployed to Zementis Server.
+
+```{r eval=NOT_CRAN}
+get_models()
+```
+
+If you like to deactivate a model without removing it from the server, do the following:
+
+```{r}
+deactivate_model("iris_model")
+deactivate_model("kyphosis_model")
+```
+
+You even can add some `magrittr` and `purrr` flavor to chain several zementisr functions together. For instance, the following line of code lets you activate all your models at once:
+
+```{r eval=NOT_CRAN}
+get_models() %>% purrr::map_df(activate_model)
+
+```
+
+
+## Delete models
+
+After a model has reached the end of its lifecycle you might want to remove it from the server using `delete_model`() which always returns a character vector with the names of the models still residing deployed on the server:
+
+```{r}
+delete_model("iris_model")
+delete_model("kyphosis_model")
+```
+
 
 ## The `...` argument
 
