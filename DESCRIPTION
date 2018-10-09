@@ -17,4 +17,7 @@ Imports: httr,
 RoxygenNote: 6.1.0
 Suggests: testthat,
     rpart,
-    pmml
+    pmml,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

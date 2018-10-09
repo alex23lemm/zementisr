@@ -1,0 +1,36 @@
+---
+title: "zementisr Quickstart Guide"
+author: "Alexander Lemm"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zementisr Quickstart Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Authentication 
+
+Zementis Server's REST API uses HTTP Basic Authentication. For each request the client needs to provide username and password. 
+
+Since typing your password in the console is a bit too dangerous (you might accidentally share the `.Rhistory` file) and asking each time gets too cumbersome quickly, the zementisr package requires that you store your secrets and the base URL of your Zementis Server as environment variables in the `.Renviron` file in your home directory.
+
+Please, make sure to set the following environment variables accordingly in your `.Renviron` file before using functions from the zementisr package.:
+
+``` {r eval=FALSE}
+ZEMENTIS_base_url = "http://localhost:9083"
+ZEMENTIS_usr = "guybrush.threepwood"
+ZEMENTIS_pwd = "bigwhoop"
+
+```
+
+## The `...` argument
+
+Each function from the zementisr package comes with a `...` (dot-dot-dot) argument. It is used to pass on additional arguments to the underlying HTTP method from the `httr` package. This might be necessary if you need to set some curl options explicitly  via `httr::config()`.
