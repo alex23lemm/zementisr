@@ -19,5 +19,6 @@ Suggests: testthat,
     rpart,
     pmml,
     knitr,
-    rmarkdown
+    rmarkdown,
+    dplyr
 VignetteBuilder: knitr
