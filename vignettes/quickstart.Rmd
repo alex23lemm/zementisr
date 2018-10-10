@@ -18,6 +18,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. 
+
+In this quickstart guide we will show how you can use zementisr to deploy PMML models, predict new values by sending data to Zementis Server and manage the entire PMML model life cycle without leaving your preferred R development environment. 
+
 ## Authentication 
 
 Zementis Server's REST API uses HTTP Basic Authentication. For each request the client needs to provide username and password. 
@@ -57,7 +61,7 @@ Now, we will start using functions from the zementisr package. We will begin wit
 
 `upload_model()` either accepts a path to a PMML file on disk or an `XMLNode` object created with `pmml::pmml()`. Below we will demonstrate both options to upload the two models to the server. A successful upload always returns a list with the model name and its activation status.
 
-```{r eval=TRUE}
+```{r eval=NOT_CRAN}
 library(zementisr)
 
 upload_model("iris_pmml.xml")
@@ -108,7 +112,7 @@ apply_model(kyphosis[23, ], "kyphosis_model")
 
 If you like to predict a __multiple new input records__ all at once, use `apply_model_batch()` which accepts data frames, `.csv` and `.json` files as data input. `.csv` and `.json` files can even be sent in compressed format (`.zip` or `.gzip`).
 
-```{r}
+```{r eval=NOT_CRAN}
 apply_model_batch(iris[23:25, ], "iris_model")
 jsonlite::write_json(iris[23:25, ], "iris.json")
 apply_model_batch("iris.json", "iris_model",)
@@ -116,13 +120,7 @@ write.csv(iris[23:25, ], "iris.csv", row.names = FALSE)
 apply_model_batch("iris.csv","iris_model")
 ```
 
-
-
-
-
-
-
-
+As you can see by the output above, `apply_model_batch()` also returns a list with the two components `model` and `output`.
 
 ## Delete models
 

@@ -16,6 +16,8 @@
 
 * `apply_model_batch()` Applies PMML model to multiple data records (a data frame in memory or a file saved to disk) that are sent to Zementis Server
 
+* _zementisr Quickstart Guide_ vignette
+
 
 
 
