@@ -21,7 +21,7 @@ via \code{\link[httr]{config}}.}
 \value{
 A list with the following components:
 \itemize{
-  \item \code{model} A vector containg the \code{model_name} that was executed on the server
+  \item \code{model} A length one character vector containg the \code{model_name} that was executed on the server
   \item \code{outputs} A data frame containing the prediction results for \code{x}
 }
 

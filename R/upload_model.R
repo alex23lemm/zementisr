@@ -71,7 +71,7 @@ upload_model <- function(file, applyCleanser = TRUE, ...) {
   if (httr::http_type(response) != "application/json") {
     stop("Zementis Server API did not return json", .call = FALSE)
   }
-  parsed <- httr::content(response, as = "text") %>%
+  parsed <- httr::content(response, as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON()
   list(
     model_name = parsed[["modelName"]],

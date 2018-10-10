@@ -27,7 +27,7 @@ via \code{\link[httr]{config}}.}
 If \code{data} is a data frame, a \code{.csv} file or a \code{.json} file, a
  list with the following components:
 \itemize{
-  \item \code{model} A vector containg the \code{model_name}
+  \item \code{model} A length one character vector containg the \code{model_name}
   \item \code{outputs} A data frame containing the prediction results for \code{data}
 }
 
@@ -54,7 +54,7 @@ apply_model_batch(iris, "iris_model")
 
 # Predict the entire iris data set previously saved to a .json file
 jsonlite::write_json(iris, "iris.json")
-apply_model_batch("iris.json", "iris_model",)
+apply_model_batch("iris.json", "iris_model")
 
 # Predict the entire iris data set previously saved to a .csv file
 write.csv(iris, "iris.csv", row.names = FALSE)

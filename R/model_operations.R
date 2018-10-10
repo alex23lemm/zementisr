@@ -33,7 +33,7 @@ get_models <- function(...) {
   if (httr::http_type(response) != "application/json") {
     stop("Zementis Server API did not return json", .call = FALSE)
   }
-  httr::content(response, as = "text") %>%
+  httr::content(response, as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON() %>%
     purrr::flatten_chr()
 }
@@ -87,7 +87,7 @@ get_model_properties <- function(model_name, ...) {
   if (httr::http_type(response) != "application/json") {
     stop("Zementis Server API did not return json", .call = FALSE)
   }
-  httr::content(response, as = "text") %>%
+  httr::content(response, as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON()
 }
 
@@ -145,7 +145,7 @@ delete_model <- function(model_name, ...) {
   if (httr::http_type(response) != "application/json") {
     stop("Zementis Server API did not return json", .call = FALSE)
   }
-  httr::content(response, as = "text") %>%
+  httr::content(response, as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON() %>%
     purrr::flatten_chr()
 }
@@ -207,7 +207,7 @@ activate_model <- function(model_name, ...) {
   if (httr::http_type(response) != "application/json") {
     stop("Zementis Server API did not return json", .call = FALSE)
   }
-  parsed <- httr::content(response, as = "text") %>%
+  parsed <- httr::content(response, as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON()
 
   list(
@@ -272,7 +272,7 @@ deactivate_model <- function(model_name, ...) {
   if (httr::http_type(response) != "application/json") {
     stop("Zementis Server API did not return json", .call = FALSE)
   }
-  parsed <- httr::content(response, as = "text") %>%
+  parsed <- httr::content(response, as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON()
 
   list(
