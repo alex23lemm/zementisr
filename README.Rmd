@@ -16,8 +16,6 @@ knitr::opts_chunk$set(
 
 # zementisr
 
-## Overview
-
 zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. Using zementisr, data scientists can deploy PMML models, predict new values by sending data to the server and manage the entire PMML model life cycle without leaving their preferred R development environment.
 
 ## Installation
@@ -27,6 +25,32 @@ zementisr is an R client for the Zementis Server API. Zementis Server is an exec
 devtools::install_github("alex23lemm/zementisr")
 
 ```
+
+## Usage
+
+zementisr deploys PMML models to Zementis Server and manages the model lifecycle. Here are some of the things you can do once you have converted your R prediction model to PMML: 
+
+```{r}
+library(zementisr)
+
+# Build a simple lm model and convert it to PMML
+iris_lm <- lm(Sepal.Length ~ ., data=iris)
+iris_pmml <- pmml::pmml(iris_lm, model.name = "iris_model")
+
+
+# Deploy PMML model to Zementis Server
+upload_model(iris_pmml)
+
+# Get prediction for new value
+apply_model(iris[42, ], "iris_model")
+
+deactivate_model("iris_model")
+
+activate_model("iris_model")
+
+delete_model("iris_model")
+```
+
 
 ## Authentication 
 
