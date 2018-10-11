@@ -15,13 +15,7 @@
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-000000-01"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-000000-01');
-</script>
+<![endif]-->
 </head>
 <body>
     <div class="container template-article">
@@ -102,7 +96,7 @@ ZEMENTIS_pwd =<span class="st"> "bigwhoop"</span></code></pre></div>
 <div id="preparation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#preparation" class="anchor"></a>Preparation</h2>
-<p>Before we get started using the zementisr package, we will create two simple prediction models and convert them to PMML using <code>pmml()</code> from the pmml package. The first PMML model will be saved to disk:</p>
+<p>Before we get started using the zementisr package, we will create two simple prediction models and convert them to PMML using <code>pmml()</code> from the <a href="https://cran.r-project.org/web/packages/pmml/index.html">pmml package</a>. The first PMML model will be saved to disk:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)
 <span class="kw">library</span>(pmml)
 <span class="co">#&gt; Lade nötiges Paket: XML</span>
