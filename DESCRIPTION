@@ -7,8 +7,8 @@ Description: zementisr is an R client for the Zementis Server API. Zementis Serv
     capabilities. Using zementisr, data scientists can deploy PMML models,
     predict new values by sending data to the server and manage the entire PMML model
     life cycle without leaving their preferred R development environment. 
-Depends: R (>= 3.5.1)
-License: GPL-2
+Depends: R (>= 3.5.0)
+License: GPL-3
 URL: https://github.com/alex23lemm/zementisr
 BugReports: https://github.com/alex23lemm/zementisr/issues
 Encoding: UTF-8
