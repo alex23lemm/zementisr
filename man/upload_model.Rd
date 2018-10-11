@@ -22,9 +22,11 @@ via \code{\link[httr]{config}}.}
 If a model with the same name already existis on the server or if is
  not valid PMML, an error.
 Otherwise a list with the following components:
- \item{model_name}{The name of the uploaded model}
- \item{is_active}{A logical indicating the activation status of the model
-   which is TRUE after the initial model upload.}
+\itemize{
+ \item \code{model_name} The name of the uploaded model
+ \item \code{is_active} A logical indicating the activation status of the model
+   which is TRUE after the initial model upload.
+ }
 }
 \description{
 Upload new PMML source or serialized model file to Zementis Server.
