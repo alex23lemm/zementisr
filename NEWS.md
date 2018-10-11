@@ -8,7 +8,7 @@
 
 * `activate_model()` activates PMML model on Zementis Server
 
-* `decative_model()` deactivates PMML model on Zementis Server
+* `deactivate_model()` deactivates PMML model on Zementis Server
 
 * `delete_model()` deletes PMML model from Zementis Server
 
