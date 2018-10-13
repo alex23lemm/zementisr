@@ -1,0 +1,134 @@
+---
+title: "zementisr Quickstart Guide"
+author: "Alexander Lemm"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{zementisr Quickstart Guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. 
+
+In this quickstart guide we will show how you can use zementisr to deploy PMML models, predict new values by sending data to Zementis Server and manage the entire PMML model life cycle without leaving your preferred R development environment. 
+
+## Authentication 
+
+Zementis Server's REST API uses HTTP Basic Authentication. For each request the client needs to provide username and password. 
+
+Since typing your password in the console is a bit too dangerous (you might accidentally share the `.Rhistory` file) and asking each time gets too cumbersome quickly, the zementisr package requires that you store your secrets and the base URL of your Zementis Server as environment variables in the `.Renviron` file in your home directory.
+
+Please make sure to set the following environment variables accordingly in your `.Renviron` file before using functions from the zementisr package:
+
+``` {r eval=FALSE}
+ZEMENTIS_base_url = "http://localhost:9083"
+ZEMENTIS_usr = "guybrush.threepwood"
+ZEMENTIS_pwd = "bigwhoop"
+
+```
+
+
+## Preparation
+
+Before we get started using the zementisr package, we will create two simple prediction models and convert them to PMML using `pmml()` from the [pmml package](https://cran.r-project.org/web/packages/pmml/index.html). The first PMML model will be saved to disk: 
+
+``` {r}
+library(rpart)
+library(pmml)
+
+iris_lm <- lm(Sepal.Length ~ ., data=iris)
+iris_pmml <- pmml(iris_lm, model.name = "iris_model")
+saveXML(iris_pmml, "iris_pmml.xml")
+
+kyphosis_fit <- rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
+kyphosis_pmml <- pmml(kyphosis_fit, model.name = "kyphosis_model")
+```
+
+
+## Model deployment 
+
+Now, we will start using functions from the zementisr package. We will begin with `upload_model()` to upload our PMML models to the server. 
+
+`upload_model()` either accepts a path to a PMML file on disk or an `XMLNode` object created with `pmml::pmml()`. Below we will demonstrate both options to upload the two models to the server. A successful upload always returns a list with the model name and its activation status.
+
+```{r}
+library(zementisr)
+
+upload_model("iris_pmml.xml")
+upload_model(kyphosis_pmml)
+```
+
+
+## Basic model operations 
+
+After deployment you might be interested in how many PMML models are currently deployed to Zementis Server:
+
+```{r}
+get_models()
+```
+
+Use `get_model_properties()` to get the PMML model's name, description, input and output field properties:
+
+```{r}
+get_model_properties("kyphosis_model")
+```
+
+If you like to deactivate a PMML model without removing it from the server, do the following:
+
+```{r}
+deactivate_model("iris_model")
+deactivate_model("kyphosis_model")
+```
+
+You even can add some `magrittr` and `purrr` flavor to chain several zementisr functions together. For instance, the following line of code lets you activate all your PMML models at once:
+
+```{r}
+get_models() %>% purrr::map_df(activate_model)
+```
+
+
+## Model predictions 
+
+If you like to predict a __single new input record__, use `apply_model()` which needs a one row data frame as its data input and the name of the deployed PMML model that should get the prediction. If executed successfully, `apply_model()` returns a list with the following components:
+
+* `model` A length one character vector containing the name of the PMML model that was executed on the server
+
+* `outputs` A data frame containing the prediction results. The values returned depend on the type of prediction model being executed on the server. You can spot the difference between a regression and a classification model in the output below
+
+```{r}
+apply_model(iris[42, ], "iris_model")
+apply_model(kyphosis[23, ], "kyphosis_model")
+```
+
+If you like to predict a __multiple new input records__ all at once, use `apply_model_batch()` which accepts data frames, `.csv` and `.json` files as data input. `.csv` and `.json` files can even be sent in compressed format (`.zip` or `.gzip`).
+
+```{r}
+apply_model_batch(iris[23:25, ], "iris_model")
+jsonlite::write_json(iris[23:25, ], "iris.json")
+apply_model_batch("iris.json", "iris_model")
+write.csv(iris[23:25, ], "iris.csv", row.names = FALSE)
+apply_model_batch("iris.csv","iris_model")
+```
+
+As you can see by the output above, `apply_model_batch()` also returns a list with the two components `model` and `outputs`.
+
+## Delete models
+
+After a PMML model has reached the end of its life cycle you might want to remove it from the server using `delete_model`() which always returns a character vector with the names of the models still residing deployed to the server:
+
+```{r}
+delete_model("iris_model")
+delete_model("kyphosis_model")
+```
+
+
+## The `...` argument
+
+Each function from the zementisr package comes with a `...` (dot-dot-dot) argument. It is used to pass on additional arguments to the underlying HTTP method from the `httr` package. This might be necessary if you need to set some curl options explicitly  via `httr::config()`.
