@@ -1,6 +1,15 @@
-#' @importFrom magrittr %>%
+#' Pipe operator
+#'
+#' See \code{magrittr::\link[magrittr]{\%>\%}} for details.
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
 #' @export
-magrittr::`%>%`
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
+NULL
+
 
 get_useragent <- function() {
   ua <- "Request created by the zementisr package; https://github.com/alex23lemm/zementisr"
