@@ -74,6 +74,13 @@ test_that("apply_model_batch() requires data frame or valid path to a file as in
                fixed = TRUE)
 })
 
+test_that("apply_model_batch() returns error if path for compressed file downloads is missing", {
+  skip_on_travis()
+  expect_error(apply_model_batch("iris.csv.zip", "iris_model"),
+               "Please provide a 'path' to which the predictions from Zementis Server are written to.",
+               fixed = TRUE)
+})
+
 test_that("apply_model_batch() returns error if 'model_name' is not length one character vector", {
   skip_on_travis()
   expect_error(apply_model_batch(iris[1:2, ], c("iris_model", "kyphosis_model")))
