@@ -4,7 +4,7 @@ zementisr
 
 [![Travis-CI Build Status](https://travis-ci.org/alex23lemm/zementisr.svg?branch=master)](https://travis-ci.org/alex23lemm/zementisr)
 
-zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. Using zementisr, data scientists can deploy PMML models, predict new values by sending data to the server and manage the entire PMML model life cycle without leaving their preferred R development environment.
+zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. Using zementisr, data scientists can deploy PMML models to Zementis Server, predict new values by sending data to the server and manage the entire PMML model life cycle without leaving their preferred R development environment.
 
 Installation
 ------------
@@ -17,15 +17,19 @@ devtools::install_github("alex23lemm/zementisr")
 Usage
 -----
 
-zementisr deploys PMML models to Zementis Server and manages the model lifecycle. Here are some of the things you can do once you have converted your R prediction model to PMML:
+zementisr deploys PMML models to Zementis Server and manages the model lifecycle. Below are some of the things you can do once you have converted your R prediction model to PMML.
+
+Check out the [quickstart guide](https://alex23lemm.github.io/zementisr/articles/zementisr.html) and [the docs](https://alex23lemm.github.io/zementisr/reference/index.html) for further details.
 
 ``` r
-library(zementisr)
+library(pmml)
 
 # Build a simple lm model and convert it to PMML
 iris_lm <- lm(Sepal.Length ~ ., data=iris)
-iris_pmml <- pmml::pmml(iris_lm, model.name = "iris_model")
+iris_pmml <- pmml(iris_lm, model.name = "iris_model")
 
+
+library(zementisr)
 
 # Deploy PMML model to Zementis Server
 upload_model(iris_pmml)
@@ -35,7 +39,7 @@ upload_model(iris_pmml)
 #> $is_active
 #> [1] TRUE
 
-# Get prediction for new value
+# Get prediction for new value from Zementis Server
 apply_model(iris[42, ], "iris_model")
 #> $model
 #> [1] "iris_model"
@@ -44,6 +48,7 @@ apply_model(iris[42, ], "iris_model")
 #>   Predicted_Sepal.Length
 #> 1               4.295281
 
+# Deactivate PMML model on Zementis Server
 deactivate_model("iris_model")
 #> $model_name
 #> [1] "iris_model"
@@ -51,6 +56,7 @@ deactivate_model("iris_model")
 #> $is_active
 #> [1] FALSE
 
+# Activate PMML model on Zementis Server
 activate_model("iris_model")
 #> $model_name
 #> [1] "iris_model"
@@ -58,6 +64,7 @@ activate_model("iris_model")
 #> $is_active
 #> [1] TRUE
 
+# Delete PMML model from Zementis Server
 delete_model("iris_model")
 #> character(0)
 ```

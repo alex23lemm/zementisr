@@ -12,7 +12,7 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="R client for the Zementis Server API">
 <meta property="og:description" content="zementisr is an R client for the Zementis Server API. Zementis Server 
     is an execution engine for PMML models which also comes with model management
-    capabilities. Using zementisr, data scientists can deploy PMML models,
+    capabilities. Using zementisr, data scientists can deploy PMML models to Zementis Server,
     predict new values by sending data to the server and manage the entire PMML model
     life cycle without leaving their preferred R development environment. ">
 <meta name="twitter:card" content="summary">
@@ -88,7 +88,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#zementisr" class="anchor"></a>zementisr</h1></div>
 
-<p>zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. Using zementisr, data scientists can deploy PMML models, predict new values by sending data to the server and manage the entire PMML model life cycle without leaving their preferred R development environment.</p>
+<p>zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. Using zementisr, data scientists can deploy PMML models to Zementis Server, predict new values by sending data to the server and manage the entire PMML model life cycle without leaving their preferred R development environment.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -98,13 +98,16 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>zementisr deploys PMML models to Zementis Server and manages the model lifecycle. Here are some of the things you can do once you have converted your R prediction model to PMML:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zementisr)
+<p>zementisr deploys PMML models to Zementis Server and manages the model lifecycle. Below are some of the things you can do once you have converted your R prediction model to PMML.</p>
+<p>Check out the <a href="https://alex23lemm.github.io/zementisr/articles/zementisr.html">quickstart guide</a> and <a href="https://alex23lemm.github.io/zementisr/reference/index.html">the docs</a> for further details.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pmml)
 
 <span class="co"># Build a simple lm model and convert it to PMML</span>
 iris_lm &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris)
-iris_pmml &lt;-<span class="st"> </span>pmml<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/pmml/topics/pmml">pmml</a></span>(iris_lm, <span class="dt">model.name =</span> <span class="st">"iris_model"</span>)
+iris_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(iris_lm, <span class="dt">model.name =</span> <span class="st">"iris_model"</span>)
 
+
+<span class="kw">library</span>(zementisr)
 
 <span class="co"># Deploy PMML model to Zementis Server</span>
 <span class="kw"><a href="reference/upload_model.html">upload_model</a></span>(iris_pmml)
@@ -114,7 +117,7 @@ iris_pmml &lt;-<span class="st"> </span>pmml<span class="op">::</span><span clas
 <span class="co">#&gt; $is_active</span>
 <span class="co">#&gt; [1] TRUE</span>
 
-<span class="co"># Get prediction for new value</span>
+<span class="co"># Get prediction for new value from Zementis Server</span>
 <span class="kw"><a href="reference/apply_model.html">apply_model</a></span>(iris[<span class="dv">42</span>, ], <span class="st">"iris_model"</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] "iris_model"</span>
@@ -123,6 +126,7 @@ iris_pmml &lt;-<span class="st"> </span>pmml<span class="op">::</span><span clas
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
 <span class="co">#&gt; 1               4.295281</span>
 
+<span class="co"># Deactivate PMML model on Zementis Server</span>
 <span class="kw"><a href="reference/deactivate_model.html">deactivate_model</a></span>(<span class="st">"iris_model"</span>)
 <span class="co">#&gt; $model_name</span>
 <span class="co">#&gt; [1] "iris_model"</span>
@@ -130,6 +134,7 @@ iris_pmml &lt;-<span class="st"> </span>pmml<span class="op">::</span><span clas
 <span class="co">#&gt; $is_active</span>
 <span class="co">#&gt; [1] FALSE</span>
 
+<span class="co"># Activate PMML model on Zementis Server</span>
 <span class="kw"><a href="reference/activate_model.html">activate_model</a></span>(<span class="st">"iris_model"</span>)
 <span class="co">#&gt; $model_name</span>
 <span class="co">#&gt; [1] "iris_model"</span>
@@ -137,6 +142,7 @@ iris_pmml &lt;-<span class="st"> </span>pmml<span class="op">::</span><span clas
 <span class="co">#&gt; $is_active</span>
 <span class="co">#&gt; [1] TRUE</span>
 
+<span class="co"># Delete PMML model from Zementis Server</span>
 <span class="kw"><a href="reference/delete_model.html">delete_model</a></span>(<span class="st">"iris_model"</span>)
 <span class="co">#&gt; character(0)</span></code></pre></div>
 </div>

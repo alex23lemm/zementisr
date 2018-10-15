@@ -73,7 +73,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <p>zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities.</p>
-<p>In this quickstart guide we will show how you can use zementisr to deploy PMML models, predict new values by sending data to Zementis Server and manage the entire PMML model life cycle without leaving your preferred R development environment.</p>
+<p>In this quickstart guide we will show how you can use zementisr to deploy PMML models to Zementis Server, predict new values by sending data to the server and manage the entire PMML model life cycle without leaving your preferred R development environment.</p>
 <div id="authentication" class="section level2">
 <h2>Authentication</h2>
 <p>Zementis Server’s REST API uses HTTP Basic Authentication. For each request the client needs to provide username and password.</p>
@@ -88,7 +88,6 @@ ZEMENTIS_pwd =<span class="st"> &quot;bigwhoop&quot;</span></code></pre></div>
 <p>Before we get started using the zementisr package, we will create two simple prediction models and convert them to PMML using <code>pmml()</code> from the <a href="https://cran.r-project.org/web/packages/pmml/index.html">pmml package</a>. The first PMML model will be saved to disk:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)
 <span class="kw">library</span>(pmml)
-<span class="co">#&gt; Loading required package: XML</span>
 
 iris_lm &lt;-<span class="st"> </span><span class="kw">lm</span>(Sepal.Length <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris)
 iris_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(iris_lm, <span class="dt">model.name =</span> <span class="st">&quot;iris_model&quot;</span>)
