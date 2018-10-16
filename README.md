@@ -2,7 +2,7 @@
 zementisr
 =========
 
-[![Travis-CI Build Status](https://travis-ci.org/alex23lemm/zementisr.svg?branch=master)](https://travis-ci.org/alex23lemm/zementisr)
+[![Travis-CI Build Status](https://travis-ci.org/alex23lemm/zementisr.svg?branch=master)](https://travis-ci.org/alex23lemm/zementisr) [![Coverage status](https://codecov.io/gh/alex23lemm/zementisr/branch/master/graph/badge.svg)](https://codecov.io/github/alex23lemm/zementisr?branch=master)
 
 zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. Using zementisr, data scientists can deploy PMML models to Zementis Server, predict new values by sending data to the server and manage the entire PMML model life cycle without leaving their preferred R development environment.
 
