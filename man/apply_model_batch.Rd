@@ -27,7 +27,7 @@ via \code{\link[httr]{config}}.}
 If \code{data} is a data frame, a \code{.csv} file or a \code{.json} file, a
  list with the following components:
 \itemize{
-  \item \code{model} A length one character vector containg the \code{model_name}
+  \item \code{model} A length one character vector containing the \code{model_name}
   \item \code{outputs} A data frame containing the prediction results for \code{data}
 }
 

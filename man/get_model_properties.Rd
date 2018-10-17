@@ -16,7 +16,7 @@ via \code{\link[httr]{config}}.}
 \value{
 A list with the following components:
 \itemize{
-  \item \code{modelName} A length one character vector containg the \code{model_name}
+  \item \code{modelName} A length one character vector containing the \code{model_name}
   \item \code{description} A length one character vector with the description of the model
   \item \code{isActive} A length one character vector with the activation status of the model
   \item \code{inputFields} A data frame with the model input field properties (name, type, usage)

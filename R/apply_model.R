@@ -4,7 +4,7 @@
 #' to Zementis Server. The value returned depends on the type of prediction model
 #' being executed on the server.
 #'
-#' @param x A one row data frame containg the data record which is sent to
+#' @param x A one row data frame containing the data record which is sent to
 #'  Zementis Server for prediction. The data frame column names must match
 #'  the PMML model argument names.
 #' @param model_name The name of the deployed PMML model that gets the prediction
@@ -12,7 +12,7 @@
 #' @inheritParams get_models
 #' @return A list with the following components:
 #' \itemize{
-#'   \item \code{model} A length one character vector containg the \code{model_name} that was executed on the server
+#'   \item \code{model} A length one character vector containing the \code{model_name} that was executed on the server
 #'   \item \code{outputs} A data frame containing the prediction results for \code{x}
 #' }
 #'

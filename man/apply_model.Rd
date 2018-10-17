@@ -7,7 +7,7 @@
 apply_model(x, model_name, ...)
 }
 \arguments{
-\item{x}{A one row data frame containg the data record which is sent to
+\item{x}{A one row data frame containing the data record which is sent to
 Zementis Server for prediction. The data frame column names must match
 the PMML model argument names.}
 
@@ -21,7 +21,7 @@ via \code{\link[httr]{config}}.}
 \value{
 A list with the following components:
 \itemize{
-  \item \code{model} A length one character vector containg the \code{model_name} that was executed on the server
+  \item \code{model} A length one character vector containing the \code{model_name} that was executed on the server
   \item \code{outputs} A data frame containing the prediction results for \code{x}
 }
 

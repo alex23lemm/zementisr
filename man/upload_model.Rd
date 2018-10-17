@@ -11,7 +11,7 @@ upload_model(file, applyCleanser = TRUE, ...)
 \code{\link[pmml]{pmml}}. The PMML model file can end in \code{.xml},
 \code{.pmml} or even be \code{.zip} or \code{.gzip} compressed.}
 
-\item{applyCleanser}{Logical indicating if the server should perfom cleansing
+\item{applyCleanser}{Logical indicating if the server should perform cleansing
 on the PMML file. (Default: TRUE)}
 
 \item{...}{Additional arguments passed on to the underlying HTTP method.
@@ -19,7 +19,7 @@ This might be necessary if you need to set some curl options explicitly
 via \code{\link[httr]{config}}.}
 }
 \value{
-If a model with the same name already existis on the server or if is
+If a model with the same name already exists on the server or if is
  not valid PMML, an error.
 Otherwise a list with the following components:
 \itemize{

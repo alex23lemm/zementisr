@@ -22,7 +22,7 @@ If the model name is not known to the server, an error. Otherwise a
    }
 }
 \description{
-Dectivates an existing PMML model which was deployed to Zementis Server.
+Deactivates an existing PMML model which was deployed to Zementis Server.
 }
 \examples{
 \dontrun{
