@@ -120,7 +120,8 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <h2>Basic model operations</h2>
 <p>After deployment you might be interested in how many PMML models are currently deployed to Zementis Server:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_models</span>()
-<span class="co">#&gt; [1] &quot;iris_model&quot;     &quot;kyphosis_model&quot;</span></code></pre></div>
+<span class="co">#&gt; [1] &quot;LoanNNModel&quot;    &quot;AuditSVMModel&quot;  &quot;IrisMLRModel&quot;   &quot;iris_model&quot;    </span>
+<span class="co">#&gt; [5] &quot;kyphosis_model&quot;</span></code></pre></div>
 <p>Use <code>get_model_properties()</code> to get the PMML model’s name, description, input and output field properties:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_model_properties</span>(<span class="st">&quot;kyphosis_model&quot;</span>)
 <span class="co">#&gt; $modelName</span>
@@ -133,16 +134,16 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <span class="co">#&gt; [1] TRUE</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $inputFields</span>
-<span class="co">#&gt;     name   type  usage</span>
-<span class="co">#&gt; 1    Age DOUBLE ACTIVE</span>
-<span class="co">#&gt; 2 Number DOUBLE ACTIVE</span>
-<span class="co">#&gt; 3  Start DOUBLE ACTIVE</span>
+<span class="co">#&gt;    usage   name   type</span>
+<span class="co">#&gt; 1 ACTIVE    Age DOUBLE</span>
+<span class="co">#&gt; 2 ACTIVE Number DOUBLE</span>
+<span class="co">#&gt; 3 ACTIVE  Start DOUBLE</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputFields</span>
-<span class="co">#&gt;                  name   type  usage</span>
-<span class="co">#&gt; 1  Predicted_Kyphosis STRING OUTPUT</span>
-<span class="co">#&gt; 2  Probability_absent DOUBLE OUTPUT</span>
-<span class="co">#&gt; 3 Probability_present DOUBLE OUTPUT</span></code></pre></div>
+<span class="co">#&gt;    usage                name   type</span>
+<span class="co">#&gt; 1 OUTPUT  Predicted_Kyphosis STRING</span>
+<span class="co">#&gt; 2 OUTPUT  Probability_absent DOUBLE</span>
+<span class="co">#&gt; 3 OUTPUT Probability_present DOUBLE</span></code></pre></div>
 <p>If you like to deactivate a PMML model without removing it from the server, do the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">deactivate_model</span>(<span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model_name</span>
@@ -158,11 +159,14 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <span class="co">#&gt; [1] FALSE</span></code></pre></div>
 <p>You even can add some <code>magrittr</code> and <code>purrr</code> flavor to chain several zementisr functions together. For instance, the following line of code lets you activate all your PMML models at once:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_models</span>() <span class="op">%&gt;%</span><span class="st"> </span>purrr<span class="op">::</span><span class="kw">map_df</span>(activate_model)
-<span class="co">#&gt; # A tibble: 2 x 2</span>
+<span class="co">#&gt; # A tibble: 5 x 2</span>
 <span class="co">#&gt;   model_name     is_active</span>
 <span class="co">#&gt;   &lt;chr&gt;          &lt;lgl&gt;    </span>
-<span class="co">#&gt; 1 iris_model     TRUE     </span>
-<span class="co">#&gt; 2 kyphosis_model TRUE</span></code></pre></div>
+<span class="co">#&gt; 1 LoanNNModel    TRUE     </span>
+<span class="co">#&gt; 2 AuditSVMModel  TRUE     </span>
+<span class="co">#&gt; 3 IrisMLRModel   TRUE     </span>
+<span class="co">#&gt; 4 iris_model     TRUE     </span>
+<span class="co">#&gt; 5 kyphosis_model TRUE</span></code></pre></div>
 </div>
 <div id="model-predictions" class="section level2">
 <h2>Model predictions</h2>
@@ -221,9 +225,9 @@ jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span 
 <h2>Delete models</h2>
 <p>After a PMML model has reached the end of its life cycle you might want to remove it from the server using <code>delete_model</code>() which always returns a character vector with the names of the models still residing deployed to the server:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">delete_model</span>(<span class="st">&quot;iris_model&quot;</span>)
-<span class="co">#&gt; [1] &quot;kyphosis_model&quot;</span>
+<span class="co">#&gt; [1] &quot;LoanNNModel&quot;    &quot;AuditSVMModel&quot;  &quot;IrisMLRModel&quot;   &quot;kyphosis_model&quot;</span>
 <span class="kw">delete_model</span>(<span class="st">&quot;kyphosis_model&quot;</span>)
-<span class="co">#&gt; character(0)</span></code></pre></div>
+<span class="co">#&gt; [1] &quot;LoanNNModel&quot;   &quot;AuditSVMModel&quot; &quot;IrisMLRModel&quot;</span></code></pre></div>
 </div>
 <div id="the-...-argument" class="section level2">
 <h2>The <code>...</code> argument</h2>

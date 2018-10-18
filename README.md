@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-zementisr
-=========
+zementisr <img src="man/figures/logo.jpg" align="right" height=140/>
+====================================================================
 
 [![Travis-CI Build Status](https://travis-ci.org/alex23lemm/zementisr.svg?branch=master)](https://travis-ci.org/alex23lemm/zementisr) [![Coverage status](https://codecov.io/gh/alex23lemm/zementisr/branch/master/graph/badge.svg)](https://codecov.io/github/alex23lemm/zementisr?branch=master)
 
@@ -66,7 +66,7 @@ activate_model("iris_model")
 
 # Delete PMML model from Zementis Server
 delete_model("iris_model")
-#> character(0)
+#> [1] "LoanNNModel"   "AuditSVMModel" "IrisMLRModel"
 ```
 
 Authentication

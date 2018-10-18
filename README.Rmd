@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# zementisr
+# zementisr <img src="man/figures/logo.jpg" align="right" height=140/>
 
 [![Travis-CI Build Status](https://travis-ci.org/alex23lemm/zementisr.svg?branch=master)](https://travis-ci.org/alex23lemm/zementisr)
 [![Coverage status](https://codecov.io/gh/alex23lemm/zementisr/branch/master/graph/badge.svg)](https://codecov.io/github/alex23lemm/zementisr?branch=master)

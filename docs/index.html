@@ -86,7 +86,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="zementisr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#zementisr" class="anchor"></a>zementisr</h1></div>
+<a href="#zementisr" class="anchor"></a>zementisr <img src="reference/figures/logo.jpg" align="right" height="140/">
+</h1></div>
 
 <p>zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. Using zementisr, data scientists can deploy PMML models to Zementis Server, predict new values by sending data to the server and manage the entire PMML model life cycle without leaving their preferred R development environment.</p>
 <div id="installation" class="section level2">
@@ -144,7 +145,7 @@ iris_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(iris_lm, <s
 
 <span class="co"># Delete PMML model from Zementis Server</span>
 <span class="kw"><a href="reference/delete_model.html">delete_model</a></span>(<span class="st">"iris_model"</span>)
-<span class="co">#&gt; character(0)</span></code></pre></div>
+<span class="co">#&gt; [1] "LoanNNModel"   "AuditSVMModel" "IrisMLRModel"</span></code></pre></div>
 </div>
 <div id="authentication" class="section level2">
 <h2 class="hasAnchor">

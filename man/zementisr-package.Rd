@@ -15,6 +15,7 @@ zementisr is an R client for the Zementis Server API. Zementis Server
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://alex23lemm.github.io/zementisr}
   \item \url{https://github.com/alex23lemm/zementisr}
   \item Report bugs at \url{https://github.com/alex23lemm/zementisr/issues}
 }

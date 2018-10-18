@@ -9,7 +9,7 @@ Description: zementisr is an R client for the Zementis Server API. Zementis Serv
     life cycle without leaving their preferred R development environment. 
 Depends: R (>= 3.5.0)
 License: GPL-3 + file LICENSE
-URL: https://github.com/alex23lemm/zementisr
+URL: https://alex23lemm.github.io/zementisr, https://github.com/alex23lemm/zementisr
 BugReports: https://github.com/alex23lemm/zementisr/issues
 Encoding: UTF-8
 LazyData: true
