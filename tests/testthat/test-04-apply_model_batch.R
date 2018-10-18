@@ -19,7 +19,7 @@ kyphosis_resp <- list(
 )
 
 test_that("apply_model_batch works for data frames", {
-
+  skip_on_cran()
   expect_equal(apply_model_batch(iris[1:3, ], "iris_model"), iris_resp,
                tolerance = 1.5e-6)
   expect_equal(apply_model_batch(kyphosis[1:3, ], "kyphosis_model"),
@@ -27,7 +27,7 @@ test_that("apply_model_batch works for data frames", {
 })
 
 test_that("apply_model_batch() works for .csv files", {
-
+  skip_on_cran()
   expect_equal(apply_model_batch("iris.csv", "iris_model"), iris_resp,
                tolerance = 1.5e-6)
   expect_equal(apply_model_batch("kyphosis.csv", "kyphosis_model"), kyphosis_resp,
@@ -35,7 +35,7 @@ test_that("apply_model_batch() works for .csv files", {
 })
 
 test_that("apply_model_batch() works for .json files", {
-
+  skip_on_cran()
   expect_equal(apply_model_batch("iris.json", "iris_model"), iris_resp,
                tolerance = 1.5e-6)
   expect_equal(apply_model_batch("kyphosis.json", "kyphosis_model"), kyphosis_resp,
@@ -43,7 +43,7 @@ test_that("apply_model_batch() works for .json files", {
 })
 
 test_that("apply_model_batch() works for .zip files", {
-
+  skip_on_cran()
   # Download compressed iris predictions
   tmp_iris_z <- tempfile(fileext = ".zip")
   on.exit(unlink(tmp_iris_z))
@@ -65,7 +65,7 @@ test_that("apply_model_batch() works for .zip files", {
 })
 
 test_that("apply_model_batch() requires data frame or valid path to a file as input", {
-
+  skip_on_cran()
   expect_error(apply_model_batch("unknown.csv", "iris_model"),
                "Please either provide a data frame or a path to a file",
                fixed = TRUE)
@@ -75,19 +75,19 @@ test_that("apply_model_batch() requires data frame or valid path to a file as in
 })
 
 test_that("apply_model_batch() returns error if path for compressed file downloads is missing", {
-
+  skip_on_cran()
   expect_error(apply_model_batch("iris.csv.zip", "iris_model"),
                "Please provide a 'path' to which the predictions from Zementis Server are written to.",
                fixed = TRUE)
 })
 
 test_that("apply_model_batch() returns error if 'model_name' is not length one character vector", {
-
+  skip_on_cran()
   expect_error(apply_model_batch(iris[1:2, ], c("iris_model", "kyphosis_model")))
   expect_error(apply_model_batch(iris[1:2, ], 1:2))
 })
 
 test_that("apply_model_batch() returns error if model name is unknown to the server", {
-
+  skip_on_cran()
   expect_error(apply_model_batch(iris[1:3, ], "unknown_model"), err_not_known, fixed = TRUE)
 })

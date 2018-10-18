@@ -1,7 +1,7 @@
 context("model_operations")
 
 test_that("get_models() returns a vector with model names", {
-
+  skip_on_cran()
   my_models <- zementisr::get_models()
   my_models <- my_models[c(length(my_models)- 1, length(my_models))]
 
@@ -10,7 +10,7 @@ test_that("get_models() returns a vector with model names", {
 })
 
 test_that("get_model_properties() returns model properties", {
-
+  skip_on_cran()
   iris_props <- list(
     modelName = "iris_model",
     description = "Linear Regression Model",
@@ -26,18 +26,30 @@ test_that("get_model_properties() returns model properties", {
       usage = "OUTPUT",
       stringsAsFactors = FALSE)
   )
-  expect_equal(get_model_properties("iris_model"), iris_props)
+
+  order_by_column <- function(df) {
+    df[, order(names(df))]
+  }
+  iris_rsp <- get_model_properties("iris_model") %>%
+    purrr::map(., function(.x) {
+      if (class(.x) == "data.frame")
+        order_by_column(.x)
+      else
+        .x
+      })
+
+  expect_equal(iris_rsp, iris_props)
   expect_named(get_model_properties("kyphosis_model"),
                c("modelName", "description", "isActive", "inputFields", "outputFields"))
 })
 
 test_that("get_model_properties() returns error if model name is unknown to the server", {
-
+  skip_on_cran()
   expect_error(get_model_properties("unknown_model"), err_not_known, fixed = TRUE)
 })
 
 test_that("deactivate_model() returns list after successful deactivation", {
-
+  skip_on_cran()
   expect_equal(deactivate_model("iris_model"), list(model_name = "iris_model",
                                                     is_active = FALSE))
   expect_equal(deactivate_model("kyphosis_model"), list(model_name = "kyphosis_model",
@@ -45,18 +57,18 @@ test_that("deactivate_model() returns list after successful deactivation", {
 })
 
 test_that("deactivate_model() returns error if model name is unknown to the server", {
-
+  skip_on_cran()
   expect_error(deactivate_model("unknown_model"), err_not_known, fixed = TRUE)
 })
 
 test_that("deactivate_model() returns error if 'model_name' is not length one character vector", {
-
+  skip_on_cran()
   expect_error(deactivate_model(c("iris_model", "kyphosis_model")))
   expect_error(deactivate_model(1:2))
 })
 
 test_that("activate_model() returns list after successful activation", {
-
+  skip_on_cran()
   expect_equal(activate_model("iris_model"), list(model_name = "iris_model",
                                                   is_active = TRUE))
   expect_equal(activate_model("kyphosis_model"), list(model_name = "kyphosis_model",
@@ -64,12 +76,12 @@ test_that("activate_model() returns list after successful activation", {
 })
 
 test_that("activate_model() returns error if 'model_name' is not length one character vector", {
-
+  skip_on_cran()
   expect_error(activate_model(c("iris_model", "kyphosis_model")))
   expect_error(activate_model(1:2))
 })
 
 test_that("activate_model() returns error if model name is unknown to the server", {
-
+  skip_on_cran()
   expect_error(activate_model("unknown_model"), err_not_known, fixed = TRUE)
 })
