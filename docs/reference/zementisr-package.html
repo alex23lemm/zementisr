@@ -133,6 +133,18 @@
     </div>
 
         
+    <h2 class="hasAnchor" id="authentication"><a class="anchor" href="#authentication"></a>Authentication</h2>
+
+    
+    <p>Zementis Server's REST API uses HTTP Basic Authentication. For each request the client needs to provide
+username and password. The zementisr package requires that you store your secrets and the base URL of
+your Zementis Server as environment variables in the <code>.Renviron</code> file in your home directory.</p>
+<p>Please, make sure to set the environment variables below in your <code>.Renviron</code> file before
+using functions from the zementisr package. You can easily edit <code>.Renviron</code> using <code><a href='http://www.rdocumentation.org/packages/usethis/topics/edit'>usethis::edit_r_environ()</a></code>.</p>
+<p><code class="env">ZEMENTIS_base_url = "[address]:[port]"</code><br />
+<code class="env">ZEMENTIS_usr = "[your_username]"</code><br />
+<code class="env">ZEMENTIS_pwd = "[your_password]"</code><br /></p>
+    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Useful links:</p><ul>
@@ -147,6 +159,8 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
+      <li><a href="#authentication">Authentication</a></li>
+
       <li><a href="#see-also">See also</a></li>
           </ul>
 

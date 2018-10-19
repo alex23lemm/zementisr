@@ -66,7 +66,7 @@ activate_model("iris_model")
 
 # Delete PMML model from Zementis Server
 delete_model("iris_model")
-#> [1] "LoanNNModel"   "AuditSVMModel" "IrisMLRModel"
+#> character(0)
 ```
 
 Authentication
@@ -76,7 +76,7 @@ Zementis Server's REST API uses HTTP Basic Authentication. For each request the 
 
 The zementisr package requires that you store your secrets and the base URL of your Zementis Server as environment variables in the `.Renviron` file in your home directory.
 
-Please, make sure to set the following environment variables accordingly in your `.Renviron` file before using functions from the zementisr package.:
+Please, make sure to set the environment variables below in your `.Renviron` file before using functions from the zementisr package. You can easily edit `.Renviron` using `usethis::edit_r_environ()`.
 
 ``` r
 ZEMENTIS_base_url = "[address]:[port]"

@@ -25,10 +25,10 @@ Zementis Server's REST API uses HTTP Basic Authentication. For each request the 
 
 Since typing your password in the console is a bit too dangerous (you might accidentally share the `.Rhistory` file) and asking each time gets too cumbersome quickly, the zementisr package requires that you store your secrets and the base URL of your Zementis Server as environment variables in the `.Renviron` file in your home directory.
 
-Please make sure to set the following environment variables accordingly in your `.Renviron` file before using functions from the zementisr package:
+Please make sure to set the environment variables below in your `.Renviron` file before using functions from the zementisr package. You can easily edit `.Renviron` using `usethis::edit_r_environ()`.
 
 ``` {r eval=FALSE}
-ZEMENTIS_base_url = "http://localhost:9083"
+ZEMENTIS_base_url = "https://localhost:9083"
 ZEMENTIS_usr = "guybrush.threepwood"
 ZEMENTIS_pwd = "bigwhoop"
 

@@ -145,14 +145,14 @@ iris_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(iris_lm, <s
 
 <span class="co"># Delete PMML model from Zementis Server</span>
 <span class="kw"><a href="reference/delete_model.html">delete_model</a></span>(<span class="st">"iris_model"</span>)
-<span class="co">#&gt; [1] "LoanNNModel"   "AuditSVMModel" "IrisMLRModel"</span></code></pre></div>
+<span class="co">#&gt; character(0)</span></code></pre></div>
 </div>
 <div id="authentication" class="section level2">
 <h2 class="hasAnchor">
 <a href="#authentication" class="anchor"></a>Authentication</h2>
 <p>Zementis Server’s REST API uses HTTP Basic Authentication. For each request the client needs to provide username and password.</p>
 <p>The zementisr package requires that you store your secrets and the base URL of your Zementis Server as environment variables in the <code>.Renviron</code> file in your home directory.</p>
-<p>Please, make sure to set the following environment variables accordingly in your <code>.Renviron</code> file before using functions from the zementisr package.:</p>
+<p>Please, make sure to set the environment variables below in your <code>.Renviron</code> file before using functions from the zementisr package. You can easily edit <code>.Renviron</code> using <code><a href="http://www.rdocumentation.org/packages/usethis/topics/edit">usethis::edit_r_environ()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ZEMENTIS_base_url =<span class="st"> "[address]:[port]"</span>
 ZEMENTIS_usr =<span class="st"> "[your_username]"</span>
 ZEMENTIS_pwd =<span class="st"> "[your_password]"</span></code></pre></div>

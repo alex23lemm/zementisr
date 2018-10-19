@@ -5,7 +5,7 @@ knitr::opts_chunk$set(
 )
 
 ## ----eval=FALSE----------------------------------------------------------
-#  ZEMENTIS_base_url = "http://localhost:9083"
+#  ZEMENTIS_base_url = "https://localhost:9083"
 #  ZEMENTIS_usr = "guybrush.threepwood"
 #  ZEMENTIS_pwd = "bigwhoop"
 #  
