@@ -1,3 +1,7 @@
+# zementisr 0.2.0
+
+* `download_model()` downloads the original PMML model source from Zementis Server
+
 # zementisr 0.1.0
 
 * `get_models()` lists all models deployed to Zementis Server

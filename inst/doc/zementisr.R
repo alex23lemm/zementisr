@@ -51,6 +51,24 @@ apply_model_batch("iris.json", "iris_model")
 write.csv(iris[23:25, ], "iris.csv", row.names = FALSE)
 apply_model_batch("iris.csv","iris_model")
 
+## ----eval=FALSE----------------------------------------------------------
+#  iris_download <- download_model("iris_model")
+#  XML::saveXML(iris_download[["model_source"]], file = iris_download[["model_name"]])
+#  
+
+## ------------------------------------------------------------------------
+
+downloads <- get_models() %>% purrr::map(download_model)
+
+tibble::tibble(
+  model_name = purrr::map_chr(downloads, "model_name"), 
+  source = purrr::map(downloads, "model_source"))
+
+## ------------------------------------------------------------------------
+purrr::walk2(purrr::map(downloads, "model_source"),
+             purrr::map_chr(downloads, "model_name"),
+             XML::saveXML)
+
 ## ------------------------------------------------------------------------
 delete_model("iris_model")
 delete_model("kyphosis_model")

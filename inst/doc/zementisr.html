@@ -185,7 +185,7 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Probability_present Probability_absent Predicted_Kyphosis</span>
 <span class="co">#&gt; 1           0.5714286          0.4285714            present</span></code></pre></div>
-<p>If you like to predict a <strong>multiple new input records</strong> all at once, use <code>apply_model_batch()</code> which accepts data frames, <code>.csv</code> and <code>.json</code> files as data input. <code>.csv</code> and <code>.json</code> files can even be sent in compressed format (<code>.zip</code> or <code>.gzip</code>).</p>
+<p>If you like to predict <strong>multiple new input records</strong> all at once, use <code>apply_model_batch()</code> which accepts data frames, <code>.csv</code> and <code>.json</code> files as data input. <code>.csv</code> and <code>.json</code> files can even be sent in compressed format (<code>.zip</code> or <code>.gzip</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply_model_batch</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] &quot;iris_model&quot;</span>
@@ -216,6 +216,33 @@ jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span 
 <span class="co">#&gt; 2               5.059837</span>
 <span class="co">#&gt; 3               5.369821</span></code></pre></div>
 <p>As you can see by the output above, <code>apply_model_batch()</code> also returns a list with the two components <code>model</code> and <code>outputs</code>.</p>
+</div>
+<div id="download-models" class="section level2">
+<h2>Download models</h2>
+<p><code>download_model()</code> lets you download the PMML source of a deployed model. You might choose to download the PMML model source before deleting the model permanently from the server with <code>delete_model()</code> which is described in the next section. <code>download_model()</code> returns a list with two components:</p>
+<ul>
+<li>The <code>model_name</code> of the downloaded model including the suffix “.pmml”</li>
+<li>The <code>model_source</code> represented as an S3 object of class <code>XMLInternalDocument</code> created by parsing the server response using <code>XML::xmlParse()</code></li>
+</ul>
+<p>After downloading the model of your choice, you can use <code>XML::saveXML()</code> to store it on disk:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_download &lt;-<span class="st"> </span><span class="kw">download_model</span>(<span class="st">&quot;iris_model&quot;</span>)
+XML<span class="op">::</span><span class="kw">saveXML</span>(iris_download[[<span class="st">&quot;model_source&quot;</span>]], <span class="dt">file =</span> iris_download[[<span class="st">&quot;model_name&quot;</span>]])</code></pre></div>
+<p>Again using some <code>tidyverse</code> ingredients, you can easily download all deployed models at once and store them in a data frame:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+downloads &lt;-<span class="st"> </span><span class="kw">get_models</span>() <span class="op">%&gt;%</span><span class="st"> </span>purrr<span class="op">::</span><span class="kw">map</span>(download_model)
+
+tibble<span class="op">::</span><span class="kw">tibble</span>(
+  <span class="dt">model_name =</span> purrr<span class="op">::</span><span class="kw">map_chr</span>(downloads, <span class="st">&quot;model_name&quot;</span>), 
+  <span class="dt">source =</span> purrr<span class="op">::</span><span class="kw">map</span>(downloads, <span class="st">&quot;model_source&quot;</span>))
+<span class="co">#&gt; # A tibble: 2 x 2</span>
+<span class="co">#&gt;   model_name          source                   </span>
+<span class="co">#&gt;   &lt;chr&gt;               &lt;list&gt;                   </span>
+<span class="co">#&gt; 1 iris_model.pmml     &lt;S3: XMLInternalDocument&gt;</span>
+<span class="co">#&gt; 2 kyphosis_model.pmml &lt;S3: XMLInternalDocument&gt;</span></code></pre></div>
+<p>If you like to store the downloaded models on disk instead, do this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purrr<span class="op">::</span><span class="kw">walk2</span>(purrr<span class="op">::</span><span class="kw">map</span>(downloads, <span class="st">&quot;model_source&quot;</span>),
+             purrr<span class="op">::</span><span class="kw">map_chr</span>(downloads, <span class="st">&quot;model_name&quot;</span>),
+             XML<span class="op">::</span>saveXML)</code></pre></div>
 </div>
 <div id="delete-models" class="section level2">
 <h2>Delete models</h2>

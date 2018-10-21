@@ -19,12 +19,13 @@ Imports: httr,
     jsonlite,
     XML
 RoxygenNote: 6.1.0
-Suggests: 
+Suggests:
     testthat,
     rpart,
     pmml,
     knitr,
     rmarkdown,
     dplyr,
-    covr
+    covr,
+    tibble
 VignetteBuilder: knitr

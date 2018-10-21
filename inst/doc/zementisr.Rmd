@@ -107,7 +107,7 @@ apply_model(iris[42, ], "iris_model")
 apply_model(kyphosis[23, ], "kyphosis_model")
 ```
 
-If you like to predict a __multiple new input records__ all at once, use `apply_model_batch()` which accepts data frames, `.csv` and `.json` files as data input. `.csv` and `.json` files can even be sent in compressed format (`.zip` or `.gzip`).
+If you like to predict __multiple new input records__ all at once, use `apply_model_batch()` which accepts data frames, `.csv` and `.json` files as data input. `.csv` and `.json` files can even be sent in compressed format (`.zip` or `.gzip`).
 
 ```{r}
 apply_model_batch(iris[23:25, ], "iris_model")
@@ -118,6 +118,43 @@ apply_model_batch("iris.csv","iris_model")
 ```
 
 As you can see by the output above, `apply_model_batch()` also returns a list with the two components `model` and `outputs`.
+
+## Download models
+
+`download_model()` lets you download the PMML source of a deployed model. You might choose to download the PMML model source before deleting the model permanently from the server with `delete_model()` which is described in the next section. `download_model()` returns a list with two components:
+
+* The `model_name` of the downloaded model including the suffix ".pmml"
+* The `model_source` represented as an S3 object of class `XMLInternalDocument` created by parsing the server response using `XML::xmlParse()`
+
+After downloading the model of your choice, you can use `XML::saveXML()` to store it on disk:
+
+```{r eval=FALSE}
+iris_download <- download_model("iris_model")
+XML::saveXML(iris_download[["model_source"]], file = iris_download[["model_name"]])
+
+```
+
+Again using some `tidyverse` ingredients, you can easily download all deployed models at once and store them in a data frame:
+
+```{r}
+
+downloads <- get_models() %>% purrr::map(download_model)
+
+tibble::tibble(
+  model_name = purrr::map_chr(downloads, "model_name"), 
+  source = purrr::map(downloads, "model_source"))
+```
+
+If you like to store the downloaded models on disk instead, do this:
+
+```{r}
+purrr::walk2(purrr::map(downloads, "model_source"),
+             purrr::map_chr(downloads, "model_name"),
+             XML::saveXML)
+```
+
+
+
 
 ## Delete models
 

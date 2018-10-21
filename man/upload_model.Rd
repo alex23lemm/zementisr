@@ -12,7 +12,7 @@ upload_model(file, applyCleanser = TRUE, ...)
 \code{.pmml} or even be \code{.zip} or \code{.gzip} compressed.}
 
 \item{applyCleanser}{Logical indicating if the server should perform cleansing
-on the PMML file. (Default: TRUE)}
+on the PMML file. (Default: \code{TRUE})}
 
 \item{...}{Additional arguments passed on to the underlying HTTP method.
 This might be necessary if you need to set some curl options explicitly
@@ -36,14 +36,14 @@ Upload new PMML source or serialized model file to Zementis Server.
    #Build a simple lm model
    iris_lm <- lm(Sepal.Length ~ ., data=iris)
    # Convert to pmml and save to disk
-   iris_pmml <- pmml(iris_lm, model.name = "iris_model")
+   iris_pmml <- pmml::pmml(iris_lm, model.name = "iris_model")
    saveXML(iris_pmml, "iris_pmml.xml")
 
    # Upload model to server
    upload_model("iris_pmml.xml")
 
    # Second option: Upload XMLNode object directly
-   iris_pmml <- pmml(iris_lm, model.name = "iris_model_opt2")
+   iris_pmml <- pmml::pmml(iris_lm, model.name = "iris_model_opt2")
    upload_model(iris_pmml)
  }
 }
