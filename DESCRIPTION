@@ -27,5 +27,8 @@ Suggests:
     knitr,
     rmarkdown,
     covr,
-    tibble
+    tibble,
+    ggplot2,
+    tidyr,
+    caTools
 VignetteBuilder: knitr

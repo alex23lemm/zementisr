@@ -1,19 +1,25 @@
 #' Get PMML model metrics
 #'
-#' Gets memory metrics and prediction metrics for the given PMML model from Zementis Server.
+#' Gets memory metrics and prediction metrics for a deployed PMML model from Zementis Server.
+#'
+#' The HTTP endpoint accessed by \code{get_model_metrics()} is only available for Zementis Server 10.3 or higher.
 #'
 #' @param model_name Name of the PMML model whose metrics are fetched from the server.
 #' @inheritParams get_models
 #' @return A list with the following components:
 #'  \itemize{
+#'    \item \code{model_name} A length one character vector containing the \code{model_name}
 #'    \item \code{prediction_metrics} A data frame containing prediction-related
 #'      metrics for \code{model_name}. The information contained in \code{prediction_metrics}
-#'      differs between regression and classification models. If no predictions have
-#'      been calculated for \code{model_name} thus far on Zementis Server,
-#'      \code{prediction_metrics} won't be included in the response list.
+#'      differs between regression and classification models.
 #'    \item \code{memory_metrics} A data frame containing memory-related metrics
 #'      for \code{model_name} expressed in MB.
 #'  }
+#' If no predictions have been calculated for \code{model_name} thus far on Zementis Server,
+#' \code{prediction_metrics} won't be included in the response list.
+#'
+#' If the model is deactivated while \code{get_model_metrics()} is called, the return list
+#' neither includes \code{memory_metrics} nor \code{prediction_metrics}.
 #' @seealso \code{\link{upload_model}}, \code{\link{apply_model}}, \code{\link{apply_model_batch}}
 #' @export
 #'
@@ -63,7 +69,7 @@ get_model_metrics <- function(model_name, ...) {
 
   parsed <- httr::content(response, as = "text", encoding = "UTF-8") %>%
    jsonlite::fromJSON()
-  metrics <- list()
+  metrics <- list(model_name = model_name)
 
   if ("predictionMetrics" %in% names(parsed)) {
     prediction_metrics <- purrr::flatten_dfc(parsed[["predictionMetrics"]])
@@ -73,7 +79,10 @@ get_model_metrics <- function(model_name, ...) {
     parsed[["predictionMetricsErrorMsg"]] <- NULL
   }
 
-  memory_metrics <- purrr::flatten_dfc(parsed)
-  metrics[["memory_metrics"]] <- memory_metrics
+  if (!"memoryMetricsErrorMsg" %in% names(parsed)) {
+    memory_metrics <- purrr::flatten_dfc(parsed) %>%
+      purrr::map_dfc(function(x){as.numeric(sub(" MB", "", x))})
+    metrics[["memory_metrics"]] <- memory_metrics
+  }
   metrics
 }
