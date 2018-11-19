@@ -1,3 +1,9 @@
+# zementisr 0.2.0.9999
+
+* `get_model_metrics()` gets PMML model memory and model prediction metrics from Zementis Server
+
+* The model metrics vignette (see `vignette("model-metrics")`) shows how to download and visualize metrics for different kind of predictive models from Zementis Server
+
 # zementisr 0.2.0
 
 * `download_model()` downloads the original PMML model source from Zementis Server
@@ -20,7 +26,7 @@
 
 * `apply_model_batch()` Applies PMML model to multiple data records (a data frame in memory or a file saved to disk) that are sent to Zementis Server
 
-* _zementisr Quickstart Guide_ vignette
+*  Read the Quickstart Guide vignette (see `vignette("zementisr")`) for an in-depth introduction to the zementisr package
 
 
 

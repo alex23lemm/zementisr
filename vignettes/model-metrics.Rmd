@@ -21,9 +21,9 @@ __Note:__ The features described in this vignette are only available for Zementi
 
 ## Some data science prep work
 
-Before showing how to download the model metrics using the zementisr package, we will create two prediction models and upload them to the server: One classification model and one regression model. The prediction metrics returned from Zementis Server differ for these two model types. 
+Before showing how to download the model metrics using the zementisr package, we will create two predictive models and upload them to the server: One classification model and one regression model. The prediction metrics returned from Zementis Server differ for these two model types. 
 
-We will use some shortcuts while following the data science process because we would like to concentrate on showcasing zementisr's model metric-related functions in this vignette. For instance, we will just build the prediction models using the training sets without evaluating the model performances before deploying them to Zementis Server in PMML format. The test sets will be (mis-)used to simulate new and unseen data which is sent to Zementis Server for scoring.
+We will use some shortcuts while following the data science process because we would like to concentrate on showcasing zementisr's model metric-related functions in this vignette. For instance, we will just build the predictive models using the training sets without evaluating the model performances before deploying them to Zementis Server in PMML format. The test sets will be (mis-)used to simulate new and unseen data which is sent to Zementis Server for scoring.
 
 Our _classification model_ will be a classification tree created using the `rpart()` function and the `iris` data set. The classification tree will be used to predict the iris species. 
 
@@ -62,7 +62,7 @@ pmml(mtcars_lm, model.name = "mtcars_model") %>%
 
 ## Retrieving model metrics from Zementis Server
 
-Initially, `get_model_metrics()` will only return the memory related metrics expressed in MB if the model on the server has not yet predicted any new values which is the case for both models we just uploaded:
+Initially, `get_model_metrics()` will only return the memory related metrics _expressed in MB_ if the model on the server has not yet predicted any new values which is the case for both models we just uploaded:
 
 ```{r}
 get_model_metrics("iris_model")
@@ -70,7 +70,16 @@ get_model_metrics("iris_model")
 get_model_metrics("mtcars_model")
 ```
 
-Therefore, we will now send 500 new values to each model deployed on Zementis Server for scoring. The data mimicking our new and unseen data will be samples we draw from the two test sets we created above.  
+The memory metrics returned from `get_model_metrics()` are in fact a mix between server memory and model memory specific KPIs:
+
+* __modelSize__: The amount of memory consumed by the specific model itself
+* __usedMemory__: The entire memory currently used by all models and other resources on the server
+* __freeMemory__: The memory still available on the server
+* __totalMemory__: The total amount of server memory 
+
+Looking at the output above we see that both models only consume a tiny amount of memory. That makes sense because they represent really simple models which were trained using very small data sets. Ensemble models like a random forest model or a deep neural network trained with a lot of data including many predictor variables would consume far more memory.
+
+Next, we will send 500 new values to each model deployed on Zementis Server for scoring. The data mimicking our new and unseen data will be samples we draw from the two test sets we created above.  
 
 ```{r}
 index <- sample(1:dim(test_set_iris)[1], 500, replace = TRUE)
@@ -85,13 +94,13 @@ head(mtcars_predictions$outputs, 4)
 
 After executing `get_model_metrics()` a second time, the response now includes the prediction-related metrics as well. As you can see the prediction metrics differ between classification and regression models.
 
-For classification models the number of predictions for each class since model activation on the server are returned:
+For __classification models__ the number of predictions for each class since model activation on the server are returned:
 
 ```{r}
 iris_metrics <- get_model_metrics("iris_model")
 iris_metrics
 ```
-Prediction-related metrics for regression models include the Five-number summary plus the number of predictions calculated since model activation on the server:
+Prediction-related metrics for __regression models__ include the Five-number summary since model activation on the server:
 
 ```{r}
 mtcars_metrics <- get_model_metrics("mtcars_model")
@@ -113,8 +122,7 @@ iris_metrics[["memory_metrics"]] %>%
   ggplot(aes(metric, MB)) + 
     geom_col(aes(fill = metric)) + 
     coord_flip() + 
-    labs(title = paste("Model Memory Metrics for", iris_metrics[["model_name"]]),
-         caption = paste("Data as of", Sys.time()))
+    labs(title = paste("Memory metrics for", iris_metrics[["model_name"]]))
 ```
 
 ```{r fig.width=6}
@@ -123,14 +131,13 @@ mtcars_metrics[["memory_metrics"]] %>%
   ggplot(aes(metric, MB)) + 
     geom_col(aes(fill = metric)) + 
     coord_flip() + 
-    labs(title = paste("Model Memory Metrics for", mtcars_metrics[["model_name"]]),
-         caption = paste("Data as of", Sys.time()))
+    labs(title = paste("Memory metrics for", mtcars_metrics[["model_name"]]))
 ```
 
 
 ## Visualizing model prediction metrics 
 
-The prediction metrics are next. For classification models it makes most sense to create a bar chart based on the underlying data:
+The prediction metrics are next. For __classification models__ it makes most sense to create a bar chart based on the underlying data:
 
 ```{r fig.width=6}
 iris_metrics[["prediction_metrics"]] %>% 
@@ -138,13 +145,12 @@ iris_metrics[["prediction_metrics"]] %>%
   ggplot(aes(Class, `Number of cases`)) + 
     geom_col(aes(fill = Class)) + 
     coord_flip() + 
-    labs(title = paste("Prediction Metrics for", iris_metrics[["model_name"]]),
+    labs(title = paste("Model prediction metrics for", iris_metrics[["model_name"]]),
          subtitle = paste("Predictions calcuated since model deployment:",
-                          rowSums(iris_metrics[["prediction_metrics"]])),
-         caption = paste("Data as of", Sys.time()))
+                          rowSums(iris_metrics[["prediction_metrics"]])))
 ```
 
-The best visualization for the 5-number summary of the regression model is a boxplot:
+The best visualization for the 5-number summary of the __regression model__ is a boxplot:
 
 ```{r fig.height=3, fig.width=6}
 mtcars_metrics[["prediction_metrics"]] %>%
@@ -160,12 +166,11 @@ mtcars_metrics[["prediction_metrics"]] %>%
       geom = "boxplot") +
     coord_flip() +
     labs(
-      title = paste("Model prediction metrics for", mtcars_metrics[["model_name"]]),
-      subtitle = paste("Predictions calcuated since model deployment:",
-                       mtcars_metrics[["prediction_metrics"]][["NumOfObservations"]]),
-      caption = paste("Data as of", Sys.time())
+      title = paste("Model prediction metrics for", mtcars_metrics[["model_name"]])
     ) +
-    xlab(NULL)
+    xlab(NULL) +
+    ylab("Miles per Gallon (MPG)")
+    
 ```
 
 ## Resetting the model metrics
@@ -184,7 +189,7 @@ Next, we try to download the model metrics again for the iris classification tre
 get_model_metrics("iris_model")
 ```
 
-Re-activating the model and calling `get_model_metrics()` again, now returns the model name plus the memory model metrics:
+Re-activating the model and calling `get_model_metrics()`, now returns the model name plus the memory model metrics:
 
 ```{r}
 activate_model("iris_model")

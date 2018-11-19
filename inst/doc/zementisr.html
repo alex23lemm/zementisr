@@ -177,7 +177,7 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.295281</span>
+<span class="co">#&gt; 1               6.192416</span>
 <span class="kw">apply_model</span>(kyphosis[<span class="dv">23</span>, ], <span class="st">&quot;kyphosis_model&quot;</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] &quot;kyphosis_model&quot;</span>
@@ -192,9 +192,9 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.722679</span>
-<span class="co">#&gt; 2               5.059837</span>
-<span class="co">#&gt; 3               5.369821</span>
+<span class="co">#&gt; 1               4.539586</span>
+<span class="co">#&gt; 2               6.629826</span>
+<span class="co">#&gt; 3               5.461359</span>
 jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris.json&quot;</span>)
 <span class="kw">apply_model_batch</span>(<span class="st">&quot;iris.json&quot;</span>, <span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
@@ -202,9 +202,9 @@ jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span 
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.722679</span>
-<span class="co">#&gt; 2               5.059837</span>
-<span class="co">#&gt; 3               5.369821</span>
+<span class="co">#&gt; 1               4.539586</span>
+<span class="co">#&gt; 2               6.629826</span>
+<span class="co">#&gt; 3               5.461359</span>
 <span class="kw">write.csv</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)
 <span class="kw">apply_model_batch</span>(<span class="st">&quot;iris.csv&quot;</span>,<span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
@@ -212,9 +212,9 @@ jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span 
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.722679</span>
-<span class="co">#&gt; 2               5.059837</span>
-<span class="co">#&gt; 3               5.369821</span></code></pre></div>
+<span class="co">#&gt; 1               4.539586</span>
+<span class="co">#&gt; 2               6.629826</span>
+<span class="co">#&gt; 3               5.461359</span></code></pre></div>
 <p>As you can see by the output above, <code>apply_model_batch()</code> also returns a list with the two components <code>model</code> and <code>outputs</code>.</p>
 </div>
 <div id="download-models" class="section level2">

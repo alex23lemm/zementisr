@@ -60,8 +60,7 @@ iris_metrics[["memory_metrics"]] %>%
   ggplot(aes(metric, MB)) + 
     geom_col(aes(fill = metric)) + 
     coord_flip() + 
-    labs(title = paste("Model Memory Metrics for", iris_metrics[["model_name"]]),
-         caption = paste("Data as of", Sys.time()))
+    labs(title = paste("Memory metrics for", iris_metrics[["model_name"]]))
 
 ## ----fig.width=6---------------------------------------------------------
 mtcars_metrics[["memory_metrics"]] %>% 
@@ -69,8 +68,7 @@ mtcars_metrics[["memory_metrics"]] %>%
   ggplot(aes(metric, MB)) + 
     geom_col(aes(fill = metric)) + 
     coord_flip() + 
-    labs(title = paste("Model Memory Metrics for", mtcars_metrics[["model_name"]]),
-         caption = paste("Data as of", Sys.time()))
+    labs(title = paste("Memory metrics for", mtcars_metrics[["model_name"]]))
 
 ## ----fig.width=6---------------------------------------------------------
 iris_metrics[["prediction_metrics"]] %>% 
@@ -78,10 +76,9 @@ iris_metrics[["prediction_metrics"]] %>%
   ggplot(aes(Class, `Number of cases`)) + 
     geom_col(aes(fill = Class)) + 
     coord_flip() + 
-    labs(title = paste("Prediction Metrics for", iris_metrics[["model_name"]]),
+    labs(title = paste("Model prediction metrics for", iris_metrics[["model_name"]]),
          subtitle = paste("Predictions calcuated since model deployment:",
-                          rowSums(iris_metrics[["prediction_metrics"]])),
-         caption = paste("Data as of", Sys.time()))
+                          rowSums(iris_metrics[["prediction_metrics"]])))
 
 ## ----fig.height=3, fig.width=6-------------------------------------------
 mtcars_metrics[["prediction_metrics"]] %>%
@@ -97,12 +94,11 @@ mtcars_metrics[["prediction_metrics"]] %>%
       geom = "boxplot") +
     coord_flip() +
     labs(
-      title = paste("Model prediction metrics for", mtcars_metrics[["model_name"]]),
-      subtitle = paste("Predictions calcuated since model deployment:",
-                       mtcars_metrics[["prediction_metrics"]][["NumOfObservations"]]),
-      caption = paste("Data as of", Sys.time())
+      title = paste("Model prediction metrics for", mtcars_metrics[["model_name"]])
     ) +
-    xlab(NULL)
+    xlab(NULL) +
+    ylab("Miles per Gallon (MPG)")
+    
 
 ## ------------------------------------------------------------------------
 deactivate_model("iris_model")

@@ -3,6 +3,8 @@
 #' Gets memory metrics and prediction metrics for a deployed PMML model from Zementis Server.
 #'
 #' The HTTP endpoint accessed by \code{get_model_metrics()} is only available for Zementis Server 10.3 or higher.
+#' See vignette("model-metrics") for more details on that function and for best practices how to visualize the
+#' different model metrics of your predictive models.
 #'
 #' @param model_name Name of the PMML model whose metrics are fetched from the server.
 #' @inheritParams get_models

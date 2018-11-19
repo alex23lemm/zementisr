@@ -34,6 +34,8 @@ Gets memory metrics and prediction metrics for a deployed PMML model from Zement
 }
 \details{
 The HTTP endpoint accessed by \code{get_model_metrics()} is only available for Zementis Server 10.3 or higher.
+See vignette("model-metrics") for more details on that function and for best practices how to visualize the
+different model metrics of your predictive models.
 }
 \examples{
  \dontrun{
