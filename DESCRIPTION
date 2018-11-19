@@ -1,6 +1,6 @@
 Package: zementisr
 Title: R client for the Zementis Server API
-Version: 0.2.0.9999
+Version: 0.3.0
 Authors@R: person("Alexander", "Lemm", email = "alex23lemm@gmail.com", role = c("aut", "cre"))
 Description: zementisr is an R client for the Zementis Server API. Zementis Server 
     is an execution engine for PMML models which also comes with model management

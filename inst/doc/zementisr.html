@@ -177,7 +177,7 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               6.192416</span>
+<span class="co">#&gt; 1               4.856021</span>
 <span class="kw">apply_model</span>(kyphosis[<span class="dv">23</span>, ], <span class="st">&quot;kyphosis_model&quot;</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] &quot;kyphosis_model&quot;</span>
@@ -192,9 +192,9 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.539586</span>
-<span class="co">#&gt; 2               6.629826</span>
-<span class="co">#&gt; 3               5.461359</span>
+<span class="co">#&gt; 1               6.639628</span>
+<span class="co">#&gt; 2               6.736446</span>
+<span class="co">#&gt; 3               5.186890</span>
 jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris.json&quot;</span>)
 <span class="kw">apply_model_batch</span>(<span class="st">&quot;iris.json&quot;</span>, <span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
@@ -202,9 +202,9 @@ jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span 
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.539586</span>
-<span class="co">#&gt; 2               6.629826</span>
-<span class="co">#&gt; 3               5.461359</span>
+<span class="co">#&gt; 1               6.639628</span>
+<span class="co">#&gt; 2               6.736446</span>
+<span class="co">#&gt; 3               5.186890</span>
 <span class="kw">write.csv</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)
 <span class="kw">apply_model_batch</span>(<span class="st">&quot;iris.csv&quot;</span>,<span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
@@ -212,13 +212,13 @@ jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span 
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.539586</span>
-<span class="co">#&gt; 2               6.629826</span>
-<span class="co">#&gt; 3               5.461359</span></code></pre></div>
+<span class="co">#&gt; 1               6.639628</span>
+<span class="co">#&gt; 2               6.736446</span>
+<span class="co">#&gt; 3               5.186890</span></code></pre></div>
 <p>As you can see by the output above, <code>apply_model_batch()</code> also returns a list with the two components <code>model</code> and <code>outputs</code>.</p>
 </div>
-<div id="download-models" class="section level2">
-<h2>Download models</h2>
+<div id="downloading-models" class="section level2">
+<h2>Downloading models</h2>
 <p><code>download_model()</code> lets you download the PMML source of a deployed model. You might choose to download the PMML model source before deleting the model permanently from the server with <code>delete_model()</code> which is described in the next section. <code>download_model()</code> returns a list with two components:</p>
 <ul>
 <li>The <code>model_name</code> of the downloaded model including the suffix “.pmml”</li>
@@ -244,8 +244,8 @@ tibble<span class="op">::</span><span class="kw">tibble</span>(
              purrr<span class="op">::</span><span class="kw">map_chr</span>(downloads, <span class="st">&quot;model_name&quot;</span>),
              XML<span class="op">::</span>saveXML)</code></pre></div>
 </div>
-<div id="delete-models" class="section level2">
-<h2>Delete models</h2>
+<div id="deleting-models" class="section level2">
+<h2>Deleting models</h2>
 <p>After a PMML model has reached the end of its life cycle you might want to remove it from the server using <code>delete_model</code>() which always returns a character vector with the names of the models still residing deployed to the server:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">delete_model</span>(<span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; [1] &quot;kyphosis_model&quot;</span>

@@ -1,4 +1,4 @@
-# zementisr 0.2.0.9999
+# zementisr 0.3.0
 
 * `get_model_metrics()` gets PMML model memory and model prediction metrics from Zementis Server
 

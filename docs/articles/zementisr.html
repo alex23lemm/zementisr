@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zementisr</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.0</span>
       </span>
     </div>
 
@@ -52,6 +52,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/model-metrics.html">Downloading and visualizing model metrics</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -237,9 +249,9 @@ jsonlite<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; 3               5.369821</span></code></pre></div>
 <p>As you can see by the output above, <code><a href="../reference/apply_model_batch.html">apply_model_batch()</a></code> also returns a list with the two components <code>model</code> and <code>outputs</code>.</p>
 </div>
-<div id="download-models" class="section level2">
+<div id="downloading-models" class="section level2">
 <h2 class="hasAnchor">
-<a href="#download-models" class="anchor"></a>Download models</h2>
+<a href="#downloading-models" class="anchor"></a>Downloading models</h2>
 <p><code><a href="../reference/download_model.html">download_model()</a></code> lets you download the PMML source of a deployed model. You might choose to download the PMML model source before deleting the model permanently from the server with <code><a href="../reference/delete_model.html">delete_model()</a></code> which is described in the next section. <code><a href="../reference/download_model.html">download_model()</a></code> returns a list with two components:</p>
 <ul>
 <li>The <code>model_name</code> of the downloaded model including the suffix “.pmml”</li>
@@ -266,9 +278,9 @@ tibble<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
              purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_chr</a></span>(downloads, <span class="st">"model_name"</span>),
              XML<span class="op">::</span>saveXML)</code></pre></div>
 </div>
-<div id="delete-models" class="section level2">
+<div id="deleting-models" class="section level2">
 <h2 class="hasAnchor">
-<a href="#delete-models" class="anchor"></a>Delete models</h2>
+<a href="#deleting-models" class="anchor"></a>Deleting models</h2>
 <p>After a PMML model has reached the end of its life cycle you might want to remove it from the server using <code>delete_model</code>() which always returns a character vector with the names of the models still residing deployed to the server:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/delete_model.html">delete_model</a></span>(<span class="st">"iris_model"</span>)
 <span class="co">#&gt; [1] "kyphosis_model"</span>
@@ -292,8 +304,8 @@ tibble<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
       <li><a href="#model-deployment">Model deployment</a></li>
       <li><a href="#basic-model-operations">Basic model operations</a></li>
       <li><a href="#model-predictions">Model predictions</a></li>
-      <li><a href="#download-models">Download models</a></li>
-      <li><a href="#delete-models">Delete models</a></li>
+      <li><a href="#downloading-models">Downloading models</a></li>
+      <li><a href="#deleting-models">Deleting models</a></li>
       <li><a href="#the-----argument">The <code>...</code> argument</a></li>
       </ul>
 </div>

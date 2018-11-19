@@ -119,7 +119,7 @@ apply_model_batch("iris.csv","iris_model")
 
 As you can see by the output above, `apply_model_batch()` also returns a list with the two components `model` and `outputs`.
 
-## Download models
+## Downloading models
 
 `download_model()` lets you download the PMML source of a deployed model. You might choose to download the PMML model source before deleting the model permanently from the server with `delete_model()` which is described in the next section. `download_model()` returns a list with two components:
 
@@ -156,7 +156,7 @@ purrr::walk2(purrr::map(downloads, "model_source"),
 
 
 
-## Delete models
+## Deleting models
 
 After a PMML model has reached the end of its life cycle you might want to remove it from the server using `delete_model`() which always returns a character vector with the names of the models still residing deployed to the server:
 
