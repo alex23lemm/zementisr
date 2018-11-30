@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • zementisr</title>
+<title>Get prediction for single input record from PMML model — predict_pmml • zementisr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,12 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Get prediction for single input record from PMML model — predict_pmml" />
+
+<meta property="og:description" content="predict_pmml() returns the prediction for a single input record that is sent
+to Zementis Server. The value returned depends on the type of prediction model
+being executed on the server." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -57,7 +62,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -122,96 +127,80 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Get prediction for single input record from PMML model</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alex23lemm/zementisr/blob/master/R/predict_pmml.R'><code>R/predict_pmml.R</code></a></small>
+    <div class="hidden name"><code>predict_pmml.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    
+    <p><code>predict_pmml()</code> returns the prediction for a single input record that is sent
+to Zementis Server. The value returned depends on the type of prediction model
+being executed on the server.</p>
+    
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
-
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="activate_model.html">activate_model()</a></code> </p>
-        </td>
-        <td><p>Activate existing PMML model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="deactivate_model.html">deactivate_model()</a></code> </p>
-        </td>
-        <td><p>Deactivate existing PMML model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="delete_model.html">delete_model()</a></code> </p>
-        </td>
-        <td><p>Delete PMML model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="download_model.html">download_model()</a></code> </p>
-        </td>
-        <td><p>Download PMML model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_models.html">get_models()</a></code> </p>
-        </td>
-        <td><p>List available PMML models</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_model_metrics.html">get_model_metrics()</a></code> </p>
-        </td>
-        <td><p>Get PMML model metrics</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_model_properties.html">get_model_properties()</a></code> </p>
-        </td>
-        <td><p>Get PMML model properties</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="predict_pmml.html">predict_pmml()</a></code> </p>
-        </td>
-        <td><p>Get prediction for single input record from PMML model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="predict_pmml_batch.html">predict_pmml_batch()</a></code> </p>
-        </td>
-        <td><p>Get predictions for multiple input records from PMML model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="upload_model.html">upload_model()</a></code> </p>
-        </td>
-        <td><p>Upload new PMML model</p></td>
-      </tr>
-    </tbody>
+    <pre class="usage"><span class='fu'>predict_pmml</span>(<span class='no'>x</span>, <span class='no'>model_name</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>A one row data frame containing the data record which is sent to
+Zementis Server for prediction. The data frame column names must match
+the PMML model argument names.</p></td>
+    </tr>
+    <tr>
+      <th>model_name</th>
+      <td><p>The name of the deployed PMML model that gets the prediction
+on the new data record <code>x</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed on to the underlying HTTP method.
+This might be necessary if you need to set some curl options explicitly
+via <code><a href='https://www.rdocumentation.org/packages/httr/topics/config'>config</a></code>.</p></td>
+    </tr>
     </table>
-  </div>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A list with the following components:</p><ul>
+<li><p><code>model</code> A length one character vector containing the <code>model_name</code> that was executed on the server</p></li>
+<li><p><code>outputs</code> A data frame containing the prediction results for <code>x</code></p></li>
+</ul>
+
+<p>For regression models <code>outputs</code> will include a 1-column data frame with
+ the predicted value.</p>
+<p>For binary classification models <code>outputs</code> will include a 3-column
+ data frame that includes the probability of class 0, the probability of
+ class 1 and the classification class label result based on a 50% threshold.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='upload_model.html'>upload_model</a></code>, <code><a href='predict_pmml_batch.html'>predict_pmml_batch</a></code></p></div>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>predict_pmml</span>(<span class='no'>iris</span>[<span class='fl'>42</span>, ], <span class='st'>"iris_model"</span>)
+<span class='co'># }</span></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

@@ -1,4 +1,4 @@
-# zementisr 0.3.0.9999
+# zementisr 0.4.0
 
 ## Breaking changes
 
@@ -8,7 +8,7 @@
 
 ## Minor improvements
 
-* `predict_pmml_batch()` gets two additional arguments
+* `predict_pmml_batch()` gets two additional arguments `max_threads` and `max_records_per_thread`
 
 # zementisr 0.3.0
 
