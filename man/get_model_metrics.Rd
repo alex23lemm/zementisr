@@ -47,12 +47,12 @@ different model metrics of your predictive models.
    # only includes memory metrics
    get_model_metrics("iris_model")
 
-   apply_model_batch(iris[23:33, ], "iris_model")
+   predict_pmml_batch(iris[23:33, ], "iris_model")
 
    # includes memory and prediction metrics
    get_model_metrics("iris_model")
 }
 }
 \seealso{
-\code{\link{upload_model}}, \code{\link{apply_model}}, \code{\link{apply_model_batch}}
+\code{\link{upload_model}}, \code{\link{predict_pmml}}, \code{\link{predict_pmml_batch}}
 }

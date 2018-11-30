@@ -1,3 +1,15 @@
+# zementisr 0.3.0.9999
+
+## Breaking changes
+
+* `apply_model()` renamed to `predict_pmml()` which is a more intuitive function name for the common R user
+
+* `apply_model_batch()` renamed to `predict_pmml_batch()`
+
+## Minor improvements
+
+* `predict_pmml_batch()` gets two additional arguments
+
 # zementisr 0.3.0
 
 * `get_model_metrics()` gets PMML model memory and model prediction metrics from Zementis Server

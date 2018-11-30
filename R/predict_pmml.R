@@ -1,6 +1,6 @@
-#' Apply PMML model to single input record
+#' Get prediction for single input record from PMML model
 #'
-#' \code{apply_model()} returns the prediction for a single input record that is sent
+#' \code{predict_pmml()} returns the prediction for a single input record that is sent
 #' to Zementis Server. The value returned depends on the type of prediction model
 #' being executed on the server.
 #'
@@ -22,14 +22,14 @@
 #'  For binary classification models \code{outputs} will include a 3-column
 #'  data frame that includes the probability of class 0, the probability of
 #'  class 1 and the classification class label result based on a 50\% threshold.
-#' @seealso \code{\link{upload_model}}, \code{\link{apply_model_batch}}
+#' @seealso \code{\link{upload_model}}, \code{\link{predict_pmml_batch}}
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' apply_model(iris[42, ], "iris_model")
+#' predict_pmml(iris[42, ], "iris_model")
 #' }
-apply_model <- function(x, model_name, ...) {
+predict_pmml <- function(x, model_name, ...) {
 
   if (!is.data.frame(x)) {
     stop("'x' must be a data frame with a single record.")

@@ -41,15 +41,15 @@ deactivate_model("kyphosis_model")
 get_models() %>% purrr::map_df(activate_model)
 
 ## ------------------------------------------------------------------------
-apply_model(iris[42, ], "iris_model")
-apply_model(kyphosis[23, ], "kyphosis_model")
+predict_pmml(iris[42, ], "iris_model")
+predict_pmml(kyphosis[23, ], "kyphosis_model")
 
 ## ------------------------------------------------------------------------
-apply_model_batch(iris[23:25, ], "iris_model")
+predict_pmml_batch(iris[23:25, ], "iris_model")
 jsonlite::write_json(iris[23:25, ], "iris.json")
-apply_model_batch("iris.json", "iris_model")
+predict_pmml_batch("iris.json", "iris_model")
 write.csv(iris[23:25, ], "iris.csv", row.names = FALSE)
-apply_model_batch("iris.csv","iris_model")
+predict_pmml_batch("iris.csv","iris_model")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  iris_download <- download_model("iris_model")

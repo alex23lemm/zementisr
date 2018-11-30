@@ -22,7 +22,7 @@
 #'
 #' If the model is deactivated while \code{get_model_metrics()} is called, the return list
 #' neither includes \code{memory_metrics} nor \code{prediction_metrics}.
-#' @seealso \code{\link{upload_model}}, \code{\link{apply_model}}, \code{\link{apply_model_batch}}
+#' @seealso \code{\link{upload_model}}, \code{\link{predict_pmml}}, \code{\link{predict_pmml_batch}}
 #' @export
 #'
 #' @examples
@@ -35,7 +35,7 @@
 #'    # only includes memory metrics
 #'    get_model_metrics("iris_model")
 #'
-#'    apply_model_batch(iris[23:33, ], "iris_model")
+#'    predict_pmml_batch(iris[23:33, ], "iris_model")
 #'
 #'    # includes memory and prediction metrics
 #'    get_model_metrics("iris_model")

@@ -96,28 +96,28 @@ get_models() %>% purrr::map_df(activate_model)
 
 ## Model predictions 
 
-If you like to predict a __single new input record__, use `apply_model()` which needs a one row data frame as its data input and the name of the deployed PMML model that should get the prediction. If executed successfully, `apply_model()` returns a list with the following components:
+If you like to predict a __single new input record__, use `predict_pmml()` which needs a one row data frame as its data input and the name of the deployed PMML model that should get the prediction. If executed successfully, `predict_pmml()` returns a list with the following components:
 
 * `model` A length one character vector containing the name of the PMML model that was executed on the server
 
 * `outputs` A data frame containing the prediction results. The values returned depend on the type of prediction model being executed on the server. You can spot the difference between a regression and a classification model in the output below
 
 ```{r}
-apply_model(iris[42, ], "iris_model")
-apply_model(kyphosis[23, ], "kyphosis_model")
+predict_pmml(iris[42, ], "iris_model")
+predict_pmml(kyphosis[23, ], "kyphosis_model")
 ```
 
-If you like to predict __multiple new input records__ all at once, use `apply_model_batch()` which accepts data frames, `.csv` and `.json` files as data input. `.csv` and `.json` files can even be sent in compressed format (`.zip` or `.gzip`).
+If you like to predict __multiple new input records__ all at once, use `predict_pmml_batch()` which accepts data frames, `.csv` and `.json` files as data input. `.csv` and `.json` files can even be sent in compressed format (`.zip` or `.gzip`).
 
 ```{r}
-apply_model_batch(iris[23:25, ], "iris_model")
+predict_pmml_batch(iris[23:25, ], "iris_model")
 jsonlite::write_json(iris[23:25, ], "iris.json")
-apply_model_batch("iris.json", "iris_model")
+predict_pmml_batch("iris.json", "iris_model")
 write.csv(iris[23:25, ], "iris.csv", row.names = FALSE)
-apply_model_batch("iris.csv","iris_model")
+predict_pmml_batch("iris.csv","iris_model")
 ```
 
-As you can see by the output above, `apply_model_batch()` also returns a list with the two components `model` and `outputs`.
+As you can see by the output above, `predict_pmml_batch()` also returns a list with the two components `model` and `outputs`.
 
 ## Downloading models
 

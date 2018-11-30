@@ -40,7 +40,7 @@ upload_model(iris_pmml)
 #> [1] TRUE
 
 # Get prediction for new value from Zementis Server
-apply_model(iris[42, ], "iris_model")
+predict_pmml(iris[42, ], "iris_model")
 #> $model
 #> [1] "iris_model"
 #> 

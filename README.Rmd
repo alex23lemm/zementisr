@@ -49,7 +49,7 @@ library(zementisr)
 upload_model(iris_pmml)
 
 # Get prediction for new value from Zementis Server
-apply_model(iris[42, ], "iris_model")
+predict_pmml(iris[42, ], "iris_model")
 
 # Deactivate PMML model on Zementis Server
 deactivate_model("iris_model")

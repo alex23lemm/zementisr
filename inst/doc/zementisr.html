@@ -166,56 +166,56 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 </div>
 <div id="model-predictions" class="section level2">
 <h2>Model predictions</h2>
-<p>If you like to predict a <strong>single new input record</strong>, use <code>apply_model()</code> which needs a one row data frame as its data input and the name of the deployed PMML model that should get the prediction. If executed successfully, <code>apply_model()</code> returns a list with the following components:</p>
+<p>If you like to predict a <strong>single new input record</strong>, use <code>predict_pmml()</code> which needs a one row data frame as its data input and the name of the deployed PMML model that should get the prediction. If executed successfully, <code>predict_pmml()</code> returns a list with the following components:</p>
 <ul>
 <li><p><code>model</code> A length one character vector containing the name of the PMML model that was executed on the server</p></li>
 <li><p><code>outputs</code> A data frame containing the prediction results. The values returned depend on the type of prediction model being executed on the server. You can spot the difference between a regression and a classification model in the output below</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply_model</span>(iris[<span class="dv">42</span>, ], <span class="st">&quot;iris_model&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict_pmml</span>(iris[<span class="dv">42</span>, ], <span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] &quot;iris_model&quot;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.856021</span>
-<span class="kw">apply_model</span>(kyphosis[<span class="dv">23</span>, ], <span class="st">&quot;kyphosis_model&quot;</span>)
+<span class="co">#&gt; 1               7.708997</span>
+<span class="kw">predict_pmml</span>(kyphosis[<span class="dv">23</span>, ], <span class="st">&quot;kyphosis_model&quot;</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] &quot;kyphosis_model&quot;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Probability_present Probability_absent Predicted_Kyphosis</span>
 <span class="co">#&gt; 1           0.5714286          0.4285714            present</span></code></pre></div>
-<p>If you like to predict <strong>multiple new input records</strong> all at once, use <code>apply_model_batch()</code> which accepts data frames, <code>.csv</code> and <code>.json</code> files as data input. <code>.csv</code> and <code>.json</code> files can even be sent in compressed format (<code>.zip</code> or <code>.gzip</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply_model_batch</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris_model&quot;</span>)
+<p>If you like to predict <strong>multiple new input records</strong> all at once, use <code>predict_pmml_batch()</code> which accepts data frames, <code>.csv</code> and <code>.json</code> files as data input. <code>.csv</code> and <code>.json</code> files can even be sent in compressed format (<code>.zip</code> or <code>.gzip</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">predict_pmml_batch</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] &quot;iris_model&quot;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               6.639628</span>
-<span class="co">#&gt; 2               6.736446</span>
-<span class="co">#&gt; 3               5.186890</span>
+<span class="co">#&gt; 1               5.004788</span>
+<span class="co">#&gt; 2               5.044575</span>
+<span class="co">#&gt; 3               4.972281</span>
 jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris.json&quot;</span>)
-<span class="kw">apply_model_batch</span>(<span class="st">&quot;iris.json&quot;</span>, <span class="st">&quot;iris_model&quot;</span>)
+<span class="kw">predict_pmml_batch</span>(<span class="st">&quot;iris.json&quot;</span>, <span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] &quot;iris_model&quot;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               6.639628</span>
-<span class="co">#&gt; 2               6.736446</span>
-<span class="co">#&gt; 3               5.186890</span>
+<span class="co">#&gt; 1               5.004788</span>
+<span class="co">#&gt; 2               5.044575</span>
+<span class="co">#&gt; 3               4.972281</span>
 <span class="kw">write.csv</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)
-<span class="kw">apply_model_batch</span>(<span class="st">&quot;iris.csv&quot;</span>,<span class="st">&quot;iris_model&quot;</span>)
+<span class="kw">predict_pmml_batch</span>(<span class="st">&quot;iris.csv&quot;</span>,<span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] &quot;iris_model&quot;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               6.639628</span>
-<span class="co">#&gt; 2               6.736446</span>
-<span class="co">#&gt; 3               5.186890</span></code></pre></div>
-<p>As you can see by the output above, <code>apply_model_batch()</code> also returns a list with the two components <code>model</code> and <code>outputs</code>.</p>
+<span class="co">#&gt; 1               5.004788</span>
+<span class="co">#&gt; 2               5.044575</span>
+<span class="co">#&gt; 3               4.972281</span></code></pre></div>
+<p>As you can see by the output above, <code>predict_pmml_batch()</code> also returns a list with the two components <code>model</code> and <code>outputs</code>.</p>
 </div>
 <div id="downloading-models" class="section level2">
 <h2>Downloading models</h2>

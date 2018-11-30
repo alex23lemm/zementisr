@@ -37,11 +37,11 @@ get_model_metrics("mtcars_model")
 
 ## ------------------------------------------------------------------------
 index <- sample(1:dim(test_set_iris)[1], 500, replace = TRUE)
-iris_predictions <- apply_model_batch(test_set_iris[index, ], "iris_model")
+iris_predictions <- predict_pmml_batch(test_set_iris[index, ], "iris_model")
 head(iris_predictions$outputs, 4)
 
 index <- sample(1:dim(test_set_mtcars)[1], 500, replace = TRUE)
-mtcars_predictions <- apply_model_batch(test_set_mtcars[index, ], "mtcars_model")
+mtcars_predictions <- predict_pmml_batch(test_set_mtcars[index, ], "mtcars_model")
 head(mtcars_predictions$outputs, 4)
 
 ## ------------------------------------------------------------------------
@@ -111,7 +111,7 @@ activate_model("iris_model")
 get_model_metrics("iris_model")
 
 ## ----results="hide"------------------------------------------------------
-apply_model_batch(test_set_iris[1:5, ], "iris_model")
+predict_pmml_batch(test_set_iris[1:5, ], "iris_model")
 
 ## ------------------------------------------------------------------------
 get_model_metrics("iris_model")
