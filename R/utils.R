@@ -21,7 +21,6 @@ get_zementis_base_url <- function() {
   if (identical(val, "")) {
     stop("`ZEMENTIS_base_url` env var has not been set.")
   }
-  val <- paste(val, "adapars", sep = "/")
   val
 }
 

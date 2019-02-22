@@ -79,7 +79,7 @@ The zementisr package requires that you store your secrets and the base URL of y
 Please, make sure to set the environment variables below in your `.Renviron` file before using functions from the zementisr package. You can easily edit `.Renviron` using `usethis::edit_r_environ()`.
 
 ``` r
-ZEMENTIS_base_url = "[address]:[port]"
+ZEMENTIS_base_url = "[address]"
 ZEMENTIS_usr = "[your_username]"
 ZEMENTIS_pwd = "[your_password]"
 ```

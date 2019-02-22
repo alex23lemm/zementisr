@@ -18,7 +18,7 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -54,7 +54,29 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -79,7 +101,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Zementis Server’s REST API uses HTTP Basic Authentication. For each request the client needs to provide username and password.</p>
 <p>Since typing your password in the console is a bit too dangerous (you might accidentally share the <code>.Rhistory</code> file) and asking each time gets too cumbersome quickly, the zementisr package requires that you store your secrets and the base URL of your Zementis Server as environment variables in the <code>.Renviron</code> file in your home directory.</p>
 <p>Please make sure to set the environment variables below in your <code>.Renviron</code> file before using functions from the zementisr package. You can easily edit <code>.Renviron</code> using <code>usethis::edit_r_environ()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ZEMENTIS_base_url =<span class="st"> &quot;https://localhost:9083&quot;</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ZEMENTIS_base_url =<span class="st"> &quot;https://localhost:9083/adapars&quot;</span>
 ZEMENTIS_usr =<span class="st"> &quot;guybrush.threepwood&quot;</span>
 ZEMENTIS_pwd =<span class="st"> &quot;bigwhoop&quot;</span></code></pre></div>
 </div>
@@ -177,7 +199,7 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               7.708997</span>
+<span class="co">#&gt; 1               5.057188</span>
 <span class="kw">predict_pmml</span>(kyphosis[<span class="dv">23</span>, ], <span class="st">&quot;kyphosis_model&quot;</span>)
 <span class="co">#&gt; $model</span>
 <span class="co">#&gt; [1] &quot;kyphosis_model&quot;</span>
@@ -192,9 +214,9 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               5.004788</span>
-<span class="co">#&gt; 2               5.044575</span>
-<span class="co">#&gt; 3               4.972281</span>
+<span class="co">#&gt; 1               4.889357</span>
+<span class="co">#&gt; 2               6.511500</span>
+<span class="co">#&gt; 3               6.995851</span>
 jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris.json&quot;</span>)
 <span class="kw">predict_pmml_batch</span>(<span class="st">&quot;iris.json&quot;</span>, <span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
@@ -202,9 +224,9 @@ jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span 
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               5.004788</span>
-<span class="co">#&gt; 2               5.044575</span>
-<span class="co">#&gt; 3               4.972281</span>
+<span class="co">#&gt; 1               4.889357</span>
+<span class="co">#&gt; 2               6.511500</span>
+<span class="co">#&gt; 3               6.995851</span>
 <span class="kw">write.csv</span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">&quot;iris.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)
 <span class="kw">predict_pmml_batch</span>(<span class="st">&quot;iris.csv&quot;</span>,<span class="st">&quot;iris_model&quot;</span>)
 <span class="co">#&gt; $model</span>
@@ -212,9 +234,9 @@ jsonlite<span class="op">::</span><span class="kw">write_json</span>(iris[<span 
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $outputs</span>
 <span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               5.004788</span>
-<span class="co">#&gt; 2               5.044575</span>
-<span class="co">#&gt; 3               4.972281</span></code></pre></div>
+<span class="co">#&gt; 1               4.889357</span>
+<span class="co">#&gt; 2               6.511500</span>
+<span class="co">#&gt; 3               6.995851</span></code></pre></div>
 <p>As you can see by the output above, <code>predict_pmml_batch()</code> also returns a list with the two components <code>model</code> and <code>outputs</code>.</p>
 </div>
 <div id="downloading-models" class="section level2">

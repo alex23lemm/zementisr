@@ -1,3 +1,7 @@
+# zementisr 0.4.1
+
+* Internal function `get_zementis_base_url()` stops adding "adapars" to base URL fetched from `.Renviron`
+
 # zementisr 0.4.0
 
 ## Breaking changes
