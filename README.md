@@ -1,10 +1,19 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 zementisr <img src="man/figures/logo.jpg" align="right" height=140/>
 ====================================================================
 
-[![Travis-CI Build Status](https://travis-ci.org/alex23lemm/zementisr.svg?branch=master)](https://travis-ci.org/alex23lemm/zementisr) [![Coverage status](https://codecov.io/gh/alex23lemm/zementisr/branch/master/graph/badge.svg)](https://codecov.io/github/alex23lemm/zementisr?branch=master)
+[![Travis-CI Build
+Status](https://travis-ci.org/alex23lemm/zementisr.svg?branch=master)](https://travis-ci.org/alex23lemm/zementisr)
+[![Coverage
+status](https://codecov.io/gh/alex23lemm/zementisr/branch/master/graph/badge.svg)](https://codecov.io/github/alex23lemm/zementisr?branch=master)
 
-zementisr is an R client for the Zementis Server API. Zementis Server is an execution engine for PMML models which also comes with model management capabilities. Using zementisr, data scientists can deploy PMML models to Zementis Server, predict new values by sending data to the server and manage the entire PMML model life cycle without leaving their preferred R development environment.
+zementisr is an R client for the Zementis Server API. Zementis Server is
+an execution engine for PMML models which also comes with model
+management capabilities. Using zementisr, data scientists can deploy
+PMML models to Zementis Server, predict new values by sending data to
+the server and manage the entire PMML model life cycle without leaving
+their preferred R development environment.
 
 Installation
 ------------
@@ -17,16 +26,22 @@ devtools::install_github("alex23lemm/zementisr")
 Usage
 -----
 
-zementisr deploys PMML models to Zementis Server and manages the model lifecycle. Below are some of the things you can do once you have converted your R prediction model to PMML.
+zementisr deploys PMML models to Zementis Server and manages the model
+lifecycle. Below are some of the things you can do once you have
+converted your R prediction model to PMML.
 
-Check out the [quickstart guide](https://alex23lemm.github.io/zementisr/articles/zementisr.html) and [the docs](https://alex23lemm.github.io/zementisr/reference/index.html) for further details.
+Check out the [quickstart
+guide](https://alex23lemm.github.io/zementisr/articles/zementisr.html)
+and [the
+docs](https://alex23lemm.github.io/zementisr/reference/index.html) for
+further details.
 
 ``` r
 library(pmml)
 
 # Build a simple lm model and convert it to PMML
 iris_lm <- lm(Sepal.Length ~ ., data=iris)
-iris_pmml <- pmml(iris_lm, model.name = "iris_model")
+iris_pmml <- pmml(iris_lm, model_name = "iris_model")
 
 
 library(zementisr)
@@ -72,11 +87,16 @@ delete_model("iris_model")
 Authentication
 --------------
 
-Zementis Server's REST API uses HTTP Basic Authentication. For each request the client needs to provide username and password.
+Zementis Server’s REST API uses HTTP Basic Authentication. For each
+request the client needs to provide username and password.
 
-The zementisr package requires that you store your secrets and the base URL of your Zementis Server as environment variables in the `.Renviron` file in your home directory.
+The zementisr package requires that you store your secrets and the base
+URL of your Zementis Server as environment variables in the `.Renviron`
+file in your home directory.
 
-Please, make sure to set the environment variables below in your `.Renviron` file before using functions from the zementisr package. You can easily edit `.Renviron` using `usethis::edit_r_environ()`.
+Please, make sure to set the environment variables below in your
+`.Renviron` file before using functions from the zementisr package. You
+can easily edit `.Renviron` using `usethis::edit_r_environ()`.
 
 ``` r
 ZEMENTIS_base_url = "[address]"

@@ -40,7 +40,7 @@ library(pmml)
 
 # Build a simple lm model and convert it to PMML
 iris_lm <- lm(Sepal.Length ~ ., data=iris)
-iris_pmml <- pmml(iris_lm, model.name = "iris_model")
+iris_pmml <- pmml(iris_lm, model_name = "iris_model")
 
 
 library(zementisr)

@@ -14,7 +14,7 @@ test_that("get_model_metrics() returns list with prediction and memory metrics",
 test_that("get_model_metrics() only returns list of memory metrics", {
   skip_on_cran()
   iris_lm <- lm(Sepal.Length ~ ., data = iris)
-  iris_tmp <- pmml::pmml(iris_lm, model.name = "iris_tmp")
+  iris_tmp <- pmml::pmml(iris_lm, model_name = "iris_tmp")
   upload_model(iris_tmp)
   metrics_rsp <- get_model_metrics("iris_tmp")
   delete_model("iris_tmp")
