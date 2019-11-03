@@ -44,11 +44,11 @@ library(rpart)
 library(pmml)
 
 iris_lm <- lm(Sepal.Length ~ ., data=iris)
-iris_pmml <- pmml(iris_lm, model.name = "iris_model")
+iris_pmml <- pmml(iris_lm, model_name = "iris_model")
 saveXML(iris_pmml, "iris_pmml.xml")
 
 kyphosis_fit <- rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
-kyphosis_pmml <- pmml(kyphosis_fit, model.name = "kyphosis_model")
+kyphosis_pmml <- pmml(kyphosis_fit, model_name = "kyphosis_model")
 ```
 
 

@@ -24,10 +24,10 @@ mtcars_lm <- lm(mpg ~ wt + qsec + am, data = training_set)
 library(pmml)
 library(zementisr)
 
-pmml(iris_cart, model.name = "iris_model") %>%
+pmml(iris_cart, model_name = "iris_model") %>%
   upload_model
 
-pmml(mtcars_lm, model.name = "mtcars_model") %>%
+pmml(mtcars_lm, model_name = "mtcars_model") %>%
   upload_model
 
 ## ------------------------------------------------------------------------
