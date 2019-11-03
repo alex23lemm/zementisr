@@ -1,3 +1,7 @@
+# zementisr 0.4.2
+
+* Modify README, vignettes and tests to align with R pmml package release 2.0.0 and Zementis Server release 10.5
+
 # zementisr 0.4.1
 
 * Internal function `get_zementis_base_url()` stops adding "adapars" to base URL fetched from `.Renviron`

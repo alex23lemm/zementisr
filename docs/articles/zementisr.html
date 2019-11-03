@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>zementisr Quickstart Guide • zementisr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="zementisr Quickstart Guide">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -36,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zementisr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -44,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -73,7 +74,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/alex23lemm/zementisr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -86,6 +87,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -107,94 +109,97 @@
 <a href="#authentication" class="anchor"></a>Authentication</h2>
 <p>Zementis Server’s REST API uses HTTP Basic Authentication. For each request the client needs to provide username and password.</p>
 <p>Since typing your password in the console is a bit too dangerous (you might accidentally share the <code>.Rhistory</code> file) and asking each time gets too cumbersome quickly, the zementisr package requires that you store your secrets and the base URL of your Zementis Server as environment variables in the <code>.Renviron</code> file in your home directory.</p>
-<p>Please make sure to set the environment variables below in your <code>.Renviron</code> file before using functions from the zementisr package. You can easily edit <code>.Renviron</code> using <code><a href="https://www.rdocumentation.org/packages/usethis/topics/edit">usethis::edit_r_environ()</a></code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ZEMENTIS_base_url =<span class="st"> "https://localhost:9083/adapars"</span>
-ZEMENTIS_usr =<span class="st"> "guybrush.threepwood"</span>
-ZEMENTIS_pwd =<span class="st"> "bigwhoop"</span></code></pre></div>
+<p>Please make sure to set the environment variables below in your <code>.Renviron</code> file before using functions from the zementisr package. You can easily edit <code>.Renviron</code> using <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">ZEMENTIS_base_url =<span class="st"> "https://localhost:9083/adapars"</span></a>
+<a class="sourceLine" id="cb1-2" title="2">ZEMENTIS_usr =<span class="st"> "guybrush.threepwood"</span></a>
+<a class="sourceLine" id="cb1-3" title="3">ZEMENTIS_pwd =<span class="st"> "bigwhoop"</span></a></code></pre></div>
 </div>
 <div id="preparation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#preparation" class="anchor"></a>Preparation</h2>
 <p>Before we get started using the zementisr package, we will create two simple prediction models and convert them to PMML using <code>pmml()</code> from the <a href="https://cran.r-project.org/web/packages/pmml/index.html">pmml package</a>. The first PMML model will be saved to disk:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(rpart)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(pmml)
-
-iris_lm &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/lm">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris)
-iris_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(iris_lm, <span class="dt">model.name =</span> <span class="st">"iris_model"</span>)
-<span class="kw">saveXML</span>(iris_pmml, <span class="st">"iris_pmml.xml"</span>)
-<span class="co">#&gt; [1] "iris_pmml.xml"</span>
-
-kyphosis_fit &lt;-<span class="st"> </span><span class="kw">rpart</span>(Kyphosis <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Number <span class="op">+</span><span class="st"> </span>Start, <span class="dt">data =</span> kyphosis)
-kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosis_fit, <span class="dt">model.name =</span> <span class="st">"kyphosis_model"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(rpart)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(pmml)</a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4">iris_lm &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span>(Sepal.Length <span class="op">~</span><span class="st"> </span>., <span class="dt">data=</span>iris)</a>
+<a class="sourceLine" id="cb2-5" title="5">iris_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(iris_lm, <span class="dt">model_name =</span> <span class="st">"iris_model"</span>)</a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">saveXML</span>(iris_pmml, <span class="st">"iris_pmml.xml"</span>)</a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; [1] "iris_pmml.xml"</span></a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9">kyphosis_fit &lt;-<span class="st"> </span><span class="kw">rpart</span>(Kyphosis <span class="op">~</span><span class="st"> </span>Age <span class="op">+</span><span class="st"> </span>Number <span class="op">+</span><span class="st"> </span>Start, <span class="dt">data =</span> kyphosis)</a>
+<a class="sourceLine" id="cb2-10" title="10">kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosis_fit, <span class="dt">model_name =</span> <span class="st">"kyphosis_model"</span>)</a></code></pre></div>
 </div>
 <div id="model-deployment" class="section level2">
 <h2 class="hasAnchor">
 <a href="#model-deployment" class="anchor"></a>Model deployment</h2>
 <p>Now, we will start using functions from the zementisr package. We will begin with <code><a href="../reference/upload_model.html">upload_model()</a></code> to upload our PMML models to the server.</p>
-<p><code><a href="../reference/upload_model.html">upload_model()</a></code> either accepts a path to a PMML file on disk or an <code>XMLNode</code> object created with <code><a href="https://www.rdocumentation.org/packages/pmml/topics/pmml">pmml::pmml()</a></code>. Below we will demonstrate both options to upload the two models to the server. A successful upload always returns a list with the model name and its activation status.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(zementisr)
-
-<span class="kw"><a href="../reference/upload_model.html">upload_model</a></span>(<span class="st">"iris_pmml.xml"</span>)
-<span class="co">#&gt; $model_name</span>
-<span class="co">#&gt; [1] "iris_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $is_active</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="kw"><a href="../reference/upload_model.html">upload_model</a></span>(kyphosis_pmml)
-<span class="co">#&gt; $model_name</span>
-<span class="co">#&gt; [1] "kyphosis_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $is_active</span>
-<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<p><code><a href="../reference/upload_model.html">upload_model()</a></code> either accepts a path to a PMML file on disk or an <code>XMLNode</code> object created with <code><a href="https://rdrr.io/pkg/pmml/man/pmml.html">pmml::pmml()</a></code>. Below we will demonstrate both options to upload the two models to the server. A successful upload always returns a list with the model name and its activation status.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(zementisr)</a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw"><a href="../reference/upload_model.html">upload_model</a></span>(<span class="st">"iris_pmml.xml"</span>)</a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; $model_name</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; [1] "iris_model"</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt; $is_active</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="kw"><a href="../reference/upload_model.html">upload_model</a></span>(kyphosis_pmml)</a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="co">#&gt; $model_name</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt; [1] "kyphosis_model"</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt; $is_active</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
 </div>
 <div id="basic-model-operations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-model-operations" class="anchor"></a>Basic model operations</h2>
 <p>After deployment you might be interested in how many PMML models are currently deployed to Zementis Server:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_models.html">get_models</a></span>()
-<span class="co">#&gt; [1] "iris_model"     "kyphosis_model"</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/get_models.html">get_models</a></span>()</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co">#&gt; [1] "iris_model"     "kyphosis_model"</span></a></code></pre></div>
 <p>Use <code><a href="../reference/get_model_properties.html">get_model_properties()</a></code> to get the PMML model’s name, description, input and output field properties:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_model_properties.html">get_model_properties</a></span>(<span class="st">"kyphosis_model"</span>)
-<span class="co">#&gt; $modelName</span>
-<span class="co">#&gt; [1] "kyphosis_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $description</span>
-<span class="co">#&gt; [1] "RPart Decision Tree Model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $isActive</span>
-<span class="co">#&gt; [1] TRUE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $inputFields</span>
-<span class="co">#&gt;     name   type  usage</span>
-<span class="co">#&gt; 1    Age DOUBLE ACTIVE</span>
-<span class="co">#&gt; 2 Number DOUBLE ACTIVE</span>
-<span class="co">#&gt; 3  Start DOUBLE ACTIVE</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $outputFields</span>
-<span class="co">#&gt;                  name   type  usage</span>
-<span class="co">#&gt; 1  Predicted_Kyphosis STRING OUTPUT</span>
-<span class="co">#&gt; 2  Probability_absent DOUBLE OUTPUT</span>
-<span class="co">#&gt; 3 Probability_present DOUBLE OUTPUT</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/get_model_properties.html">get_model_properties</a></span>(<span class="st">"kyphosis_model"</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co">#&gt; $modelName</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; [1] "kyphosis_model"</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; $description</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; [1] "RPart Decision Tree Model"</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; $creationDate</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; [1] "2019-11-03 22:18:09"</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; $isActive</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="co">#&gt; $inputFields</span></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt;     name   type  usage</span></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="co">#&gt; 1    Age DOUBLE ACTIVE</span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="co">#&gt; 2 Number DOUBLE ACTIVE</span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="co">#&gt; 3  Start DOUBLE ACTIVE</span></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-20" title="20"><span class="co">#&gt; $outputFields</span></a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="co">#&gt;                  name   type  usage</span></a>
+<a class="sourceLine" id="cb5-22" title="22"><span class="co">#&gt; 1  Predicted_Kyphosis STRING OUTPUT</span></a>
+<a class="sourceLine" id="cb5-23" title="23"><span class="co">#&gt; 2  Probability_absent DOUBLE OUTPUT</span></a>
+<a class="sourceLine" id="cb5-24" title="24"><span class="co">#&gt; 3 Probability_present DOUBLE OUTPUT</span></a></code></pre></div>
 <p>If you like to deactivate a PMML model without removing it from the server, do the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/deactivate_model.html">deactivate_model</a></span>(<span class="st">"iris_model"</span>)
-<span class="co">#&gt; $model_name</span>
-<span class="co">#&gt; [1] "iris_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $is_active</span>
-<span class="co">#&gt; [1] FALSE</span>
-<span class="kw"><a href="../reference/deactivate_model.html">deactivate_model</a></span>(<span class="st">"kyphosis_model"</span>)
-<span class="co">#&gt; $model_name</span>
-<span class="co">#&gt; [1] "kyphosis_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $is_active</span>
-<span class="co">#&gt; [1] FALSE</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/deactivate_model.html">deactivate_model</a></span>(<span class="st">"iris_model"</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt; $model_name</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; [1] "iris_model"</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; $is_active</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; [1] FALSE</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="kw"><a href="../reference/deactivate_model.html">deactivate_model</a></span>(<span class="st">"kyphosis_model"</span>)</a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; $model_name</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; [1] "kyphosis_model"</span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt; $is_active</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; [1] FALSE</span></a></code></pre></div>
 <p>You even can add some <code>magrittr</code> and <code>purrr</code> flavor to chain several zementisr functions together. For instance, the following line of code lets you activate all your PMML models at once:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/get_models.html">get_models</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span>(activate_model)
-<span class="co">#&gt; # A tibble: 2 x 2</span>
-<span class="co">#&gt;   model_name     is_active</span>
-<span class="co">#&gt;   &lt;chr&gt;          &lt;lgl&gt;    </span>
-<span class="co">#&gt; 1 iris_model     TRUE     </span>
-<span class="co">#&gt; 2 kyphosis_model TRUE</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/get_models.html">get_models</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_df</a></span>(activate_model)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; # A tibble: 2 x 2</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt;   model_name     is_active</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt;   &lt;chr&gt;          &lt;lgl&gt;    </span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt; 1 iris_model     TRUE     </span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; 2 kyphosis_model TRUE</span></a></code></pre></div>
 </div>
 <div id="model-predictions" class="section level2">
 <h2 class="hasAnchor">
@@ -204,50 +209,50 @@ kyphosis_pmml &lt;-<span class="st"> </span><span class="kw">pmml</span>(kyphosi
 <li><p><code>model</code> A length one character vector containing the name of the PMML model that was executed on the server</p></li>
 <li><p><code>outputs</code> A data frame containing the prediction results. The values returned depend on the type of prediction model being executed on the server. You can spot the difference between a regression and a classification model in the output below</p></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/predict_pmml.html">predict_pmml</a></span>(iris[<span class="dv">42</span>, ], <span class="st">"iris_model"</span>)
-<span class="co">#&gt; $model</span>
-<span class="co">#&gt; [1] "iris_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $outputs</span>
-<span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.295281</span>
-<span class="kw"><a href="../reference/predict_pmml.html">predict_pmml</a></span>(kyphosis[<span class="dv">23</span>, ], <span class="st">"kyphosis_model"</span>)
-<span class="co">#&gt; $model</span>
-<span class="co">#&gt; [1] "kyphosis_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $outputs</span>
-<span class="co">#&gt;   Probability_present Probability_absent Predicted_Kyphosis</span>
-<span class="co">#&gt; 1           0.5714286          0.4285714            present</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/predict_pmml.html">predict_pmml</a></span>(iris[<span class="dv">42</span>, ], <span class="st">"iris_model"</span>)</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; $model</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; [1] "iris_model"</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; $outputs</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt;   Predicted_Sepal.Length</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; 1               4.295281</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="kw"><a href="../reference/predict_pmml.html">predict_pmml</a></span>(kyphosis[<span class="dv">23</span>, ], <span class="st">"kyphosis_model"</span>)</a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; $model</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; [1] "kyphosis_model"</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; $outputs</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt;   Probability_present Probability_absent Predicted_Kyphosis</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; 1           0.5714286          0.4285714            present</span></a></code></pre></div>
 <p>If you like to predict <strong>multiple new input records</strong> all at once, use <code><a href="../reference/predict_pmml_batch.html">predict_pmml_batch()</a></code> which accepts data frames, <code>.csv</code> and <code>.json</code> files as data input. <code>.csv</code> and <code>.json</code> files can even be sent in compressed format (<code>.zip</code> or <code>.gzip</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/predict_pmml_batch.html">predict_pmml_batch</a></span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">"iris_model"</span>)
-<span class="co">#&gt; $model</span>
-<span class="co">#&gt; [1] "iris_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $outputs</span>
-<span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.722679</span>
-<span class="co">#&gt; 2               5.059837</span>
-<span class="co">#&gt; 3               5.369821</span>
-jsonlite<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/jsonlite/topics/read_json">write_json</a></span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">"iris.json"</span>)
-<span class="kw"><a href="../reference/predict_pmml_batch.html">predict_pmml_batch</a></span>(<span class="st">"iris.json"</span>, <span class="st">"iris_model"</span>)
-<span class="co">#&gt; $model</span>
-<span class="co">#&gt; [1] "iris_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $outputs</span>
-<span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.722679</span>
-<span class="co">#&gt; 2               5.059837</span>
-<span class="co">#&gt; 3               5.369821</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">"iris.csv"</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)
-<span class="kw"><a href="../reference/predict_pmml_batch.html">predict_pmml_batch</a></span>(<span class="st">"iris.csv"</span>,<span class="st">"iris_model"</span>)
-<span class="co">#&gt; $model</span>
-<span class="co">#&gt; [1] "iris_model"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $outputs</span>
-<span class="co">#&gt;   Predicted_Sepal.Length</span>
-<span class="co">#&gt; 1               4.722679</span>
-<span class="co">#&gt; 2               5.059837</span>
-<span class="co">#&gt; 3               5.369821</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="../reference/predict_pmml_batch.html">predict_pmml_batch</a></span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">"iris_model"</span>)</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt; $model</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; [1] "iris_model"</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; $outputs</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt;   Predicted_Sepal.Length</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; 1               4.722679</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt; 2               5.059837</span></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt; 3               5.369821</span></a>
+<a class="sourceLine" id="cb9-10" title="10">jsonlite<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/jsonlite/man/read_json.html">write_json</a></span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">"iris.json"</span>)</a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="kw"><a href="../reference/predict_pmml_batch.html">predict_pmml_batch</a></span>(<span class="st">"iris.json"</span>, <span class="st">"iris_model"</span>)</a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="co">#&gt; $model</span></a>
+<a class="sourceLine" id="cb9-13" title="13"><span class="co">#&gt; [1] "iris_model"</span></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="co">#&gt; $outputs</span></a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="co">#&gt;   Predicted_Sepal.Length</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="co">#&gt; 1               4.722679</span></a>
+<a class="sourceLine" id="cb9-18" title="18"><span class="co">#&gt; 2               5.059837</span></a>
+<a class="sourceLine" id="cb9-19" title="19"><span class="co">#&gt; 3               5.369821</span></a>
+<a class="sourceLine" id="cb9-20" title="20"><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(iris[<span class="dv">23</span><span class="op">:</span><span class="dv">25</span>, ], <span class="st">"iris.csv"</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb9-21" title="21"><span class="kw"><a href="../reference/predict_pmml_batch.html">predict_pmml_batch</a></span>(<span class="st">"iris.csv"</span>,<span class="st">"iris_model"</span>)</a>
+<a class="sourceLine" id="cb9-22" title="22"><span class="co">#&gt; $model</span></a>
+<a class="sourceLine" id="cb9-23" title="23"><span class="co">#&gt; [1] "iris_model"</span></a>
+<a class="sourceLine" id="cb9-24" title="24"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-25" title="25"><span class="co">#&gt; $outputs</span></a>
+<a class="sourceLine" id="cb9-26" title="26"><span class="co">#&gt;   Predicted_Sepal.Length</span></a>
+<a class="sourceLine" id="cb9-27" title="27"><span class="co">#&gt; 1               4.722679</span></a>
+<a class="sourceLine" id="cb9-28" title="28"><span class="co">#&gt; 2               5.059837</span></a>
+<a class="sourceLine" id="cb9-29" title="29"><span class="co">#&gt; 3               5.369821</span></a></code></pre></div>
 <p>As you can see by the output above, <code><a href="../reference/predict_pmml_batch.html">predict_pmml_batch()</a></code> also returns a list with the two components <code>model</code> and <code>outputs</code>.</p>
 </div>
 <div id="downloading-models" class="section level2">
@@ -256,46 +261,47 @@ jsonlite<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <p><code><a href="../reference/download_model.html">download_model()</a></code> lets you download the PMML source of a deployed model. You might choose to download the PMML model source before deleting the model permanently from the server with <code><a href="../reference/delete_model.html">delete_model()</a></code> which is described in the next section. <code><a href="../reference/download_model.html">download_model()</a></code> returns a list with two components:</p>
 <ul>
 <li>The <code>model_name</code> of the downloaded model including the suffix “.pmml”</li>
-<li>The <code>model_source</code> represented as an S3 object of class <code>XMLInternalDocument</code> created by parsing the server response using <code><a href="https://www.rdocumentation.org/packages/XML/topics/xmlTreeParse">XML::xmlParse()</a></code>
+<li>The <code>model_source</code> represented as an S3 object of class <code>XMLInternalDocument</code> created by parsing the server response using <code><a href="https://rdrr.io/pkg/XML/man/xmlTreeParse.html">XML::xmlParse()</a></code>
 </li>
 </ul>
-<p>After downloading the model of your choice, you can use <code><a href="https://www.rdocumentation.org/packages/XML/topics/saveXML">XML::saveXML()</a></code> to store it on disk:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris_download &lt;-<span class="st"> </span><span class="kw"><a href="../reference/download_model.html">download_model</a></span>(<span class="st">"iris_model"</span>)
-XML<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/XML/topics/saveXML">saveXML</a></span>(iris_download[[<span class="st">"model_source"</span>]], <span class="dt">file =</span> iris_download[[<span class="st">"model_name"</span>]])</code></pre></div>
+<p>After downloading the model of your choice, you can use <code><a href="https://rdrr.io/pkg/XML/man/saveXML.html">XML::saveXML()</a></code> to store it on disk:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">iris_download &lt;-<span class="st"> </span><span class="kw"><a href="../reference/download_model.html">download_model</a></span>(<span class="st">"iris_model"</span>)</a>
+<a class="sourceLine" id="cb10-2" title="2">XML<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/XML/man/saveXML.html">saveXML</a></span>(iris_download[[<span class="st">"model_source"</span>]], <span class="dt">file =</span> iris_download[[<span class="st">"model_name"</span>]])</a></code></pre></div>
 <p>Again using some <code>tidyverse</code> ingredients, you can easily download all deployed models at once and store them in a data frame:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-downloads &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_models.html">get_models</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(download_model)
-
-tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(
-  <span class="dt">model_name =</span> purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span>(downloads, <span class="st">"model_name"</span>), 
-  <span class="dt">source =</span> purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(downloads, <span class="st">"model_source"</span>))
-<span class="co">#&gt; # A tibble: 2 x 2</span>
-<span class="co">#&gt;   model_name          source                   </span>
-<span class="co">#&gt;   &lt;chr&gt;               &lt;list&gt;                   </span>
-<span class="co">#&gt; 1 iris_model.pmml     &lt;S3: XMLInternalDocument&gt;</span>
-<span class="co">#&gt; 2 kyphosis_model.pmml &lt;S3: XMLInternalDocument&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"></a>
+<a class="sourceLine" id="cb11-2" title="2">downloads &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_models.html">get_models</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(download_model)</a>
+<a class="sourceLine" id="cb11-3" title="3"></a>
+<a class="sourceLine" id="cb11-4" title="4">tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span>(</a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="dt">model_name =</span> purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span>(downloads, <span class="st">"model_name"</span>), </a>
+<a class="sourceLine" id="cb11-6" title="6">  <span class="dt">source =</span> purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(downloads, <span class="st">"model_source"</span>))</a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt; # A tibble: 2 x 2</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt;   model_name          source    </span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="co">#&gt;   &lt;chr&gt;               &lt;list&gt;    </span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="co">#&gt; 1 iris_model.pmml     &lt;XMLIntrD&gt;</span></a>
+<a class="sourceLine" id="cb11-11" title="11"><span class="co">#&gt; 2 kyphosis_model.pmml &lt;XMLIntrD&gt;</span></a></code></pre></div>
 <p>If you like to store the downloaded models on disk instead, do this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map2.html">walk2</a></span>(purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(downloads, <span class="st">"model_source"</span>),
-             purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span>(downloads, <span class="st">"model_name"</span>),
-             XML<span class="op">::</span>saveXML)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map2.html">walk2</a></span>(purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span>(downloads, <span class="st">"model_source"</span>),</a>
+<a class="sourceLine" id="cb12-2" title="2">             purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map.html">map_chr</a></span>(downloads, <span class="st">"model_name"</span>),</a>
+<a class="sourceLine" id="cb12-3" title="3">             XML<span class="op">::</span>saveXML)</a></code></pre></div>
 </div>
 <div id="deleting-models" class="section level2">
 <h2 class="hasAnchor">
 <a href="#deleting-models" class="anchor"></a>Deleting models</h2>
 <p>After a PMML model has reached the end of its life cycle you might want to remove it from the server using <code>delete_model</code>() which always returns a character vector with the names of the models still residing deployed to the server:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/delete_model.html">delete_model</a></span>(<span class="st">"iris_model"</span>)
-<span class="co">#&gt; [1] "kyphosis_model"</span>
-<span class="kw"><a href="../reference/delete_model.html">delete_model</a></span>(<span class="st">"kyphosis_model"</span>)
-<span class="co">#&gt; character(0)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw"><a href="../reference/delete_model.html">delete_model</a></span>(<span class="st">"iris_model"</span>)</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="co">#&gt; [1] "kyphosis_model"</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="kw"><a href="../reference/delete_model.html">delete_model</a></span>(<span class="st">"kyphosis_model"</span>)</a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co">#&gt; character(0)</span></a></code></pre></div>
 </div>
 <div id="the-----argument" class="section level2">
 <h2 class="hasAnchor">
 <a href="#the-----argument" class="anchor"></a>The <code>...</code> argument</h2>
-<p>Each function from the zementisr package comes with a <code>...</code> (dot-dot-dot) argument. It is used to pass on additional arguments to the underlying HTTP method from the <code>httr</code> package. This might be necessary if you need to set some curl options explicitly via <code><a href="https://www.rdocumentation.org/packages/httr/topics/config">httr::config()</a></code>.</p>
+<p>Each function from the zementisr package comes with a <code>...</code> (dot-dot-dot) argument. It is used to pass on additional arguments to the underlying HTTP method from the <code>httr</code> package. This might be necessary if you need to set some curl options explicitly via <code><a href="https://httr.r-lib.org/reference/config.html">httr::config()</a></code>.</p>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -315,17 +321,20 @@ tibble<span class="op">::</span><span class="kw"><a href="https://tibble.tidyver
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Alexander Lemm.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
