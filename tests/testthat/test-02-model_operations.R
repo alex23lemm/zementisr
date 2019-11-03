@@ -3,7 +3,13 @@ context("model_operations")
 test_that("get_models() returns a vector with model names", {
   skip_on_cran()
   my_models <- zementisr::get_models()
-  my_models <- my_models[c(length(my_models)- 1, length(my_models))]
+
+  creation_dates <- my_models %>%
+    purrr::map(get_model_properties) %>%
+    purrr::map_chr("creationDate") %>%
+    as.POSIXct
+
+  my_models <- my_models[order(creation_dates, decreasing = TRUE)][1:2]
 
   expect_length(my_models, 2)
   expect_equal(my_models, c("iris_model", "kyphosis_model"))
