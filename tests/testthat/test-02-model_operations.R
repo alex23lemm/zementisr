@@ -38,9 +38,10 @@ test_that("get_model_properties() returns model properties", {
         .x
       })
 
-  expect_equal(iris_rsp, iris_props)
   expect_named(get_model_properties("kyphosis_model"),
-               c("modelName", "description", "isActive", "inputFields", "outputFields"))
+               c("modelName", "description", "creationDate", "isActive", "inputFields", "outputFields"))
+  iris_rsp$creationDate <- NULL
+  expect_equal(iris_rsp, iris_props)
 })
 
 test_that("get_model_properties() returns error if model name is unknown to the server", {

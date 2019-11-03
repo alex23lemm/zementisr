@@ -83,7 +83,7 @@ get_model_metrics <- function(model_name, ...) {
 
   if (!"memoryMetricsErrorMsg" %in% names(parsed)) {
     memory_metrics <- purrr::flatten_dfc(parsed) %>%
-      purrr::map_dfc(function(x){as.numeric(sub(" MB", "", x))})
+      purrr::map_dfc(function(x){as.numeric(sub(",", ".", sub(" MB", "", x)))})
     metrics[["memory_metrics"]] <- memory_metrics
   }
   metrics
