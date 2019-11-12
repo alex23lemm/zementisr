@@ -9,3 +9,4 @@ _pkgdown.yml
 ^doc$
 ^Meta$
 ^pkgdown$
+^cran-comments\.md$
