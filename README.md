@@ -1,7 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-zementisr <img src="man/figures/logo.jpg" align="right" height=140/>
-====================================================================
+# zementisr <img src='man/figures/logo.png' align="right" height="138" />
 
 [![Travis-CI Build
 Status](https://travis-ci.org/alex23lemm/zementisr.svg?branch=master)](https://travis-ci.org/alex23lemm/zementisr)
@@ -15,16 +14,14 @@ PMML models to Zementis Server, predict new values by sending data to
 the server and manage the entire PMML model life cycle without leaving
 their preferred R development environment.
 
-Installation
-------------
+## Installation
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("alex23lemm/zementisr")
 ```
 
-Usage
------
+## Usage
 
 zementisr deploys PMML models to Zementis Server and manages the model
 lifecycle. Below are some of the things you can do once you have
@@ -84,8 +81,7 @@ delete_model("iris_model")
 #> character(0)
 ```
 
-Authentication
---------------
+## Authentication
 
 Zementis Server’s REST API uses HTTP Basic Authentication. For each
 request the client needs to provide username and password.

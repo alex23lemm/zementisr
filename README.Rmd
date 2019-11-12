@@ -1,7 +1,7 @@
 ---
 output:
   md_document:
-    variant: markdown_github
+    variant: gfm
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# zementisr <img src="man/figures/logo.jpg" align="right" height=140/>
+# zementisr <img src='man/figures/logo.png' align="right" height="138" />
 
 [![Travis-CI Build Status](https://travis-ci.org/alex23lemm/zementisr.svg?branch=master)](https://travis-ci.org/alex23lemm/zementisr)
 [![Coverage status](https://codecov.io/gh/alex23lemm/zementisr/branch/master/graph/badge.svg)](https://codecov.io/github/alex23lemm/zementisr?branch=master)
