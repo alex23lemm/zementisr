@@ -6,12 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Downloading and visualizing model metrics • zementisr</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Downloading and visualizing model metrics">
 <meta property="og:description" content="">
+<meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -37,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zementisr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -155,7 +162,7 @@
 <a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 1      0.01       156.       225.        382.</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 1     0.009       67.7       318.        386.</span></a>
 <a class="sourceLine" id="cb4-10" title="10"></a>
 <a class="sourceLine" id="cb4-11" title="11"><span class="kw"><a href="../reference/get_model_metrics.html">get_model_metrics</a></span>(<span class="st">"mtcars_model"</span>)</a>
 <a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; $model_name</span></a>
@@ -165,7 +172,7 @@
 <a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 1     0.003       157.       225.        382.</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 1     0.003       68.7       317.        386.</span></a></code></pre></div>
 <p>The memory metrics returned from <code><a href="../reference/get_model_metrics.html">get_model_metrics()</a></code> are in fact a mix between server memory and model memory specific KPIs:</p>
 <ul>
 <li>
@@ -218,7 +225,7 @@
 <a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; 1      0.01       164.       218.        382.</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; 1     0.009       76.5       309.        386.</span></a></code></pre></div>
 <p>Prediction-related metrics for <strong>regression models</strong> include the Five-number summary since model activation on the server:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">mtcars_metrics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_model_metrics.html">get_model_metrics</a></span>(<span class="st">"mtcars_model"</span>)</a>
 <a class="sourceLine" id="cb7-2" title="2">mtcars_metrics</a>
@@ -235,7 +242,7 @@
 <a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 1     0.003       72.1       319.        392.</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 1     0.003       76.8       309.        386.</span></a></code></pre></div>
 </div>
 <div id="visualizing-model-memory-metrics" class="section level2">
 <h2 class="hasAnchor">
@@ -322,7 +329,7 @@
 <a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb14-14" title="14"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; 1      0.01       73.9       318.        392.</span></a></code></pre></div>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; 1      0.01       77.9       308.        386.</span></a></code></pre></div>
 <p>The returned list above does not include the prediction metrics for the iris model since the model deactivation before completely reset these metrics. Not before new data for scoring is sent to the server, the prediction metrics will be included in the server’s response:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="../reference/predict_pmml_batch.html">predict_pmml_batch</a></span>(test_set_iris[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ], <span class="st">"iris_model"</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="../reference/get_model_metrics.html">get_model_metrics</a></span>(<span class="st">"iris_model"</span>)</a>
@@ -339,7 +346,7 @@
 <a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb16-13" title="13"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb16-14" title="14"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb16-15" title="15"><span class="co">#&gt; 1      0.01       74.6       317.        392.</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-15" title="15"><span class="co">#&gt; 1      0.01       78.6       307.        386.</span></a></code></pre></div>
 </div>
   </div>
 

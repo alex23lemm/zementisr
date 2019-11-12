@@ -1,3 +1,9 @@
+# zementisr 0.5.0 
+
+* Update hex logo format to .png and add favicons 
+
+* Add unit test for spell checking
+
 # zementisr 0.4.2
 
 * Modify README, vignettes and tests to align with R pmml package release 2.0.0 and Zementis Server release 10.5
@@ -47,11 +53,4 @@
 * `apply_model_batch()` Applies PMML model to multiple data records (a data frame in memory or a file saved to disk) that are sent to Zementis Server
 
 *  Read the Quickstart Guide vignette (see `vignette("zementisr")`) for an in-depth introduction to the zementisr package
-
-
-
-
-
-
-
 
