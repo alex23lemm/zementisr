@@ -6,6 +6,8 @@
 \alias{zementisr-package}
 \title{zementisr: R client for the Zementis Server API}
 \description{
+\if{html}{\figure{logo.png}{options: align='right'}}
+
 zementisr is an R client for the Zementis Server API. Zementis Server 
     is an execution engine for PMML models which also comes with model management
     capabilities. Using zementisr, data scientists can deploy PMML models to Zementis Server,
