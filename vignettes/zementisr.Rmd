@@ -38,7 +38,7 @@ ZEMENTIS_pwd = "bigwhoop"
 
 ## Preparation
 
-Before we get started using the zementisr package, we will create two simple prediction models and convert them to PMML using `pmml()` from the [pmml package](https://cran.r-project.org/web/packages/pmml/index.html). The first PMML model will be saved to disk: 
+Before we get started using the zementisr package, we will create two simple prediction models and convert them to PMML using `pmml()` from the [pmml package](https://CRAN.R-project.org/package=pmml). The first PMML model will be saved to disk: 
 
 ``` {r message=FALSE}
 library(rpart)
