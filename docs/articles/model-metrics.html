@@ -162,7 +162,7 @@
 <a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 1     0.009       67.7       318.        386.</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 1     0.009       87.5       263.         351</span></a>
 <a class="sourceLine" id="cb4-10" title="10"></a>
 <a class="sourceLine" id="cb4-11" title="11"><span class="kw"><a href="../reference/get_model_metrics.html">get_model_metrics</a></span>(<span class="st">"mtcars_model"</span>)</a>
 <a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; $model_name</span></a>
@@ -172,7 +172,7 @@
 <a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 1     0.003       68.7       317.        386.</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 1     0.003       87.8       263.         351</span></a></code></pre></div>
 <p>The memory metrics returned from <code><a href="../reference/get_model_metrics.html">get_model_metrics()</a></code> are in fact a mix between server memory and model memory specific KPIs:</p>
 <ul>
 <li>
@@ -225,7 +225,7 @@
 <a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; 1     0.009       76.5       309.        386.</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; 1     0.009       93.9       257.         351</span></a></code></pre></div>
 <p>Prediction-related metrics for <strong>regression models</strong> include the Five-number summary since model activation on the server:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">mtcars_metrics &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_model_metrics.html">get_model_metrics</a></span>(<span class="st">"mtcars_model"</span>)</a>
 <a class="sourceLine" id="cb7-2" title="2">mtcars_metrics</a>
@@ -242,7 +242,7 @@
 <a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 1     0.003       76.8       309.        386.</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 1     0.003       94.1       257.         351</span></a></code></pre></div>
 </div>
 <div id="visualizing-model-memory-metrics" class="section level2">
 <h2 class="hasAnchor">
@@ -329,7 +329,7 @@
 <a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb14-14" title="14"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; 1      0.01       77.9       308.        386.</span></a></code></pre></div>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt; 1      0.01       96.0       255.         351</span></a></code></pre></div>
 <p>The returned list above does not include the prediction metrics for the iris model since the model deactivation before completely reset these metrics. Not before new data for scoring is sent to the server, the prediction metrics will be included in the server’s response:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw"><a href="../reference/predict_pmml_batch.html">predict_pmml_batch</a></span>(test_set_iris[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, ], <span class="st">"iris_model"</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw"><a href="../reference/get_model_metrics.html">get_model_metrics</a></span>(<span class="st">"iris_model"</span>)</a>
@@ -346,7 +346,7 @@
 <a class="sourceLine" id="cb16-12" title="12"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
 <a class="sourceLine" id="cb16-13" title="13"><span class="co">#&gt;   modelSize usedMemory freeMemory totalMemory</span></a>
 <a class="sourceLine" id="cb16-14" title="14"><span class="co">#&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb16-15" title="15"><span class="co">#&gt; 1      0.01       78.6       307.        386.</span></a></code></pre></div>
+<a class="sourceLine" id="cb16-15" title="15"><span class="co">#&gt; 1      0.01       96.7       254.         351</span></a></code></pre></div>
 </div>
   </div>
 

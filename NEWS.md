@@ -4,6 +4,8 @@
 
 * Add unit test for spell checking
 
+* First CRAN submission
+
 # zementisr 0.4.2
 
 * Modify README, vignettes and tests to align with R pmml package release 2.0.0 and Zementis Server release 10.5
