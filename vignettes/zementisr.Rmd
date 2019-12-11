@@ -9,10 +9,13 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
+NOT_CRAN <- identical(tolower(Sys.getenv("NOT_CRAN")), "true")
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  eval = nzchar(Sys.getenv("NOT_CRAN"))
+  purl = NOT_CRAN,
+  eval = NOT_CRAN
 )
 ```
 
@@ -29,9 +32,9 @@ Since typing your password in the console is a bit too dangerous (you might acci
 Please make sure to set the environment variables below in your `.Renviron` file before using functions from the zementisr package. You can easily edit `.Renviron` using `usethis::edit_r_environ()`.
 
 ``` {r eval=FALSE}
-ZEMENTIS_base_url = "https://localhost:9083/adapars"
-ZEMENTIS_usr = "guybrush.threepwood"
-ZEMENTIS_pwd = "bigwhoop"
+ZEMENTIS_base_url = https://localhost:9083/adapars
+ZEMENTIS_usr = guybrush.threepwood
+ZEMENTIS_pwd = bigwhoop
 
 ```
 
