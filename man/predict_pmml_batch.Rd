@@ -4,8 +4,14 @@
 \alias{predict_pmml_batch}
 \title{Get predictions for multiple input records from PMML model}
 \usage{
-predict_pmml_batch(data, model_name, path = NULL, max_threads = NULL,
-  max_records_per_thread = 5000, ...)
+predict_pmml_batch(
+  data,
+  model_name,
+  path = NULL,
+  max_threads = NULL,
+  max_records_per_thread = 5000,
+  ...
+)
 }
 \arguments{
 \item{data}{Either a data frame or a path to a file that contain multiple data
