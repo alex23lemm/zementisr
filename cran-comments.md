@@ -1,3 +1,12 @@
+## Resubmission
+
+Original submission: 2019-11-15 First CRAN Review: 2019-11-25
+
+Based on the comments form the first reviewer I have:
+
+* Added single quotes to software and API names in the Title and Description
+* Added a web reference for the API in the Description 
+
 ## Test environments
 * local Windows 10 install, R 3.6.1
 * Ubuntu 16.04 (on travis-ci), R 3.6.1
