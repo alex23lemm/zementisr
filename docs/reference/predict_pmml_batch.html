@@ -154,8 +154,14 @@ that are sent to Zementis Server. The values returned depend on the type of pred
 being executed on the server.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>predict_pmml_batch</span>(<span class='no'>data</span>, <span class='no'>model_name</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max_threads</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>max_records_per_thread</span> <span class='kw'>=</span> <span class='fl'>5000</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>predict_pmml_batch</span>(
+  <span class='no'>data</span>,
+  <span class='no'>model_name</span>,
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max_threads</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>max_records_per_thread</span> <span class='kw'>=</span> <span class='fl'>5000</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -117,9 +117,9 @@
 <p>Zementis Server’s REST API uses HTTP Basic Authentication. For each request the client needs to provide username and password.</p>
 <p>Since typing your password in the console is a bit too dangerous (you might accidentally share the <code>.Rhistory</code> file) and asking each time gets too cumbersome quickly, the zementisr package requires that you store your secrets and the base URL of your Zementis Server as environment variables in the <code>.Renviron</code> file in your home directory.</p>
 <p>Please make sure to set the environment variables below in your <code>.Renviron</code> file before using functions from the zementisr package. You can easily edit <code>.Renviron</code> using <code><a href="https://usethis.r-lib.org/reference/edit.html">usethis::edit_r_environ()</a></code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">ZEMENTIS_base_url =<span class="st"> "https://localhost:9083/adapars"</span></a>
-<a class="sourceLine" id="cb1-2" title="2">ZEMENTIS_usr =<span class="st"> "guybrush.threepwood"</span></a>
-<a class="sourceLine" id="cb1-3" title="3">ZEMENTIS_pwd =<span class="st"> "bigwhoop"</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">ZEMENTIS_base_url =<span class="st"> </span>https<span class="op">:</span><span class="er">//</span>localhost<span class="op">:</span><span class="dv">9083</span><span class="op">/</span>adapars</a>
+<a class="sourceLine" id="cb1-2" title="2">ZEMENTIS_usr =<span class="st"> </span>guybrush.threepwood</a>
+<a class="sourceLine" id="cb1-3" title="3">ZEMENTIS_pwd =<span class="st"> </span>bigwhoop</a></code></pre></div>
 </div>
 <div id="preparation" class="section level2">
 <h2 class="hasAnchor">
@@ -171,7 +171,7 @@
 <a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; [1] "RPart Decision Tree Model"</span></a>
 <a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; $creationDate</span></a>
-<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; [1] "2019-11-15 11:27:09"</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; [1] "2020-01-07 20:52:18"</span></a>
 <a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; $isActive</span></a>
 <a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; [1] TRUE</span></a>
